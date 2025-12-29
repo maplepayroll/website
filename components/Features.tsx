@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 const Features: React.FC = () => {
@@ -41,8 +42,17 @@ const Features: React.FC = () => {
   ];
 
   return (
-    <section id="features" className="py-24 bg-white">
+    <section id="features" className="pb-16 pt-0 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-6 uppercase tracking-tighter">
+            The <span className="text-red-600">Complete</span> Service
+          </h2>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto font-medium">
+            From direct deposits to complex compliance, we handle every aspect of your payroll operations.
+          </p>
+        </div>
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((f, i) => (
             <div key={i} className="p-10 rounded-none border border-slate-100 hover:border-red-100 hover:shadow-2xl hover:shadow-red-50 transition-all duration-300 group">

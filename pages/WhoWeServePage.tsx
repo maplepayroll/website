@@ -17,11 +17,32 @@ const WhoWeServePage: React.FC<WhoWeServePageProps> = ({ onNavigate }) => {
       image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800&h=600"
     },
     {
+      title: "Childcare & Early Learning",
+      icon: "🧸",
+      desc: "High-turnover environments with complex licensing and grant reporting needs. We manage your educator payroll and grant reconciliations so you can focus on the children.",
+      features: ["Wage Enhancement Tracking", "Grant Reporting Support", "High-Turnover ROE Automation"],
+      image: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&q=80&w=800&h=600"
+    },
+    {
+      title: "Restaurants & Hospitality",
+      icon: "🍽️",
+      desc: "From controlled tips to seasonal hiring surges. We handle the unique complexities of the hospitality sector, ensuring tip allocations and stat holiday pay are 100% compliant.",
+      features: ["Controlled Tip Allocation", "Stat Holiday Pay Logic", "Seasonal Surge Management"],
+      image: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&q=80&w=800&h=600"
+    },
+    {
       title: "Professional Service Firms",
       icon: "⚖️",
       desc: "Law firms, accounting practices, and consulting agencies. We provide the high-end, confidential support your partners and staff expect.",
       features: ["Disbursement tracking", "Partner draw support", "Multi-provincial filings"],
       image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=800&h=600"
+    },
+    {
+      title: "Fitness & Wellness Centers",
+      icon: "💪",
+      desc: "Managing personal trainer commissions and diverse class schedules is an admin nightmare. We automate the math for your high-performance team across multiple locations.",
+      features: ["Trainer Commission Splitting", "Multi-Location Pay Runs", "Sub-contractor Management"],
+      image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800&h=600"
     },
     {
       title: "Tech & Remote Teams",
@@ -35,7 +56,7 @@ const WhoWeServePage: React.FC<WhoWeServePageProps> = ({ onNavigate }) => {
       icon: "🤝",
       desc: "Managing grants and restricted funding? We help track labour costs accurately for your reporting requirements.",
       features: ["Grant-specific reporting", "T4A filings", "CRA charity compliance"],
-      image: "https://images.unsplash.com/photo-1531206715517-5c0ba140e2b8?auto=format&fit=crop&q=80&w=800&h=600"
+      image: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&q=80&w=800&h=600"
     }
   ];
 
@@ -43,6 +64,14 @@ const WhoWeServePage: React.FC<WhoWeServePageProps> = ({ onNavigate }) => {
     {
       q: "Do you support medical professional corporations?",
       a: "Yes. We specialize in the unique structure of medical corporations, including handling dividend payments, associate splits, and complex vacation pay rules for hygienists/staff."
+    },
+    {
+      q: "How do you handle tips in restaurants?",
+      a: "We manage both controlled tips (which are subject to CPP/EI) and direct tips. Our specialists ensure that your business stays compliant with CRA's latest rulings on gratuities, which varies significantly between provinces like Quebec and the rest of Canada."
+    },
+    {
+      q: "Can you manage daycare wage enhancement grants?",
+      a: "Absolutely. We understand the administrative burden of tracking and reporting on provincial wage enhancement grants. We help reconcile these funds so your reporting to the Ministry is always accurate."
     },
     {
       q: "Can you handle remote workers in Quebec?",
@@ -53,45 +82,38 @@ const WhoWeServePage: React.FC<WhoWeServePageProps> = ({ onNavigate }) => {
       a: "Not at all. We support small businesses starting from their very first hire. Our 'Core Managed' tier is designed exactly for smaller teams needing professional support."
     },
     {
-      q: "Do you work with construction firms?",
-      a: "Yes. We handle union dues deductions, CCQ reporting (where applicable), and complex overtime rules often found in the trades and construction sectors."
+      q: "How do you handle multi-provincial payroll for remote companies?",
+      a: "We are experts in cross-provincial compliance. If you have employees in BC, Ontario, and Alberta, we manage the specific EHT, Workers Comp, and tax rates for each jurisdiction within a single unified pay run."
     },
     {
-      q: "Do you support US companies hiring in Canada?",
-      a: "Yes. We act as the Canadian payroll department for many US firms, handling all the specific CRA tax account setups and cross-border compliance issues."
+      q: "Can you manage benefits reconciliation for larger teams?",
+      a: "Yes. We don't just deduct premiums; we reconcile your monthly group insurance invoices against your payroll to ensure you aren't overpaying for terminated employees or missing deductions for new hires."
     },
     {
-      q: "Can you handle commission-only sales teams?",
-      a: "Yes. We manage complex variable pay structures, including draw-against-commission models and irregular bonus payouts common in real estate and sales."
+      q: "What security measures do you take to protect our sensitive employee data?",
+      a: "We use bank-grade 256-bit encryption and all data resides on secure Canadian servers. We are fully PIPEDA compliant and employ multi-factor authentication for all concierge-level access."
     },
     {
-      q: "Do you work with seasonal businesses?",
-      a: "We do. Whether you are a landscaping firm or a gold course, we can handle the high-volume hiring in spring and the mass ROE filings in autumn."
+      q: "Do you handle WSIB/WorkSafeBC filings and rate audits?",
+      a: "Yes. We manage the periodic reporting and remittances to all provincial safety boards. We also perform an annual classification audit to ensure your business is being billed at the correct industry rate."
     },
     {
-      q: "How do you handle tips and gratuities?",
-      a: "For hospitality clients, we can allocate controlled tips (CPP/EI pensionable) versus direct tips, ensuring you stay compliant with CRA ruling on gratuities."
-    },
-    {
-      q: "Is there a minimum employee count?",
-      a: "We have no minimum. We have clients with 1 employee and clients with 500. Our model scales perfectly as you grow."
+      q: "How long does it take to switch from a traditional provider like ADP or Ceridian?",
+      a: "The migration typically takes 2-4 weeks. We handle the data export, parallel pay runs for testing, and the opening of new CRA/Provincial authorizations so there is zero interruption for your staff."
     }
   ];
 
   return (
     <div className="bg-white">
-      {/* Updated Hero Section to match Home Page */}
+      {/* Hero Section */}
       <section className="relative min-h-screen flex items-center overflow-hidden bg-slate-900">
-        {/* Background Image Layer */}
         <div className="absolute inset-0 z-0">
           <img 
             src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=2000" 
             alt="Business sectors we serve" 
             className="w-full h-full object-cover object-center"
           />
-          {/* Gradient Overlay for Text Legibility */}
           <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent"></div>
-          {/* Subtle Red Edge Accent */}
           <div className="absolute top-0 left-0 w-2 h-full bg-red-600 z-20"></div>
         </div>
         
@@ -101,8 +123,8 @@ const WhoWeServePage: React.FC<WhoWeServePageProps> = ({ onNavigate }) => {
               Industry Solutions
             </div>
             <h1 className="text-4xl lg:text-[5.5rem] font-black text-white mb-8 leading-[0.95] tracking-tighter uppercase">
-              Built for those who <br/>
-              <span className="text-red-500">Value Their People.</span>
+              Built for <br/>
+              <span className="text-red-500">Visionary</span> Business Owners
             </h1>
             <p className="text-xl text-slate-200 leading-relaxed font-medium mb-10 max-w-xl">
               Maple is more than just a utility; it's a strategic partner for businesses where accuracy and support are non-negotiable.
@@ -134,13 +156,13 @@ const WhoWeServePage: React.FC<WhoWeServePageProps> = ({ onNavigate }) => {
           <div key={i} className={`flex flex-col lg:flex-row items-center gap-16 ${i % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
             <div className="lg:w-1/2">
               <div className="text-5xl mb-6">{s.icon}</div>
-              <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">{s.title}</h2>
+              <h2 className="text-3xl lg:text-4xl font-black text-slate-900 mb-6 uppercase tracking-tight">{s.title}</h2>
               <p className="text-lg text-slate-600 mb-10 leading-relaxed font-medium">{s.desc}</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {s.features.map((feature, idx) => (
                   <div key={idx} className="flex items-center gap-3 bg-slate-50 p-4 rounded-none border border-slate-100">
                     <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                    <span className="text-sm font-bold text-slate-700">{feature}</span>
+                    <span className="text-xs font-black uppercase tracking-widest text-slate-700">{feature}</span>
                   </div>
                 ))}
               </div>
@@ -158,7 +180,7 @@ const WhoWeServePage: React.FC<WhoWeServePageProps> = ({ onNavigate }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center gap-16">
             <div className="lg:w-1/3">
-              <h2 className="text-3xl lg:text-4xl font-extrabold mb-6 text-white">Our Sweet Spot</h2>
+              <h2 className="text-4xl lg:text-5xl font-black mb-6 text-white uppercase tracking-tighter">Our <span className="text-red-600">Sweet Spot</span></h2>
               <p className="text-slate-400 text-lg leading-relaxed">
                 While we can handle larger teams, our services are optimized for small-to-medium enterprises who want a dedicated department feel without the internal overhead.
               </p>
@@ -167,17 +189,17 @@ const WhoWeServePage: React.FC<WhoWeServePageProps> = ({ onNavigate }) => {
               <div className="p-10 rounded-none bg-white/5 border border-white/10 text-center">
                  <p className="text-xs font-bold text-red-500 uppercase tracking-widest mb-6">Team Size</p>
                  <p className="text-4xl lg:text-5xl font-extrabold mb-2 text-white">5 - 75</p>
-                 <p className="text-slate-500 text-sm font-medium">Employees</p>
+                 <p className="text-slate-500 text-sm font-medium uppercase tracking-widest">Employees</p>
               </div>
               <div className="p-10 rounded-none bg-white/5 border border-white/10 text-center">
                  <p className="text-xs font-bold text-red-500 uppercase tracking-widest mb-6">Geography</p>
-                 <p className="text-4xl lg:text-5xl font-extrabold mb-2 text-white">10/13</p>
-                 <p className="text-slate-500 text-sm font-medium">Provinces & Territories</p>
+                 <p className="text-4xl lg:text-5xl font-extrabold mb-2 text-white">13/13</p>
+                 <p className="text-slate-500 text-sm font-medium uppercase tracking-widest">Provinces & Territories</p>
               </div>
               <div className="p-10 rounded-none bg-white/5 border border-white/10 text-center">
                  <p className="text-xs font-bold text-red-500 uppercase tracking-widest mb-6">Retention</p>
                  <p className="text-4xl lg:text-5xl font-extrabold mb-2 text-white">98.4%</p>
-                 <p className="text-slate-500 text-sm font-medium">Client Retention</p>
+                 <p className="text-slate-500 text-sm font-medium uppercase tracking-widest">Client Retention</p>
               </div>
             </div>
           </div>
@@ -189,7 +211,7 @@ const WhoWeServePage: React.FC<WhoWeServePageProps> = ({ onNavigate }) => {
         items={industryFaqs} 
         title={
           <>
-            <h2 className="text-4xl font-black text-slate-900 mb-6 uppercase tracking-tight">Industry <span className="text-red-600">FAQ</span></h2>
+            <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-6 uppercase tracking-tighter">Industry <span className="text-red-600">FAQ</span></h2>
             <p className="text-lg text-slate-600 font-medium">Common questions from the sectors we serve.</p>
           </>
         } 
@@ -197,7 +219,7 @@ const WhoWeServePage: React.FC<WhoWeServePageProps> = ({ onNavigate }) => {
 
       {/* CTA */}
       <section className="py-32 text-center max-w-4xl mx-auto px-4 bg-white">
-        <h2 className="text-3xl lg:text-5xl font-extrabold text-slate-900 mb-10 leading-snug">Ready for a payroll partner who understands your sector?</h2>
+        <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-10 uppercase tracking-tighter">Ready for a payroll partner who <span className="text-red-600">understands</span> your sector?</h2>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button 
             onClick={() => {

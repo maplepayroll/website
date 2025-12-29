@@ -9,74 +9,150 @@ import Comparison from './components/Comparison';
 import Features from './components/Features';
 import ICPSection from './components/ICPSection';
 import Scorecard from './components/Scorecard';
+import KnowledgePreview from './components/KnowledgePreview';
 import FAQ from './components/FAQ';
 import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
 import Assistant from './components/Assistant';
 import ScrollToTop from './components/ScrollToTop';
 import FeaturesPage from './pages/FeaturesPage';
-import WhyUsPage from './pages/WhyUsPage';
 import WhoWeServePage from './pages/WhoWeServePage';
 import AuditServicePage from './pages/AuditServicePage';
-import CRADeadlinesPage from './pages/CRADeadlinesPage';
 import PayrollCalculatorPage from './pages/PayrollCalculatorPage';
 import VacationPayArticlePage from './pages/VacationPayArticlePage';
 import ResourcesPage from './pages/ResourcesPage';
+import TaxableBenefitsPage from './pages/TaxableBenefitsPage';
+import NonTaxableBenefitsPage from './pages/NonTaxableBenefitsPage';
+import PayrollAuditPage from './pages/PayrollAuditPage';
+import CanadianPayrollSoftwareGuide from './pages/CanadianPayrollSoftwareGuide';
+import KeyTermsPage from './pages/KeyTermsPage';
+import BuyerGuidePage from './pages/BuyerGuidePage';
+import EmployerSignUpPage from './pages/EmployerSignUpPage';
 import PricingPage from './pages/PricingPage';
-import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import WhyUsPage from './pages/WhyUsPage';
+import PortalsPage from './pages/PortalsPage';
+import EmployerPortalPage from './pages/EmployerPortalPage';
+import PublicHolidaysPage from './pages/PublicHolidaysPage';
+import Payroll2026ChangesPage from './pages/Payroll2026ChangesPage';
+import BreaksAndEatingPeriodsPage from './pages/BreaksAndEatingPeriodsPage';
 
-export type PageType = 'home' | 'what-we-do' | 'why-us' | 'who-we-serve' | 'audit' | 'cra-deadlines' | 'calculator' | 'vacation-pay-article' | 'resources' | 'pricing' | 'privacy-policy';
+export type PageType = 
+  | 'home' 
+  | 'who-we-serve' 
+  | 'why-us'
+  | 'what-we-do' 
+  | 'audit' 
+  | 'calculator' 
+  | 'resources' 
+  | 'vacation-pay-article' 
+  | 'taxable-benefits' 
+  | 'non-taxable-benefits'
+  | 'payroll-audit'
+  | 'best-payroll-software'
+  | 'key-terms'
+  | 'buyer-guide'
+  | 'signup'
+  | 'pricing'
+  | 'portals'
+  | 'employer-portal'
+  | 'public-holidays-2026'
+  | 'payroll-2026-changes'
+  | 'breaks-and-eating-periods';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<PageType>('home');
+  const [contactContext, setContactContext] = useState<string>('');
 
-  // Scroll to top when page changes
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentPage]);
 
+  const handleNavigate = (page: PageType, context?: string) => {
+    if (context) setContactContext(context);
+    setCurrentPage(page);
+    
+    if (page === 'home' && context) {
+      setTimeout(() => {
+        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  };
+
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar onNavigate={setCurrentPage} currentPage={currentPage} />
+    <div className="min-h-screen flex flex-col selection:bg-red-600 selection:text-white">
+      {/* Conditionally render Navbar: Hide it when on the employer portal to give it a standalone app feel */}
+      {currentPage !== 'employer-portal' && (
+        <Navbar onNavigate={(p) => handleNavigate(p)} currentPage={currentPage} />
+      )}
+      
       <main className="flex-grow">
-        {currentPage === 'home' ? (
-          <>
-            <Hero />
-            <Logos />
-            <ProblemSolution />
-            <WhyChooseUs />
-            <Features />
-            <Comparison />
-            <ICPSection />
-            <Scorecard />
-            <FAQ />
-            <ContactForm />
-          </>
-        ) : currentPage === 'what-we-do' ? (
-          <FeaturesPage onNavigate={setCurrentPage} />
-        ) : currentPage === 'why-us' ? (
-          <WhyUsPage onNavigate={setCurrentPage} />
-        ) : currentPage === 'who-we-serve' ? (
-          <WhoWeServePage onNavigate={setCurrentPage} />
-        ) : currentPage === 'audit' ? (
-          <AuditServicePage onNavigate={setCurrentPage} />
-        ) : currentPage === 'cra-deadlines' ? (
-          <CRADeadlinesPage onNavigate={setCurrentPage} />
-        ) : currentPage === 'calculator' ? (
-          <PayrollCalculatorPage onNavigate={setCurrentPage} />
-        ) : currentPage === 'resources' ? (
-          <ResourcesPage onNavigate={setCurrentPage} />
-        ) : currentPage === 'pricing' ? (
-          <PricingPage onNavigate={setCurrentPage} />
-        ) : currentPage === 'privacy-policy' ? (
-          <PrivacyPolicyPage onNavigate={setCurrentPage} />
-        ) : (
-          <VacationPayArticlePage onNavigate={setCurrentPage} />
-        )}
+        <div key={currentPage} className="animate-page-enter">
+          {currentPage === 'home' ? (
+            <>
+              <Hero onNavigate={handleNavigate} />
+              <Logos />
+              <ProblemSolution />
+              <WhyChooseUs />
+              <Features />
+              <Comparison />
+              <ICPSection />
+              <Scorecard onNavigate={handleNavigate} />
+              <KnowledgePreview onNavigate={handleNavigate} />
+              <FAQ />
+              <ContactForm context={contactContext} />
+            </>
+          ) : currentPage === 'what-we-do' ? (
+            <FeaturesPage onNavigate={handleNavigate} />
+          ) : currentPage === 'who-we-serve' ? (
+            <WhoWeServePage onNavigate={handleNavigate} />
+          ) : currentPage === 'why-us' ? (
+            <WhyUsPage onNavigate={handleNavigate} />
+          ) : currentPage === 'audit' ? (
+            <AuditServicePage onNavigate={handleNavigate} />
+          ) : currentPage === 'calculator' ? (
+            <PayrollCalculatorPage onNavigate={handleNavigate} />
+          ) : currentPage === 'resources' ? (
+            <ResourcesPage onNavigate={handleNavigate} />
+          ) : currentPage === 'taxable-benefits' ? (
+            <TaxableBenefitsPage onNavigate={handleNavigate} />
+          ) : currentPage === 'non-taxable-benefits' ? (
+            <NonTaxableBenefitsPage onNavigate={handleNavigate} />
+          ) : currentPage === 'payroll-audit' ? (
+            <PayrollAuditPage onNavigate={handleNavigate} />
+          ) : currentPage === 'best-payroll-software' ? (
+            <CanadianPayrollSoftwareGuide onNavigate={handleNavigate} />
+          ) : currentPage === 'key-terms' ? (
+            <KeyTermsPage onNavigate={handleNavigate} />
+          ) : currentPage === 'buyer-guide' ? (
+            <BuyerGuidePage onNavigate={handleNavigate} />
+          ) : currentPage === 'signup' ? (
+            <EmployerSignUpPage onNavigate={handleNavigate} />
+          ) : currentPage === 'pricing' ? (
+            <PricingPage onNavigate={handleNavigate} />
+          ) : currentPage === 'portals' ? (
+            <PortalsPage onNavigate={handleNavigate} />
+          ) : currentPage === 'employer-portal' ? (
+            <EmployerPortalPage onNavigate={handleNavigate} />
+          ) : currentPage === 'public-holidays-2026' ? (
+            <PublicHolidaysPage onNavigate={handleNavigate} />
+          ) : currentPage === 'payroll-2026-changes' ? (
+            <Payroll2026ChangesPage onNavigate={handleNavigate} />
+          ) : currentPage === 'breaks-and-eating-periods' ? (
+            <BreaksAndEatingPeriodsPage onNavigate={handleNavigate} />
+          ) : (
+            <VacationPayArticlePage onNavigate={handleNavigate} />
+          )}
+        </div>
       </main>
-      <Footer onNavigate={setCurrentPage} />
-      <Assistant />
-      <ScrollToTop />
+
+      {/* Only show the footer on non-portal pages */}
+      {currentPage !== 'employer-portal' && (
+        <>
+          <Footer onNavigate={handleNavigate} />
+          <Assistant />
+          <ScrollToTop />
+        </>
+      )}
     </div>
   );
 };

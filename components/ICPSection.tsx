@@ -6,25 +6,25 @@ const ICPSection: React.FC = () => {
     {
       title: "Professional Services",
       desc: "Law firms, dental offices, and clinics. High-value staff who deserve expert support, but owners have zero time for admin.",
-      img: "https://images.unsplash.com/photo-1581578731548-c64695ce6958?auto=format&fit=crop&q=80&w=400&h=300"
+      img: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800&h=600"
     },
     {
       title: "The Growing 15",
       desc: "When you hit 15+ employees, owner-managed payroll breaks. We provide the professional department you now need.",
-      img: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=400&h=300"
+      img: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800&h=600"
     },
     {
       title: "High-Growth Startups",
       desc: "Rapidly scaling your team? We handle the cross-provincial tax complexities so your HR can stay focused on hiring.",
-      img: "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=400&h=300"
+      img: "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=800&h=600"
     }
   ];
 
   return (
-    <section id="icp" className="py-24 bg-white">
+    <section id="icp" className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-extrabold text-slate-900 mb-4">Is Maple right for you?</h2>
+        <div className="text-center mb-12">
+          <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-6 uppercase tracking-tighter">Is Maple right <span className="text-red-600">for you?</span></h2>
           <p className="text-lg text-slate-600">We specialize in these three specific business types.</p>
         </div>
 

@@ -62,6 +62,34 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
     {
       q: "Does the price include T4s?",
       a: "Yes. Year-end T4 and T4A generation and filing are included in your monthly subscription fee at no extra cost if the payroll software used handles this automatically. If manual preparation is required, then our regular hourly rate applies."
+    },
+    {
+      q: "Is there an extra charge for multi-province payroll?",
+      a: "Our Core and Professional plans cover one primary province. For businesses with staff in multiple provinces, we offer an Enterprise tier or a small add-on fee per additional jurisdiction to cover the extra filing complexities."
+    },
+    {
+      q: "Are ROE filings included in the monthly price?",
+      a: "Yes, for our Professional and Enterprise tiers, unlimited Record of Employment (ROE) filings are included. For Core Managed, a small per-ROE fee applies if manual intervention is required."
+    },
+    {
+      q: "Do you charge extra for Workers' Comp (WSIB/WCB) reporting?",
+      a: "Workers' Comp reporting and remittance management are included in our Professional and Enterprise plans. We ensure your premiums are calculated accurately based on your actual gross pay runs."
+    },
+    {
+      q: "Do I need to purchase my own payroll software license separately?",
+      a: "No. The cost of the underlying payroll platform is included in your Maple Managed fee. You get a professional department and the technology to run it for one unified price."
+    },
+    {
+      q: "Is there a limit to how often I can contact my dedicated specialist?",
+      a: "No. We don't believe in charging you for asking questions. Our Professional and Enterprise clients enjoy unlimited support from their assigned specialists via phone and email."
+    },
+    {
+      q: "Are there any hidden 'per-run' or 'per-report' fees?",
+      a: "No. Unlike traditional bureaus that charge for every report generated or every extra pay run triggered, our fees are predictable and transparent. Only specific 'Add-on' services like garnishments attract extra costs."
+    },
+    {
+      q: "How do you handle price increases?",
+      a: "We are committed to price transparency. Should our rates need to change, we provide all clients with at least 60 days' written notice. We also guarantee your rate for the first 12 months of service."
     }
   ];
 
@@ -114,14 +142,14 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
 
       {/* Main Pricing Components */}
       <div id="pricing-tiers">
-        <Pricing />
+        <Pricing onNavigate={onNavigate} />
       </div>
 
       {/* Additional Services Grid */}
       <section className="py-24 bg-white border-t border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-black text-slate-900 mb-6 uppercase tracking-tight">Additional <span className="text-red-600">Services</span></h2>
+            <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-6 uppercase tracking-tighter">Additional <span className="text-red-600">Services</span></h2>
             <p className="text-lg text-slate-600 font-medium max-w-2xl mx-auto">
               Specific situations require specific solutions. These add-ons ensure you only pay for the complexity you actually have.
             </p>
@@ -150,17 +178,17 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
         items={pricingFaqs} 
         title={
           <>
-            <h2 className="text-4xl font-black text-slate-900 mb-6 uppercase tracking-tight">Billing <span className="text-red-600">FAQ</span></h2>
+            <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-6 uppercase tracking-tighter">Billing <span className="text-red-600">FAQ</span></h2>
             <p className="text-lg text-slate-600 font-medium">Common questions about how we charge for our services.</p>
           </>
         } 
       />
 
-      {/* Final CTA */}
-      <section className="py-32 text-center bg-slate-900 text-white">
+      {/* Final CTA - Updated to Light Theme to distinct from Footer */}
+      <section className="py-32 text-center bg-white border-t border-slate-100">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-3xl lg:text-5xl font-extrabold mb-8 uppercase tracking-tighter">Not sure which plan fits?</h2>
-          <p className="text-xl text-slate-400 mb-12 leading-relaxed">
+          <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-8 uppercase tracking-tighter">Not sure which plan <span className="text-red-600">fits?</span></h2>
+          <p className="text-xl text-slate-600 mb-12 leading-relaxed font-medium">
             Most of our clients have unique needs. We are happy to build a custom package that includes exactly what you need—nothing more, nothing less.
           </p>
           <button 
@@ -168,7 +196,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
               onNavigate('home');
               setTimeout(() => document.getElementById('contact')?.scrollIntoView(), 100);
             }}
-            className="px-12 py-5 bg-red-600 text-white rounded-none text-xl font-black uppercase tracking-widest hover:bg-red-700 transition-all shadow-2xl shadow-red-900/50"
+            className="px-12 py-5 bg-red-600 text-white rounded-none text-xl font-black uppercase tracking-widest hover:bg-red-700 transition-all shadow-2xl shadow-red-200"
           >
             Request Custom Proposal
           </button>

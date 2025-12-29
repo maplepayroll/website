@@ -23,8 +23,8 @@ const Logos: React.FC = () => {
   const displayPlatforms = [...platforms, ...platforms, ...platforms];
 
   return (
-    <div className="bg-white border-b border-slate-100 py-24 overflow-hidden select-none">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 text-center">
+    <div className="bg-white border-b border-slate-100 py-12 overflow-hidden select-none">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 text-center">
         <p className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-400 mb-2">
           Deeply Integrated
         </p>
@@ -43,7 +43,7 @@ const Logos: React.FC = () => {
               <img 
                 src={`https://logo.clearbit.com/${p.domain}`} 
                 alt={`${p.name} logo`} 
-                className="h-10 md:h-16 w-auto object-contain"
+                className="h-10 md:h-12 w-auto object-contain"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
                   // If the logo fails to load, hide it and reveal the text label

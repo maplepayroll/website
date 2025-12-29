@@ -17,28 +17,24 @@ export const YEARLY_RATES: Record<number, {
   cpp2: { yampe: number; rate: number; maxEnhanced: number };
   ei: { mie: number; rate: number; maxPremium: number };
   bpa: number; 
-  inflation: number; 
 }> = {
   2024: {
     cpp: { ympe: 68500, exemption: 3500, rate: 0.0595, maxBase: 3867.50 },
     cpp2: { yampe: 73200, rate: 0.0400, maxEnhanced: 188.00 },
     ei: { mie: 63200, rate: 0.0166, maxPremium: 1049.12 },
-    bpa: 15705,
-    inflation: 1.0
+    bpa: 15705
   },
   2025: {
     cpp: { ympe: 71300, exemption: 3500, rate: 0.0595, maxBase: 4034.10 },
     cpp2: { yampe: 81200, rate: 0.0400, maxEnhanced: 396.00 },
     ei: { mie: 65700, rate: 0.0164, maxPremium: 1077.48 },
-    bpa: 15964,
-    inflation: 1.027
+    bpa: 15964
   },
   2026: {
-    cpp: { ympe: 72700, exemption: 3500, rate: 0.0595, maxBase: 4117.30 },
+    cpp: { ympe: 72700, exemption: 3500, rate: 0.0595, maxBase: 4117.40 },
     cpp2: { yampe: 82800, rate: 0.0400, maxEnhanced: 404.00 },
     ei: { mie: 67000, rate: 0.0164, maxPremium: 1098.80 },
-    bpa: 16283,
-    inflation: 1.048
+    bpa: 16283
   }
 };
 
@@ -47,7 +43,7 @@ export interface PayrollParams {
   payType?: 'annual' | 'hourly';
   province?: string;
   year?: number;
-  frequency?: 'annual' | 'monthly' | 'biweekly' | 'weekly';
+  frequency?: 'annual' | 'monthly' | 'semi-monthly' | 'biweekly' | 'weekly' | 'daily';
   hoursPerWeek?: number;
 }
 
@@ -64,78 +60,56 @@ export function calculatePayroll(params: PayrollParams) {
   const province = PROVINCES.find(p => p.name.toLowerCase() === provinceName.toLowerCase()) || PROVINCES[0];
   const rates = YEARLY_RATES[year] || YEARLY_RATES[2024];
   
-  const dividers: Record<string, number> = {
-    annual: 1,
-    monthly: 12,
-    biweekly: 26,
-    weekly: 52
+  const dividers: Record<string, number> = { 
+    annual: 1, 
+    monthly: 12, 
+    'semi-monthly': 24,
+    biweekly: 26, 
+    weekly: 52,
+    daily: 260 
   };
-  
   const displayDivider = dividers[frequency] || 26;
 
-  let annualGrossEstimate = 0;
-  if (payType === 'annual') {
-    annualGrossEstimate = income;
-  } else {
-    annualGrossEstimate = income * hoursPerWeek * 52;
-  }
+  let annualGross = payType === 'annual' ? income : income * hoursPerWeek * 52;
+  const taxableIncomeAnnual = Math.max(0, annualGross);
 
-  // CPP
-  const pensionableEarnings = annualGrossEstimate;
-  const basePensionable = Math.min(pensionableEarnings, rates.cpp.ympe);
-  const contributoryEarnings = Math.max(0, basePensionable - rates.cpp.exemption);
+  // CPP & EI
+  const contributoryEarnings = Math.max(0, Math.min(annualGross, rates.cpp.ympe) - rates.cpp.exemption);
   const annualCPPBase = contributoryEarnings * rates.cpp.rate;
-
   let annualCPP2 = 0;
-  if (pensionableEarnings > rates.cpp.ympe) {
-    const enhancedContributory = Math.min(pensionableEarnings, rates.cpp2.yampe) - rates.cpp.ympe;
-    annualCPP2 = Math.max(0, enhancedContributory * rates.cpp2.rate);
+  if (annualGross > rates.cpp.ympe) {
+    annualCPP2 = (Math.min(annualGross, rates.cpp2.yampe) - rates.cpp.ympe) * rates.cpp2.rate;
   }
-  const totalAnnualCPP = annualCPPBase + annualCPP2;
+  const annualEI = Math.min(Math.min(annualGross, rates.ei.mie) * rates.ei.rate, rates.ei.maxPremium);
 
-  // EI
-  const insurableEarnings = Math.min(annualGrossEstimate, rates.ei.mie);
-  const annualEI = Math.min(insurableEarnings * rates.ei.rate, rates.ei.maxPremium);
-
-  // Split Tax Calculation
+  // Split Tax
   const fedBaseRate = 0.15;
   let fedTax = 0;
-  let provTax = annualGrossEstimate * province.taxRate;
-  
-  if (annualGrossEstimate > rates.bpa) {
-     // Federal portion with simplified progressive step
+  let provTax = taxableIncomeAnnual * province.taxRate;
+
+  if (taxableIncomeAnnual > rates.bpa) {
      let fedEffectiveRate = fedBaseRate;
-     if (annualGrossEstimate > 55000) fedEffectiveRate += 0.05;
-     if (annualGrossEstimate > 100000) fedEffectiveRate += 0.05;
-     if (annualGrossEstimate > 160000) fedEffectiveRate += 0.04;
-     
-     const fedRaw = annualGrossEstimate * fedEffectiveRate;
-     const bpaCredit = rates.bpa * fedBaseRate; 
-     fedTax = Math.max(0, fedRaw - bpaCredit);
+     if (taxableIncomeAnnual > 55000) fedEffectiveRate += 0.05;
+     if (taxableIncomeAnnual > 111000) fedEffectiveRate += 0.06;
+     fedTax = Math.max(0, (taxableIncomeAnnual * fedEffectiveRate) - (rates.bpa * fedBaseRate));
   }
   
-  const annualNet = Math.max(0, annualGrossEstimate - fedTax - provTax - totalAnnualCPP - annualEI);
+  const totalAnnualDeductions = fedTax + provTax + annualCPPBase + annualCPP2 + annualEI;
+  const annualNet = annualGross - totalAnnualDeductions;
 
-  const formatMoney = (n: number) => {
-    return new Intl.NumberFormat('en-CA', { 
-      style: 'currency', 
-      currency: 'CAD',
-      minimumFractionDigits: 2 
-    }).format(n / displayDivider);
-  };
+  const format = (n: number) => new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }).format(n / displayDivider);
 
   return {
-    summary: `Payroll Estimate for ${formatMoney(annualGrossEstimate * displayDivider)}/year (${province.name})`,
-    frequency: frequency,
-    grossPay: formatMoney(annualGrossEstimate),
-    netPay: formatMoney(annualNet),
+    netPay: format(annualNet),
+    grossPay: format(annualGross),
+    frequency,
     deductions: {
-      fedTax: formatMoney(fedTax),
-      provTax: formatMoney(provTax),
-      cppBase: formatMoney(annualCPPBase),
-      cpp2: formatMoney(annualCPP2),
-      ei: formatMoney(annualEI)
-    },
-    totalDeductions: formatMoney(fedTax + provTax + totalAnnualCPP + annualEI)
+      fedTax: format(fedTax),
+      provTax: format(provTax),
+      cppBase: format(annualCPPBase),
+      cpp2: format(annualCPP2),
+      ei: format(annualEI),
+      totalDeductions: format(totalAnnualDeductions)
+    }
   };
 }

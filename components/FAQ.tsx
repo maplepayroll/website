@@ -15,7 +15,7 @@ const FAQ: React.FC<FAQProps> = ({ items, title }) => {
   const defaultFaqs = [
     {
       q: "Do I have to switch my accounting software?",
-      a: "No. Maple is software-agnostic. We work within your existing QuickBooks Online, Xero, or=" + " Sage environment. You keep your data; we just manage the inputs and outputs professionally."
+      a: "No. Maple is software-agnostic. We work within your existing environment. You keep your data; we just manage the inputs and outputs on your behalf."
     },
     {
       q: "How does the employee support actually work?",
@@ -67,12 +67,12 @@ const FAQ: React.FC<FAQProps> = ({ items, title }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="py-32 bg-white">
+    <section className="py-20 bg-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-20">
+        <div className="text-center mb-12">
           {title || (
             <>
-            <h2 className="text-4xl font-black text-slate-900 mb-6 uppercase tracking-tight">Common <span className="text-red-600">Questions</span></h2>
+            <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-6 uppercase tracking-tighter">Common <span className="text-red-600">Questions</span></h2>
             <p className="text-lg text-slate-600 font-medium">Everything you need to know about the transition to managed payroll.</p>
             </>
           )}

@@ -1,7 +1,12 @@
 
 import React from 'react';
+import { PageType } from '../App';
 
-const Pricing: React.FC = () => {
+interface PricingProps {
+  onNavigate?: (page: PageType) => void;
+}
+
+const Pricing: React.FC<PricingProps> = ({ onNavigate }) => {
   const tiers = [
     {
       name: "Core Managed",
@@ -67,17 +72,28 @@ const Pricing: React.FC = () => {
     }
   ];
 
+  const handleCtaClick = () => {
+    if (onNavigate) {
+      onNavigate('home');
+      setTimeout(() => {
+        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="pricing" className="py-32 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20">
-          <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-6 uppercase tracking-tight">Transparent <span className="text-red-600">Investment</span></h2>
+          <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-6 uppercase tracking-tighter">Transparent <span className="text-red-600">Investment</span></h2>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto">Professional managed payroll that costs less than a single compliance error.</p>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
           {tiers.map((t, i) => (
-            <div key={i} className={`relative flex flex-col p-10 bg-white border ${t.highlighted ? 'border-red-600 shadow-2xl scale-105 z-10' : 'border-slate-100 shadow-sm'} rounded-none transition-all`}>
+            <div key={i} className={`relative flex flex-col p-10 bg-white border ${t.highlighted ? 'border-red-600 shadow-xl scale-105 z-10' : 'border-slate-100 shadow-sm'} rounded-none transition-all`}>
               {t.highlighted && (
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-red-600 text-white px-4 py-1 text-[10px] font-black uppercase tracking-widest">
                   Recommended
@@ -120,7 +136,10 @@ const Pricing: React.FC = () => {
                 )}
               </div>
 
-              <button className={`w-full py-4 font-black uppercase tracking-widest text-sm transition-all rounded-none ${t.highlighted ? 'bg-red-600 text-white hover:bg-red-700' : 'bg-slate-900 text-white hover:bg-black'}`}>
+              <button 
+                onClick={handleCtaClick}
+                className={`w-full py-4 font-black uppercase tracking-widest text-sm transition-colors rounded-none ${t.highlighted ? 'bg-red-600 text-white hover:bg-red-700' : 'bg-slate-900 text-white hover:bg-black'}`}
+              >
                 {t.cta}
               </button>
             </div>
@@ -128,7 +147,7 @@ const Pricing: React.FC = () => {
         </div>
         
         <p className="mt-12 text-center text-slate-400 text-xs font-bold uppercase tracking-widest">
-          * Base fees shown. $5-10 per employee/month processing fee applies.
+          * Base fees shown. Additional $5.00 to $10.00 per employee/month processing fee applies.
         </p>
       </div>
     </section>

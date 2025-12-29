@@ -10,84 +10,82 @@ const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
   const detailedFeatures = [
     {
       title: "Automated Remittances",
-      desc: "We calculate and pay your federal and provincial payroll taxes automatically. Never miss a CRA deadline again.",
+      desc: "Dedicated certified payroll specialists are included in your service and will help you keep your payroll compliant with federal and provincial regulations.",
       icon: "💰",
       details: ["CRA & Provincial Remittances", "Workplace Safety Filings (WSIB, WCB)", "EHT & Provincial Health Taxes"]
     },
     {
       title: "Direct Deposit & Pay Stubs",
-      desc: "Seamless electronic payments to all major Canadian banks with digital pay stubs accessible via a secure portal we manage for you.",
+      desc: "Seamless electronic payments managed by your dedicated specialist. We handle the banking complexities so your team gets paid correctly every cycle.",
       icon: "🏧",
       details: ["Next-day direct deposit", "Detailed digital stubs", "Year-end T4 portal access"]
     },
     {
       title: "Managed Onboarding",
-      desc: "We take the administrative burden of hiring off your hands. We collect all necessary documents to ensure your team is compliant and ready to be paid from day one.",
+      desc: "No need to worry about employee onboarding; send the updates to us and our team will manage the complexities of TD1s and banking forms.",
       icon: "🤝",
       details: ["TD1 & Provincial Form Collection", "Direct Deposit Info Gathering", "Employment Contract Tracking"]
     },
     {
       title: "Year-End Processing",
-      desc: "We handle the entire T4 filing process, including amendments and electronic submission to the government.",
+      desc: "Our certified specialists handle the entire T4/RL-1 filing process, ensuring you stay compliant with payroll-related regulations.",
       icon: "📅",
       details: ["T4 & T4A Preparation", "Quebec RL-1 & RL-2 filings", "CRA Summary Filings"]
     },
     {
-      title: "Records of Employment (ROE)",
-      desc: "Automated ROE filing via ROE Web. We ensure your outgoing employees get their benefits without delay.",
+      title: "Departures & Terminations",
+      desc: "No need to worry about employee departures or terminations; our team manages the ROE filing and statutory payout logic for you.",
       icon: "📄",
-      details: ["Same-day ROE filing", "ROE Web management", "Termination compliance audit"]
+      details: ["Quick ROE Processing", "ROE Web management", "Termination compliance audit"]
     },
     {
       title: "Dedicated Employee Support",
-      desc: "Your staff speaks to our experts, not you. Support available for all provinces and territories.",
+      desc: "Your staff speaks to our certified specialists directly. We handle all pay-related questions while keeping your data confidential.",
       icon: "🗣️",
       details: ["Dedicated phone line", "Email ticketing support", "Live chat for employees"]
-    },
-    {
-      title: "CRA Representation",
-      desc: "In the event of an audit or inquiry, our NPI-certified team speaks to the CRA on your behalf. We handle the paperwork.",
-      icon: "🏛️",
-      details: ["Audit assistance", "CRA portal management", "Penalty dispute handling"]
     }
   ];
 
   const featureFaqs = [
     {
-      q: "Does your automated remittance service cover provincial health taxes?",
-      a: "Yes. We automatically calculate and remit provincial health taxes (like the Ontario EHT and BC EHT) based on your total payroll thresholds, ensuring you never miss a filing."
+      q: "How does the 'Dedicated Specialist' model work?",
+      a: "Dedicated certified payroll specialists are included in your service and will help you keep your payroll compliant with all payroll-related regulations. You get a direct line to an expert who knows your business, not a generic call centre."
     },
     {
-      q: "Can I use my existing ROE Web account?",
-      a: "We typically act as the primary contact on your ROE Web account to handle filings instantly. If you prefer to retain control, we can generate the files for you to upload."
+      q: "Do I have to manage onboarding forms?",
+      a: "No need to worry about employee onboarding; send the hire details to us and our team will handle the collection of TD1s, direct deposit info, and required provincial tax forms."
     },
     {
-      q: "How fast is the direct deposit funding?",
-      a: "For most clients, we operate on a 3-day lead time. However, qualified accounts can access next-day funding to keep cash flow tight."
+      q: "What happens when someone leaves?",
+      a: "No need to worry about departures or terminations; simply send the update to us and our team will manage the complexities of final pay, statutory holiday calculations, and ROE filings."
     },
     {
-      q: "Do you handle T4s for contractors?",
-      a: "Yes. We manage both T4s for employees and T4As for independent contractors, ensuring your entire workforce is compliant."
+      q: "How do you handle CRA inquiries?",
+      a: "Our certified specialists act as your authorized representative. If the CRA calls or sends a notice, we answer on your behalf, providing the necessary documentation to ensure compliance."
     },
     {
-      q: "Do you integrate with time-tracking software?",
-      a: "Yes. We can import data directly from TSheets, Deputy, 7Shifts, and other major time-tracking platforms to eliminate manual data entry errors."
+      q: "Can you manage payroll for employees in multiple provinces?",
+      a: "Yes. We support all 13 provinces and territories. We handle the specific tax brackets, Workers' Comp rates, and provincial health taxes (like EHT in Ontario or BC) for each jurisdiction."
     },
     {
-      q: "How does Managed Onboarding work for remote staff?",
-      a: "We send a secure digital package to the new hire. They upload their void cheque, sign their TD1s digitally, and we verify everything before their start date."
+      q: "How do you handle benefits reconciliation?",
+      a: "We reconcile your monthly group insurance invoices against your active payroll to ensure you aren't paying for terminated employees and that all new hire deductions are accurate."
     },
     {
-      q: "Is there an extra fee for year-end T4 adjustments?",
-      a: "No. Unlike many bureaus that charge per slip or for 'amendments', our managed service includes year-end filing and reasonable adjustments at no extra cost."
+      q: "What is the turnaround time for processing a pay run?",
+      a: "We typically require your pay data 3 business days before the pay date to guarantee next-day direct deposit. Emergency rush processing is available for a small fee."
     },
     {
-      q: "Can you handle multiple Business Numbers (BNs)?",
-      a: "Absolutely. We are experts in multi-entity management. We can run separate payrolls for different divisions while giving you a consolidated reporting view."
+      q: "Do employees get a mobile app or portal for pay stubs?",
+      a: "This is a function of the payroll software selected but most do offer this ability. Employees receive secure access to a digital portal where they can view and download their current and historical pay stubs, as well as year-end T4 or RL-1 slips."
     },
     {
-      q: "How do you handle garnishments or family support deductions?",
-      a: "We calculate the correct garnishment amount based on provincial rules and remit payments directly to the appropriate court or agency on your behalf."
+      q: "Can you handle year-end T4/T4A and RL-1/RL-2 filings?",
+      a: "Absolutely. Year-end processing is included. We generate, file, and distribute all required tax slips to both your employees and the federal/provincial governments."
+    },
+    {
+      q: "Are remittances to CRA and WSIB/WCB handled automatically?",
+      a: "Yes. We calculate the exact amounts owed, remit them electronically on your behalf, and provide you with clear reporting for your accounting records every cycle."
     }
   ];
 
@@ -95,16 +93,13 @@ const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
     <div className="bg-white">
       {/* Full-Width Background Hero Section */}
       <section className="relative min-h-screen flex items-center overflow-hidden bg-slate-900">
-        {/* Background Image Layer */}
         <div className="absolute inset-0 z-0">
           <img 
             src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=2000" 
             alt="Modern Canadian Business Professional" 
             className="w-full h-full object-cover object-center"
           />
-          {/* Gradient Overlay for Text Legibility - Solid on left, fades to right */}
           <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent"></div>
-          {/* Subtle Red Edge Accent */}
           <div className="absolute top-0 left-0 w-2 h-full bg-red-600 z-20"></div>
         </div>
         
@@ -114,11 +109,12 @@ const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
               Service Capabilities
             </div>
             <h1 className="text-4xl lg:text-[5.5rem] font-black text-white mb-8 leading-[0.95] tracking-tighter uppercase">
-              FULL-SPECTRUM <br/>
-              <span className="text-red-500">PAYROLL MANAGEMENT</span>
+              We Do <br/>
+              Your <br/>
+              <span className="text-red-500">Payroll</span>
             </h1>
             <p className="text-xl text-slate-200 leading-relaxed font-medium mb-10 max-w-xl">
-              From complex calculations to direct employee support, discover how we handle the heavy lifting for your business across all 13 provinces and territories.
+              Dedicated certified payroll specialists are included in your service and will help you keep your payroll compliant with payroll-related regulations.
             </p>
             <div className="flex flex-col sm:flex-row gap-5">
               <button 
@@ -130,12 +126,6 @@ const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
               >
                 Get a Custom Quote
               </button>
-              <button 
-                onClick={() => onNavigate('calculator')}
-                className="inline-flex items-center justify-center px-12 py-5 bg-white/10 backdrop-blur-md text-white rounded-none text-lg font-black uppercase tracking-widest hover:bg-white/20 transition-all border border-white/20"
-              >
-                Launch Calculator
-              </button>
             </div>
           </div>
         </div>
@@ -144,9 +134,9 @@ const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
       {/* Intro Text */}
       <section className="py-24 bg-slate-50 border-b border-slate-100">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl font-black text-slate-900 mb-8 uppercase tracking-tight">Built for accuracy, delivered with care.</h2>
+          <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-8 uppercase tracking-tighter">Complexity Managed, <span className="text-red-600">Step by Step.</span></h2>
           <p className="text-xl text-slate-600 leading-relaxed font-medium">
-            Maple isn't a DIY platform. We are a professional services firm that uses industry-leading tools to manage your entire payroll department from A to Z. You don't just get a login; you get an entire NPI-certified team.
+            No need to worry about employee onboarding, departures, terminations; send the updates to us and our team will help you manage the complexities. We are your dedicated Canadian payroll department.
           </p>
         </div>
       </section>
@@ -170,90 +160,29 @@ const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
         ))}
       </section>
 
-      {/* Complex Scenarios Section */}
-      <section className="py-32 bg-slate-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row gap-16 items-center">
-            <div className="lg:w-1/2">
-               <h2 className="text-4xl lg:text-5xl font-black mb-8 uppercase tracking-tighter leading-tight">Complex Payroll? <br/><span className="text-red-600">Consider it done.</span></h2>
-               <p className="text-slate-400 text-lg mb-10 leading-relaxed font-medium">
-                 Many providers run away from complexity. At Maple, we thrive on it. Our team handles the specific nuances of Canadian labour law that software alone often misses.
-               </p>
-               <div className="grid sm:grid-cols-2 gap-8">
-                  <div className="p-6 border border-white/10 bg-white/5">
-                    <h4 className="font-black text-red-500 uppercase tracking-widest text-xs mb-2">Equity & Bonus</h4>
-                    <p className="text-slate-300 text-sm leading-relaxed">Taxable benefits for stock options, bonuses, and non-cash gifts audited for compliance.</p>
-                  </div>
-                  <div className="p-6 border border-white/10 bg-white/5">
-                    <h4 className="font-black text-red-500 uppercase tracking-widest text-xs mb-2">Multi-Provincial</h4>
-                    <p className="text-slate-300 text-sm leading-relaxed">Employees in QC, BC, and ON simultaneously? We handle the EHT, Health Tax, and RL filings.</p>
-                  </div>
-                  <div className="p-6 border border-white/10 bg-white/5">
-                    <h4 className="font-black text-red-500 uppercase tracking-widest text-xs mb-2">Vacation Accrual</h4>
-                    <p className="text-slate-300 text-sm leading-relaxed">Complex 'Pay-Out' vs 'Accrual' logic managed per province to avoid labour disputes.</p>
-                  </div>
-                  <div className="p-6 border border-white/10 bg-white/5">
-                    <h4 className="font-black text-red-500 uppercase tracking-widest text-xs mb-2">Labour Tracking</h4>
-                    <p className="text-slate-300 text-sm leading-relaxed">Department-level cost allocation and GL mapping verified by professional accountants.</p>
-                  </div>
-               </div>
-            </div>
-            <div className="lg:w-1/2">
-               <div className="relative">
-                 <div className="absolute -inset-4 bg-red-600 opacity-20 blur-2xl"></div>
-                 <div className="relative bg-white p-12 rounded-none border border-slate-200 shadow-2xl">
-                    <p className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] mb-6">Security Standards</p>
-                    <h3 className="text-3xl font-black text-slate-900 mb-6 uppercase tracking-tight">Your Data, Protected.</h3>
-                    <p className="text-slate-600 text-sm mb-8 font-medium leading-relaxed">
-                      We utilize bank-grade encryption and adhere to strict PIPEDA standards. Our internal processes are SOC2 compliant, ensuring your payroll data never leaves Canadian soil.
-                    </p>
-                    <ul className="space-y-4">
-                      {["End-to-end Encryption", "Strict Access Controls", "Canadian Data Residency", "SOC2 Compliant Processes"].map(item => (
-                        <li key={item} className="flex items-center gap-3 text-slate-900 font-bold text-xs uppercase tracking-widest">
-                          <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                          </svg>
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                 </div>
-               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Feature Specific FAQ */}
       <FAQ 
         items={featureFaqs} 
         title={
           <>
-            <h2 className="text-4xl font-black text-slate-900 mb-6 uppercase tracking-tight">Capabilities <span className="text-red-600">FAQ</span></h2>
-            <p className="text-lg text-slate-600 font-medium">Specific questions about our operational features.</p>
+            <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-6 uppercase tracking-tighter">Service <span className="text-red-600">FAQ</span></h2>
+            <p className="text-lg text-slate-600 font-medium">How our specialists handle your business complexities.</p>
           </>
         } 
       />
 
       {/* CTA */}
       <section className="py-32 text-center max-w-4xl mx-auto px-4">
-        <h2 className="text-4xl lg:text-6xl font-black text-slate-900 mb-8 uppercase tracking-tighter leading-tight">Ready to see <br/> how we <span className="text-red-600">work?</span></h2>
-        <p className="text-xl text-slate-600 mb-12 leading-relaxed font-medium">Join hundreds of Canadian business owners who have replaced their payroll stress with Maple's professional managed service.</p>
+        <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-8 uppercase tracking-tighter leading-tight">Send updates. <br/> <span className="text-red-600">We manage the rest.</span></h2>
+        <p className="text-xl text-slate-600 mb-12 leading-relaxed font-medium">Dedicated certified payroll specialists are ready to keep you compliant and stress-free.</p>
         <div className="flex flex-col sm:flex-row gap-5 justify-center">
           <button 
             onClick={() => {
               onNavigate('home');
               setTimeout(() => document.getElementById('contact')?.scrollIntoView(), 100);
             }} 
-            className="px-12 py-5 bg-red-600 text-white rounded-none text-lg font-black uppercase tracking-widest hover:bg-red-700 transition-all shadow-2xl shadow-red-200 transform hover:scale-105"
+            className="px-12 py-5 bg-red-600 text-white rounded-none text-lg font-black uppercase tracking-widest hover:bg-red-700 transition-all shadow-2xl shadow-red-200"
           >
-            Request a Free Consultation
-          </button>
-          <button 
-             onClick={() => onNavigate('home')}
-             className="px-12 py-5 bg-white border-2 border-slate-900 text-slate-900 rounded-none text-lg font-black uppercase tracking-widest hover:bg-slate-50 transition-all"
-          >
-            Back to Home
+            Talk to a Specialist
           </button>
         </div>
       </section>

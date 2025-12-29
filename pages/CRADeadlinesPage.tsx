@@ -122,14 +122,14 @@ const CRADeadlinesPage: React.FC<CRADeadlinesPageProps> = ({ onNavigate }) => {
               className="group flex items-center gap-2 text-slate-300 hover:text-white transition-colors mb-6 text-sm font-bold tracking-wide uppercase"
             >
               <span className="group-hover:-translate-x-1 transition-transform">←</span>
-              Back to Resources
+              Back to Knowledge Hub
             </button>
             <div className="inline-flex items-center px-4 py-1.5 rounded-none bg-red-600 text-white text-xs font-bold tracking-[0.2em] mb-8 uppercase shadow-lg shadow-red-900/20">
               National Compliance Calendar
             </div>
             <h1 className="text-4xl lg:text-[5.5rem] font-black text-white mb-8 leading-[0.95] tracking-tighter uppercase">
-              Filing <br/>
-              <span className="text-red-500">Deadlines</span>
+              When Are My <br/>
+              <span className="text-red-500">Filing Deadlines?</span>
             </h1>
             <p className="text-xl text-slate-200 leading-relaxed font-medium mb-10 max-w-xl">
               From CRA source deductions to Quebec's RL-1 requirements, stay ahead of every provincial and federal deadline with our comprehensive guide.
@@ -213,6 +213,45 @@ const CRADeadlinesPage: React.FC<CRADeadlinesPageProps> = ({ onNavigate }) => {
           </div>
         </div>
       </section>
+
+      {/* The Bottom Line Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-slate-900 text-white p-10 my-16 shadow-xl border-l-8 border-red-600">
+          <h3 className="text-2xl font-black mb-4 uppercase tracking-tight">The Bottom Line</h3>
+          <div className="space-y-4">
+            <div>
+              <p className="text-xs font-black text-red-500 uppercase tracking-widest mb-1">Golden Rule</p>
+              <p className="text-lg font-bold leading-relaxed">
+                Remit source deductions on time, every time. The CRA penalty for late remittance starts at 3% immediately and climbs to 10% within days.
+              </p>
+            </div>
+            <div className="h-px bg-white/20 my-4"></div>
+            <div>
+              <p className="text-xs font-black text-red-500 uppercase tracking-widest mb-1">Compliance Trap</p>
+              <p className="text-sm font-medium leading-relaxed text-slate-300">
+                Failing to file a "Nil" remittance when you have no payroll for a month often triggers a specialized assessment or audit. Always tell the CRA if you are remitting $0.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* References Section */}
+        <div className="mb-24 pt-8 border-t border-slate-200">
+            <h4 className="text-sm font-black text-slate-400 uppercase tracking-widest mb-4">Official References</h4>
+            <ul className="space-y-2">
+                <li>
+                    <a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/remitting-source-deductions/how-when-remit-due-dates.html" target="_blank" rel="noreferrer" className="text-red-600 font-bold hover:underline text-sm flex items-center gap-2">
+                        CRA: How and when to remit (pay) source deductions <span>↗</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.revenuquebec.ca/en/businesses/source-deductions-and-employer-contributions/remitting-source-deductions-and-employer-contributions/remittance-schedules/" target="_blank" rel="noreferrer" className="text-red-600 font-bold hover:underline text-sm flex items-center gap-2">
+                        Revenu Québec: Remittance schedules <span>↗</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+      </div>
 
       {/* Deadlines FAQ */}
       <FAQ 

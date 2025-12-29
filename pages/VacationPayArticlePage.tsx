@@ -1,12 +1,40 @@
 
 import React from 'react';
 import { PageType } from '../App';
+import FAQ from '../components/FAQ';
 
 interface VacationPayArticlePageProps {
-  onNavigate: (page: PageType) => void;
+  onNavigate: (page: PageType, context?: string) => void;
 }
 
 const VacationPayArticlePage: React.FC<VacationPayArticlePageProps> = ({ onNavigate }) => {
+  const vacationFaqs = [
+    {
+      q: "Can I pay vacation pay on every paycheque?",
+      a: "Yes. This is common for hourly or casual staff. You must clearly separate the 'Vacation Pay' line item on the pay stub (usually 4%). You cannot simply say 'your hourly rate includes vacation pay' without a written agreement and clear breakdown."
+    },
+    {
+      q: "Do I have to pay vacation pay on overtime earnings?",
+      a: "Yes. Vacation pay is calculated on 'gross wages,' which includes overtime pay, public holiday pay, and commissions."
+    },
+    {
+      q: "What happens to vacation pay when an employee quits?",
+      a: "All accrued and unpaid vacation pay must be paid out on their final paycheque. This is a strict requirement under Employment Standards."
+    },
+    {
+      q: "Can I enforce a 'Use it or Lose it' policy?",
+      a: "You can generally enforce a 'use it or lose it' policy for the *time off*, but you CANNOT force them to lose the *money*. Any unpaid vacation pay must be paid out to the employee, even if they didn't take the days."
+    },
+    {
+      q: "Does vacation pay accrue during a sick leave?",
+      a: "Generally, no. Vacation pay is a percentage of *wages earned*. If the employee is on unpaid sick leave and earning $0, they are accruing $0 in vacation pay (though they may still accumulate 'years of service' for entitlement purposes)."
+    },
+    {
+      q: "Is vacation pay pensionable (CPP) and insurable (EI)?",
+      a: "Yes. When vacation pay is paid out, it is considered income. You must deduct CPP, EI, and Income Tax from it."
+    }
+  ];
+
   return (
     <div className="bg-white">
       {/* Hero Section - Standardized to match Home Page */}
@@ -27,18 +55,15 @@ const VacationPayArticlePage: React.FC<VacationPayArticlePageProps> = ({ onNavig
               Employer Compliance Guide
             </div>
             <h1 className="text-4xl lg:text-[5.5rem] font-black text-white mb-8 leading-[0.95] tracking-tighter uppercase">
-              How Vacation Pay <br/>
-              <span className="text-red-500">Actually Works</span>
+              How Does Vacation Pay <br/>
+              <span className="text-red-500">Actually Work?</span>
             </h1>
             <p className="text-xl text-slate-300 leading-relaxed font-medium mb-10">
               It's the #1 source of payroll discrepancies in Canada. Here is the definitive guide to "Time Off" vs "Vacation Pay" and the compliance traps most businesses miss regarding commissions, bonuses, and termination.
             </p>
             <div className="flex flex-col sm:flex-row gap-5">
               <button 
-                onClick={() => {
-                  onNavigate('home');
-                  setTimeout(() => document.getElementById('contact')?.scrollIntoView(), 100);
-                }}
+                onClick={() => onNavigate('home', 'Vacation Pay Audit')}
                 className="inline-flex items-center justify-center px-12 py-5 bg-red-600 text-white rounded-none text-lg font-black uppercase tracking-widest hover:bg-red-700 transition-all transform hover:-translate-y-1 shadow-2xl shadow-red-600/30"
               >
                 Audit Your Liability
@@ -74,7 +99,7 @@ const VacationPayArticlePage: React.FC<VacationPayArticlePageProps> = ({ onNavig
               <h2 className="text-3xl font-black text-slate-900 mb-6 uppercase tracking-tight">1. The Salaried Employee Trap</h2>
               <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Myth: "My salary covers everything."</p>
               
-              <p className="text-slate-600 mb-6">
+              <p className="text-slate-600 mb-8">
                 Most employers tell salaried staff: "You get $60,000 a year, and that includes your 2 weeks of vacation." This is compliant, <strong>provided the employee only earns their base salary.</strong>
               </p>
               <p className="text-slate-600 mb-6">
@@ -290,6 +315,51 @@ const VacationPayArticlePage: React.FC<VacationPayArticlePageProps> = ({ onNavig
               </div>
               <p className="text-xs text-slate-400 mt-4 italic mb-12">*Varies by province (e.g., Federal jurisdiction and some provinces increase to 8% after 10 years).</p>
 
+              {/* The Bottom Line Section */}
+              <div className="bg-slate-900 text-white p-8 my-12 shadow-xl border-l-8 border-red-600">
+                <h3 className="text-2xl font-black mb-4 uppercase tracking-tight">The Bottom Line</h3>
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-xs font-black text-red-500 uppercase tracking-widest mb-1">Golden Rule</p>
+                    <p className="text-lg font-bold leading-relaxed">
+                      Vacation pay accrues on <strong>every dollar</strong> earned, including bonuses, commissions, and overtime.
+                    </p>
+                  </div>
+                  <div className="h-px bg-white/20 my-4"></div>
+                  <div>
+                    <p className="text-xs font-black text-red-500 uppercase tracking-widest mb-1">Compliance Trap</p>
+                    <p className="text-sm font-medium leading-relaxed text-slate-300">
+                      Failure to calculate vacation pay on "Termination Pay" (Pay in Lieu of Notice) is the #1 cause of Labour Board orders against small businesses after a dismissal.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* FAQ Section */}
+              <FAQ items={vacationFaqs} title={<h2 className="text-3xl font-black text-slate-900 mb-6 uppercase tracking-tight">Vacation Pay <span className="text-red-600">FAQ</span></h2>} />
+
+              {/* References Section */}
+              <div className="mt-16 pt-8 border-t border-slate-200">
+                  <h4 className="text-sm font-black text-slate-400 uppercase tracking-widest mb-4">Official References</h4>
+                  <ul className="space-y-2">
+                      <li>
+                          <a href="https://www.ontario.ca/document/your-guide-employment-standards-act-0/vacation" target="_blank" rel="noreferrer" className="text-red-600 font-bold hover:underline text-sm flex items-center gap-2">
+                              Ontario ESA: Vacation Pay Rules <span>↗</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/time-off/vacation" target="_blank" rel="noreferrer" className="text-red-600 font-bold hover:underline text-sm flex items-center gap-2">
+                              BC Employment Standards: Annual Vacation <span>↗</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="https://www.canada.ca/en/employment-social-development/services/labour-standards/reports/annual-vacation.html" target="_blank" rel="noreferrer" className="text-red-600 font-bold hover:underline text-sm flex items-center gap-2">
+                              Federal Labour Standards: Vacation (CLC) <span>↗</span>
+                          </a>
+                      </li>
+                  </ul>
+              </div>
+
             </div>
           </div>
 
@@ -308,11 +378,8 @@ const VacationPayArticlePage: React.FC<VacationPayArticlePageProps> = ({ onNavig
                     Open Payroll Calculator
                   </button>
                   <button 
-                    onClick={() => {
-                      onNavigate('home');
-                      setTimeout(() => document.getElementById('contact')?.scrollIntoView(), 100);
-                    }}
-                    className="w-full py-4 bg-red-600 text-white font-bold uppercase tracking-widest text-xs hover:bg-red-700 transition-colors shadow-lg"
+                    onClick={() => onNavigate('home', 'Vacation Pay Audit')}
+                    className="w-full py-4 bg-red-600 text-white font-bold uppercase tracking-widest text-xs hover:bg-red-700 transition-all shadow-lg"
                   >
                     Get a Compliance Audit
                   </button>

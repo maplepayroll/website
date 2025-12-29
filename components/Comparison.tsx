@@ -42,9 +42,9 @@ const Comparison: React.FC = () => {
   ];
 
   return (
-    <section id="comparison" className="py-24 bg-slate-50">
+    <section id="comparison" className="py-16 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-6 uppercase tracking-tighter">The <span className="text-red-600">Maple</span> Advantage</h2>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto font-medium">Why high-growth Canadian companies are moving away from traditional bureaus.</p>
         </div>

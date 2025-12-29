@@ -1,7 +1,12 @@
 
 import React, { useState } from 'react';
+import { PageType } from '../App';
 
-const Scorecard: React.FC = () => {
+interface ScorecardProps {
+  onNavigate?: (page: PageType) => void;
+}
+
+const Scorecard: React.FC<ScorecardProps> = ({ onNavigate }) => {
   const [step, setStep] = useState(0);
   const [score, setScore] = useState(0);
 
@@ -25,11 +30,11 @@ const Scorecard: React.FC = () => {
   };
 
   return (
-    <section id="scorecard" className="py-24 bg-red-600 overflow-hidden relative">
+    <section id="scorecard" className="py-16 bg-red-600 overflow-hidden relative">
       <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-        <h2 className="text-3xl lg:text-4xl font-extrabold text-white mb-6">The 7-Question Payroll Audit</h2>
-        <p className="text-red-100 text-lg mb-12 max-w-2xl mx-auto font-medium">
+        <h2 className="text-3xl lg:text-4xl font-extrabold text-white mb-4">The 7-Question Payroll Audit</h2>
+        <p className="text-red-100 text-lg mb-8 max-w-2xl mx-auto font-medium">
           Find out if your current provider is failing the "Employee Support" test.
         </p>
 
@@ -72,7 +77,7 @@ const Scorecard: React.FC = () => {
                   "Your current process is likely causing significant admin overhead and compliance risk."}
               </p>
               <button 
-                onClick={() => document.getElementById('contact')?.scrollIntoView()}
+                onClick={() => onNavigate ? onNavigate('audit') : document.getElementById('contact')?.scrollIntoView()}
                 className="px-8 py-4 bg-red-600 text-white rounded-xl text-lg font-bold hover:bg-red-700 transition-all shadow-xl shadow-red-100"
               >
                 Get Your Full Audit Report

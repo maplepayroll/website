@@ -10,6 +10,15 @@ interface Message {
 
 const CHAT_STORAGE_KEY = 'maple_concierge_history';
 
+const SUGGESTED_PROMPTS = [
+  { label: "🧮 Calculate Pay", text: "Calculate biweekly payroll for an Ontario employee earning $75,000 annually." },
+  { label: "🍁 2025 Rates", text: "What are the 2025 CPP and EI rates?" },
+  { label: "🏖️ Vacation Pay", text: "Explain how vacation pay works on year-end bonuses." },
+  { label: "🛡️ EHT Thresholds", text: "What is the BC EHT threshold for 2025?" },
+  { label: "📄 ROE Handling", text: "How does Maple handle ROE filings?" },
+  { label: "🤝 Onboarding", text: "Tell me about your Managed Onboarding service." }
+];
+
 const Assistant: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
@@ -50,19 +59,20 @@ const Assistant: React.FC = () => {
     }
   }, [messages, isTyping]);
 
-  const handleSend = async () => {
-    if (!input.trim() || isTyping) return;
-    const userMsg = input;
+  const handleSend = async (forcedText?: string) => {
+    const userMsg = forcedText || input;
+    if (!userMsg.trim() || isTyping) return;
+    
     setInput("");
     
     setMessages(prev => [...prev, { role: 'user', text: userMsg }]);
     setIsTyping(true);
 
     try {
-      const botResponse = await getPayrollAdvice(messages, userMsg);
+      const botResponse: ChatResponse = await getPayrollAdvice(messages, userMsg);
       setMessages(prev => [...prev, { 
         role: 'bot', 
-        text: botResponse.text,
+        text: botResponse.text || "I apologize, I am having trouble processing that request. Please try again or contact our human experts.",
         payrollData: botResponse.payrollData 
       }]);
     } catch (err) {
@@ -88,9 +98,9 @@ const Assistant: React.FC = () => {
           {/* Header */}
           <div className="bg-slate-900 p-6 text-white flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-red-600 rounded-2xl flex items-center justify-center font-black text-xl shadow-lg shadow-red-900/20">
-                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M21.92,10.63L20,10.5L20.5,9.5L18.5,8L18,9L15,8L15.5,5.5L14,5.5L13.5,7L12,2L10.5,7L10,5.5L8.5,5.5L9,8L6,9L5.5,8L3.5,9.5L4,10.5L2.08,10.63C1.65,10.68 1.45,11.22 1.8,11.5L4,13.5L3,14.5L5.5,16L6,15L9,16L8,20L11,19V22H13V19L16,20L15,16L18,15L18.5,16L21,14.5L20,13.5L22.2,11.5C22.55,11.22 22.35,10.68 21.92,10.63Z" />
+              <div className="w-11 h-11 bg-red-600 flex items-center justify-center shadow-lg shadow-red-900/20">
+                <svg className="w-7 h-7 text-white drop-shadow-sm" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.3,11.5L20,10.7L20.4,7L17,8L15,4L13,8L12,1L11,8L9,4L7,8L3.6,7L4,10.7L0.7,11.5L3,14L0,15L5,16L4.5,21L8,19L11,23L13,19L16.5,21L16,16L21,15L18,14L23.3,11.5Z" />
                 </svg>
               </div>
               <div>
@@ -180,7 +190,7 @@ const Assistant: React.FC = () => {
                       
                       <div className="flex justify-between items-center pt-2">
                         <span className="font-black text-slate-900 text-[10px] uppercase tracking-[0.2em]">Total Deductions</span>
-                        <span className="font-black text-red-600 text-sm">-{m.payrollData.totalDeductions}</span>
+                        <span className="font-black text-red-600 text-sm">-{m.payrollData.deductions.totalDeductions}</span>
                       </div>
                     </div>
                     <div className="bg-slate-50 p-3 text-center border-t border-slate-100">
@@ -192,6 +202,26 @@ const Assistant: React.FC = () => {
                 )}
               </div>
             ))}
+
+            {/* Suggested Prompts Section - Shown when conversation has just started */}
+            {messages.length <= 1 && !isTyping && (
+              <div className="pt-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 px-2">Things you can ask me:</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {SUGGESTED_PROMPTS.map((prompt, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => handleSend(prompt.text)}
+                      className="text-left p-3 bg-white border border-slate-200 rounded-2xl text-[11px] font-bold text-slate-600 hover:border-red-600 hover:bg-red-50 transition-all group"
+                    >
+                      <span className="block mb-1 group-hover:text-red-600 transition-colors">{prompt.label}</span>
+                      <span className="text-[9px] font-medium text-slate-400 line-clamp-1 group-hover:text-slate-500">"{prompt.text}"</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {isTyping && (
               <div className="flex justify-start">
                 <div className="bg-white p-5 rounded-3xl shadow-sm border border-slate-100 flex items-center gap-1.5">
@@ -211,10 +241,10 @@ const Assistant: React.FC = () => {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                 placeholder="How can we help?" 
-                className="w-full pl-6 pr-14 py-4 bg-slate-100 rounded-full text-sm font-medium outline-none focus:ring-2 focus:ring-red-600 focus:bg-white transition-all border border-transparent focus:border-slate-200"
+                className="w-full pl-6 pr-14 py-4 bg-white border border-slate-200 rounded-full text-sm font-medium outline-none focus:ring-2 focus:ring-red-600 focus:bg-white transition-all shadow-sm"
               />
               <button 
-                onClick={handleSend}
+                onClick={() => handleSend()}
                 disabled={!input.trim() || isTyping}
                 className="absolute right-2 w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center hover:bg-red-700 transition-all shadow-lg shadow-red-900/20 active:scale-90 disabled:opacity-50 disabled:scale-100"
               >

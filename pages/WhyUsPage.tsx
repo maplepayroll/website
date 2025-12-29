@@ -31,14 +31,14 @@ const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
     },
     {
       q: "Do I get a dedicated account manager?",
-      a: "Yes. On Professional and Enterprise plans, you are assigned a specific NPI-certified expert who knows your business, not a rotating call centre agent."
+      a: "Yes. On Professional and Enterprise plans, you are assigned a lead expert who knows your business, not a rotating call centre agent. Every lead is backed up by another resource to ensure continuity."
     },
     {
       q: "What happens if my main payroll contact goes on vacation?",
-      a: "Since we act as your department, we have built-in redundancy. Our team ensures your payroll runs smoothly 52 weeks a year, regardless of your internal staff availability."
+      a: "Since we act as your department, we have built-in redundancy. Our team ensures your payroll smoothly 52 weeks a year, regardless of your internal staff availability."
     },
     {
-      q: "How do you ensure confidentiality for executive payroll?",
+      q: "How do you handle confidentiality for executive payroll?",
       a: "We can set up restricted-access pay runs for executives, ensuring that general HR staff or managers only see the data they are authorized to see."
     },
     {
@@ -102,7 +102,7 @@ const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
       <section className="bg-slate-50 py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
-            <h2 className="text-4xl lg:text-5xl font-extrabold text-slate-900 mb-6">The Maple Difference</h2>
+            <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-6 uppercase tracking-tighter">The Maple <span className="text-red-600">Difference</span></h2>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">Why we're the preferred choice for high-compliance Canadian businesses.</p>
           </div>
 
@@ -113,7 +113,7 @@ const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
               </div>
               <h3 className="text-2xl font-bold text-slate-900 mb-4">Expertise-as-a-Service</h3>
               <p className="text-slate-600 leading-relaxed font-medium">
-                We don't just provide a portal; we provide a brain. Our NPI-certified specialists proactively catch errors before they result in CRA penalties.
+                We don't just provide a portal; we provide a brain. Our payroll specialists proactively catch errors before they result in CRA penalties.
               </p>
             </div>
             <div className="bg-white p-10 rounded-none border border-slate-100 shadow-sm hover:shadow-2xl transition-all group">
@@ -142,7 +142,7 @@ const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
       <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-slate-900 rounded-none overflow-hidden flex flex-col lg:flex-row items-stretch">
           <div className="lg:w-1/2 p-12 lg:p-20 text-white">
-            <h2 className="text-3xl lg:text-4xl font-extrabold mb-8 text-white">A note from our founder</h2>
+            <h2 className="text-4xl lg:text-5xl font-black text-white mb-8 uppercase tracking-tighter">A note from our <span className="text-red-600">founder</span></h2>
             <p className="text-slate-400 text-lg mb-8 italic leading-relaxed">
               "After working with over 50 companies helping them improve their Canadian payroll operations, I started Maple to better help those stressed over getting the calculations right, being compliant with remittances, doing T4s and all other filings. With so many payroll products available, business owners are overwhelmed and end up making costly mistakes."
             </p>
@@ -178,7 +178,7 @@ const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
         items={whyUsFaqs} 
         title={
           <>
-            <h2 className="text-4xl font-black text-slate-900 mb-6 uppercase tracking-tight">Our Philosophy <span className="text-red-600">FAQ</span></h2>
+            <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-6 uppercase tracking-tighter">Our Philosophy <span className="text-red-600">FAQ</span></h2>
             <p className="text-lg text-slate-600 font-medium">Questions about how we partner with your business.</p>
           </>
         } 
@@ -186,7 +186,7 @@ const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
 
       {/* Next Steps */}
       <section className="py-32 text-center bg-white">
-        <h3 className="text-2xl lg:text-4xl font-bold text-slate-900 mb-10 leading-snug">Still curious about our "Human-in-the-Middle" approach?</h3>
+        <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-10 uppercase tracking-tighter">Still curious about our <br/> <span className="text-red-600">"Human-in-the-Middle"</span> approach?</h2>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           {/* Corrected navigation target from 'features' to 'what-we-do' to match PageType defined in App.tsx */}
           <button 

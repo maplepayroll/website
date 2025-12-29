@@ -12,18 +12,18 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center">
-                 <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                   <path d="M21.92,10.63L20,10.5L20.5,9.5L18.5,8L18,9L15,8L15.5,5.5L14,5.5L13.5,7L12,2L10.5,7L10,5.5L8.5,5.5L9,8L6,9L5.5,8L3.5,9.5L4,10.5L2.08,10.63C1.65,10.68 1.45,11.22 1.8,11.5L4,13.5L3,14.5L5.5,16L6,15L9,16L8,20L11,19V22H13V19L16,20L15,16L18,15L18.5,16L21,14.5L20,13.5L22.2,11.5C22.55,11.22 22.35,10.68 21.92,10.63Z" />
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 bg-red-600 flex items-center justify-center shadow-xl shadow-red-600/20">
+                 <svg className="w-8 h-8 text-white drop-shadow-sm" fill="currentColor" viewBox="0 0 24 24">
+                   <path d="M23.3,11.5L20,10.7L20.4,7L17,8L15,4L13,8L12,1L11,8L9,4L7,8L3.6,7L4,10.7L0.7,11.5L3,14L0,15L5,16L4.5,21L8,19L11,23L13,19L16.5,21L16,16L21,15L18,14L23.3,11.5Z" />
                  </svg>
               </div>
-              <span className="font-extrabold text-xl tracking-tight">
-                MAPLE <span className="text-red-600">PAYROLL</span>
+              <span className="font-black text-2xl tracking-tighter uppercase">
+                MAPLE<span className="text-red-600">PAYROLL</span>
               </span>
             </div>
-            <p className="text-slate-400 max-w-sm mb-8 leading-relaxed">
-              We are Canada's premier "Human-in-the-Middle" payroll department. Providing hands-off payroll management for the modern entrepreneur.
+            <p className="text-slate-400 max-w-sm mb-8 leading-relaxed font-medium">
+              In addition to doing your payroll, we manage onboarding, leaves, and terminations - freeing you up to focus on your business.
             </p>
             <div className="flex flex-col gap-2">
               <a href="tel:1-416-252-1000" className="text-lg font-bold text-white hover:text-red-500 transition-colors">
@@ -37,32 +37,30 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           
           <div>
             <h4 className="font-bold text-white mb-6 uppercase text-xs tracking-widest">Company</h4>
-            <ul className="space-y-4 text-slate-400 text-sm">
+            <ul className="space-y-4 text-slate-400 text-sm font-bold uppercase tracking-tight">
               <li><button onClick={() => onNavigate?.('home')} className="hover:text-red-500 transition-colors text-left">Home</button></li>
-              <li><button onClick={() => onNavigate?.('who-we-serve')} className="hover:text-red-500 transition-colors text-left">Who We Serve</button></li>
+              <li><button onClick={() => onNavigate?.('why-us')} className="hover:text-red-500 transition-colors text-left">Who We Are</button></li>
               <li><button onClick={() => onNavigate?.('what-we-do')} className="hover:text-red-500 transition-colors text-left">What We Do</button></li>
-              <li><button onClick={() => onNavigate?.('why-us')} className="hover:text-red-500 transition-colors text-left">Why Us</button></li>
+              <li><button onClick={() => onNavigate?.('who-we-serve')} className="hover:text-red-500 transition-colors text-left">Who We Serve</button></li>
+              <li><button onClick={() => onNavigate?.('pricing')} className="hover:text-red-500 transition-colors text-left">Pricing & Tiers</button></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-bold text-white mb-6 uppercase text-xs tracking-widest">Resources</h4>
-            <ul className="space-y-4 text-slate-400 text-sm">
-              <li><button onClick={() => onNavigate?.('resources')} className="hover:text-red-500 transition-colors text-left">Articles</button></li>
+            <ul className="space-y-4 text-slate-400 text-sm font-bold uppercase tracking-tight">
               <li><button onClick={() => onNavigate?.('audit')} className="hover:text-red-500 transition-colors text-left">Payroll Audit</button></li>
+              <li><button onClick={() => onNavigate?.('key-terms')} className="hover:text-red-500 transition-colors text-left">Glossary of Terms</button></li>
               <li><button onClick={() => onNavigate?.('calculator')} className="hover:text-red-500 transition-colors text-left">Payroll Calculator</button></li>
-              <li><button onClick={() => onNavigate?.('privacy-policy')} className="hover:text-red-500 transition-colors text-left">Privacy Policy</button></li>
+              <li><button onClick={() => onNavigate?.('resources')} className="hover:text-red-500 transition-colors text-left">Knowledge Hub</button></li>
             </ul>
           </div>
         </div>
         
-        <div className="pt-8 border-t border-slate-800 flex flex-col md:row justify-between items-center gap-6">
+        <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-slate-500 text-xs font-medium text-center md:text-left">
-            © 2024 Maple Managed Payroll Services Inc. All rights reserved. Registered Third-Party CRA Submitter.
+            © 2025 Maple Managed Payroll Services Inc. All rights reserved.
           </p>
-          <div className="flex items-center gap-6">
-            <span className="text-slate-500 text-xs font-medium">Made with 🍁 in Canada</span>
-          </div>
         </div>
       </div>
     </footer>
