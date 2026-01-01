@@ -13,6 +13,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ context }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [companySize, setCompanySize] = useState('6-15 Employees');
+  const [currentSoftware, setCurrentSoftware] = useState('None');
   const [status, setStatus] = useState<SubmissionStatus>('idle');
   const [loadingText, setLoadingText] = useState('Transmitting...');
 
@@ -78,7 +79,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ context }) => {
     console.log("LEAD CAPTURED:", {
       timestamp: new Date().toISOString(),
       source: context || 'Direct Inquiry',
-      lead: { firstName, lastName, email, companySize },
+      lead: { firstName, lastName, email, companySize, currentSoftware },
       content: message
     });
 
@@ -126,8 +127,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ context }) => {
             <div className="space-y-6">
               {[
                 { label: "Phone", value: "1 (416) 252-1000", icon: "📞" },
-                { label: "Email", value: "concierge@maplepayroll.ca", icon: "📧" },
-                { label: "Office", value: "Toronto, ON & Calgary, AB", icon: "🏢" }
+                { label: "Email", value: "concierge@maplepayroll.ca", icon: "📧" }
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-4">
                   <div className="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center text-xl border border-slate-100">
@@ -178,14 +178,34 @@ const ContactForm: React.FC<ContactFormProps> = ({ context }) => {
                   <label className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Work Email</label>
                   <input required value={email} onChange={e => setEmail(e.target.value)} type="email" className={inputClasses} placeholder="john@company.com" />
                 </div>
-                <div>
-                  <label className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Company Size</label>
-                  <select value={companySize} onChange={e => setCompanySize(e.target.value)} className={`${inputClasses} appearance-none cursor-pointer`}>
-                    <option>1-5 Employees</option>
-                    <option>6-15 Employees</option>
-                    <option>16-50 Employees</option>
-                    <option>50+ Employees</option>
-                  </select>
+                <div className="grid sm:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Company Size</label>
+                    <select value={companySize} onChange={e => setCompanySize(e.target.value)} className={`${inputClasses} appearance-none cursor-pointer`}>
+                      <option>1-5 Employees</option>
+                      <option>6-15 Employees</option>
+                      <option>16-50 Employees</option>
+                      <option>50+ Employees</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Current Software</label>
+                    <select value={currentSoftware} onChange={e => setCurrentSoftware(e.target.value)} className={`${inputClasses} appearance-none cursor-pointer`}>
+                      <option value="None">None / Manual</option>
+                      <option value="ADP">ADP</option>
+                      <option value="QuickBooks">QuickBooks</option>
+                      <option value="Xero">Xero</option>
+                      <option value="Sage">Sage</option>
+                      <option value="Wagepoint">Wagepoint</option>
+                      <option value="Payworks">Payworks</option>
+                      <option value="Dayforce">Dayforce</option>
+                      <option value="Employment Hero">Employment Hero (Humi)</option>
+                      <option value="Rise">Rise</option>
+                      <option value="Knit">Knit</option>
+                      <option value="Wave">Wave</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
                 </div>
                 <div>
                   <label className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2">How can we help?</label>
@@ -221,9 +241,17 @@ const ContactForm: React.FC<ContactFormProps> = ({ context }) => {
                 <p className="text-slate-500 text-sm text-center mb-8">This is the notification email sent to the Maple Concierge team:</p>
                 
                 <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
-                  <div>
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">From</p>
-                    <p className="text-sm font-bold text-slate-900">{firstName} {lastName} ({email})</p>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">From</p>
+                      <p className="text-sm font-bold text-slate-900">{firstName} {lastName}</p>
+                      <p className="text-xs text-slate-500">{email}</p>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Infrastructure</p>
+                      <p className="text-sm font-bold text-slate-900">{companySize}</p>
+                      <p className="text-xs text-red-600 font-black uppercase tracking-tight">Software: {currentSoftware}</p>
+                    </div>
                   </div>
                   <div>
                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Attached Context</p>

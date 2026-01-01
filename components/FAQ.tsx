@@ -15,51 +15,35 @@ const FAQ: React.FC<FAQProps> = ({ items, title }) => {
   const defaultFaqs = [
     {
       q: "Do I have to switch my accounting software?",
-      a: "No. Maple is software-agnostic. We work within your existing environment. You keep your data; we just manage the inputs and outputs on your behalf."
+      a: "Nope. Maple is software-agnostic. We work with what you've already got. You keep your data; we just jump in to manage the heavy lifting for you."
     },
     {
       q: "How does the employee support actually work?",
-      a: "We provide you with a dedicated email alias (e.g., payroll@yourcompany.ca) or your staff can contact our concierge line. Our experts handle their questions about tax codes, net pay differences, and T4s directly."
+      a: "We give you a dedicated email alias or your staff can call our concierge line directly. Our experts handle their questions about tax codes and pay stubs so you don't have to."
     },
     {
       q: "Are you insured against errors?",
-      a: "Yes. Unlike DIY software where 'User Error' is your responsibility, Maple carries comprehensive Errors & Omissions (E&O) insurance and we provide a 100% compliance guarantee on all remittances we file."
+      a: "Absolutely. We carry comprehensive insurance and we back every remittance we file with a 100% compliance guarantee. If we make a mistake, we own it."
     },
     {
       q: "Can you manage payroll across multiple legal entities?",
-      a: "Yes. We specialize in multi-entity structures. We can manage separate payroll accounts for different divisions or corporations while providing you with consolidated reporting for a clear view of your total labour costs."
+      a: "Yes! We specialize in complex setups. We can manage separate accounts for different divisions while giving you one clear view of your total labour costs."
     },
     {
-      q: "What happens if I receive a CRA notice of assessment or audit?",
-      a: "You simply forward it to your dedicated Maple expert. As your authorized representative, we handle all communication with the CRA, providing the necessary documentation and defending your filings at no extra cost."
-    },
-    {
-      q: "How do you handle payroll for seasonal workers?",
-      a: "Maple is designed for scalability. We handle high-volume hiring in peak seasons and mass ROE filings during off-seasons, ensuring seasonal fluctuations never impact your administrative bandwidth or compliance accuracy."
+      q: "What happens if the CRA sends me a notice?",
+      a: "Just forward it to your Maple expert. As your authorized rep, we handle the phone calls and paperwork to sort it out—no extra charge."
     },
     {
       q: "Can you handle hiring paperwork for me?",
-      a: "Absolutely. Our Professional tier includes 'Managed Onboarding'. We send out the digital packages, collect banking info, and ensure all TD1 forms are signed and filed before their first day."
-    },
-    {
-      q: "What about vacation pay and statutory holidays?",
-      a: "We manage the accrual logic and ensure statutory pay is calculated correctly according to your specific province's labour standards, which can be surprisingly complex for hourly staff."
+      a: "You bet. Our 'Managed Onboarding' takes care of the digital packages, banking info, and tax forms before your new hire even walks through the door."
     },
     {
       q: "Do you handle Quebec payroll (Revenu Québec)?",
-      a: "Yes. We are fully compliant with Revenu Québec and handle RL-1s, CNESST, QPP, and QPIP filings just as seamlessly as we do for the rest of Canada."
+      a: "Yes, we're pros at Quebec compliance. We handle RL-1s, CNESST, and all the unique provincial deductions just as easily as the rest of Canada."
     },
     {
-      q: "How do I switch from a provider like ADP or Ceridian?",
-      a: "We handle the entire migration. We export your YTD data, set up the new system, and run parallel pay cycles to ensure 100% accuracy before the official switch."
-    },
-    {
-      q: "Can employees access their own pay stubs?",
-      a: "Generally yes... this is a function of the payroll software used for specific system capabilities, contact us to help you figure it out"
-    },
-    {
-      q: "What is your processing turnaround time?",
-      a: "We typically require payroll data 3 days before the pay date. However, for emergencies, we can often process same-day or next-day payments for a small rush fee."
+      q: "How long does it take to switch over?",
+      a: "We usually have you up and running in 2 to 4 weeks. We handle the data export and run parallel cycles to make sure everything is 100% perfect before the switch."
     }
   ];
 
@@ -73,7 +57,7 @@ const FAQ: React.FC<FAQProps> = ({ items, title }) => {
           {title || (
             <>
             <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-6 uppercase tracking-tighter">Common <span className="text-red-600">Questions</span></h2>
-            <p className="text-lg text-slate-600 font-medium">Everything you need to know about the transition to managed payroll.</p>
+            <p className="text-lg text-slate-600 font-medium">A few things people usually ask us about making the switch.</p>
             </>
           )}
         </div>

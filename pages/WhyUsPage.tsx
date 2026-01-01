@@ -23,7 +23,7 @@ const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
     },
     {
       q: "Can I upgrade my service tier later?",
-      a: "Yes. As you grow, you can seamlessly upgrade to our Professional or Enterprise tiers to add HR support, benefits administration, and more complex reporting."
+      a: "Yes. As you grow, you can seamlessly upgrade to our Biggie Smalls or Lil' Enterprise tiers to add HR support, benefits administration, and more complex reporting."
     },
     {
       q: "How are you different from a PEO?",
@@ -31,7 +31,7 @@ const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
     },
     {
       q: "Do I get a dedicated account manager?",
-      a: "Yes. On Professional and Enterprise plans, you are assigned a lead expert who knows your business, not a rotating call centre agent. Every lead is backed up by another resource to ensure continuity."
+      a: "Yes. On Biggie Smalls and Lil' Enterprise plans, you are assigned a lead expert who knows your business, not a rotating call centre agent. Every lead is backed up by another resource to ensure continuity."
     },
     {
       q: "What happens if my main payroll contact goes on vacation?",
@@ -74,7 +74,7 @@ const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
               <span className="text-red-500">Human</span> Relationship.
             </h1>
             <p className="text-xl text-slate-200 leading-relaxed font-medium mb-10 max-w-xl">
-              We treat payroll as an employee trust problem, not just a data entry problem. When your staff has a question, they talk to a dedicated person who cares.
+              We treat payroll as an employee trust imperative, not just a data entry task. When your staff has a question, they talk to a dedicated person who cares.
             </p>
             <div className="flex flex-col sm:flex-row gap-5">
               <button 

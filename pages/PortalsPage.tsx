@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { PageType } from '../App';
 
@@ -38,7 +39,7 @@ const PortalsPage: React.FC<PortalsPageProps> = ({ onNavigate }) => {
 
       {/* Access Cards */}
       <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="max-w-3xl mx-auto">
           
           {/* Employer Card */}
           <div className="bg-slate-50 border border-slate-200 p-12 lg:p-20 relative overflow-hidden group hover:shadow-2xl transition-all duration-500">
@@ -62,42 +63,6 @@ const PortalsPage: React.FC<PortalsPageProps> = ({ onNavigate }) => {
               <p className="text-center text-[10px] font-black text-slate-400 uppercase tracking-widest mt-6">
                 Need access? <button onClick={() => onNavigate('home', 'Portal Access Request')} className="text-red-600 hover:underline">Request account setup</button>
               </p>
-            </div>
-          </div>
-
-          {/* Employee Card */}
-          <div className="bg-white border border-slate-200 p-12 lg:p-20 relative overflow-hidden group hover:shadow-2xl transition-all duration-500">
-            <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
-              <svg className="w-32 h-32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
-            </div>
-            <h2 className="text-xs font-black text-red-600 uppercase tracking-[0.4em] mb-6 text-center lg:text-left">Self-Service</h2>
-            <h3 className="text-4xl font-black text-slate-900 mb-8 uppercase tracking-tighter text-center lg:text-left">Employee Access</h3>
-            <p className="text-lg text-slate-600 mb-12 leading-relaxed font-medium text-center lg:text-left">
-              Download your pay stubs, view your RL-1/T4 slips, and update your personal banking information securely and directly.
-            </p>
-            <div className="space-y-4">
-               <button 
-                onClick={() => window.open('https://app.wagepoint.com/employee/login', '_blank')}
-                className="w-full py-5 bg-red-600 text-white font-black uppercase tracking-widest text-sm hover:bg-red-700 transition-all shadow-xl shadow-red-200"
-              >
-                Employee Pay Stubs
-              </button>
-              <div className="grid grid-cols-2 gap-4">
-                 <button 
-                  onClick={() => window.open('https://my.adp.ca/', '_blank')}
-                  className="py-5 border-2 border-slate-200 text-slate-700 font-black uppercase tracking-widest text-[10px] hover:border-slate-400 transition-all"
-                >
-                  ADP MyPay
-                </button>
-                <button 
-                  onClick={() => window.open('https://knitpeople.com/login', '_blank')}
-                  className="py-5 border-2 border-slate-200 text-slate-700 font-black uppercase tracking-widest text-[10px] hover:border-slate-400 transition-all"
-                >
-                  Knit Employee
-                </button>
-              </div>
             </div>
           </div>
 

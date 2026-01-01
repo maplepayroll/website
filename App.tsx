@@ -19,6 +19,7 @@ import FeaturesPage from './pages/FeaturesPage';
 import WhoWeServePage from './pages/WhoWeServePage';
 import AuditServicePage from './pages/AuditServicePage';
 import PayrollCalculatorPage from './pages/PayrollCalculatorPage';
+import DIYCostCalculatorPage from './pages/DIYCostCalculatorPage';
 import VacationPayArticlePage from './pages/VacationPayArticlePage';
 import ResourcesPage from './pages/ResourcesPage';
 import TaxableBenefitsPage from './pages/TaxableBenefitsPage';
@@ -35,6 +36,7 @@ import EmployerPortalPage from './pages/EmployerPortalPage';
 import PublicHolidaysPage from './pages/PublicHolidaysPage';
 import Payroll2026ChangesPage from './pages/Payroll2026ChangesPage';
 import BreaksAndEatingPeriodsPage from './pages/BreaksAndEatingPeriodsPage';
+import HolidayDuringVacationPage from './pages/HolidayDuringVacationPage';
 
 export type PageType = 
   | 'home' 
@@ -43,6 +45,7 @@ export type PageType =
   | 'what-we-do' 
   | 'audit' 
   | 'calculator' 
+  | 'diy-calculator'
   | 'resources' 
   | 'vacation-pay-article' 
   | 'taxable-benefits' 
@@ -57,7 +60,8 @@ export type PageType =
   | 'employer-portal'
   | 'public-holidays-2026'
   | 'payroll-2026-changes'
-  | 'breaks-and-eating-periods';
+  | 'breaks-and-eating-periods'
+  | 'holiday-during-vacation';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<PageType>('home');
@@ -68,7 +72,7 @@ const App: React.FC = () => {
   }, [currentPage]);
 
   const handleNavigate = (page: PageType, context?: string) => {
-    if (context) setContactContext(context);
+    setContactContext(context || '');
     setCurrentPage(page);
     
     if (page === 'home' && context) {
@@ -111,6 +115,8 @@ const App: React.FC = () => {
             <AuditServicePage onNavigate={handleNavigate} />
           ) : currentPage === 'calculator' ? (
             <PayrollCalculatorPage onNavigate={handleNavigate} />
+          ) : currentPage === 'diy-calculator' ? (
+            <DIYCostCalculatorPage onNavigate={handleNavigate} />
           ) : currentPage === 'resources' ? (
             <ResourcesPage onNavigate={handleNavigate} />
           ) : currentPage === 'taxable-benefits' ? (
@@ -126,7 +132,7 @@ const App: React.FC = () => {
           ) : currentPage === 'buyer-guide' ? (
             <BuyerGuidePage onNavigate={handleNavigate} />
           ) : currentPage === 'signup' ? (
-            <EmployerSignUpPage onNavigate={handleNavigate} />
+            <EmployerSignUpPage onNavigate={handleNavigate} initialTier={contactContext} />
           ) : currentPage === 'pricing' ? (
             <PricingPage onNavigate={handleNavigate} />
           ) : currentPage === 'portals' ? (
@@ -139,6 +145,8 @@ const App: React.FC = () => {
             <Payroll2026ChangesPage onNavigate={handleNavigate} />
           ) : currentPage === 'breaks-and-eating-periods' ? (
             <BreaksAndEatingPeriodsPage onNavigate={handleNavigate} />
+          ) : currentPage === 'holiday-during-vacation' ? (
+            <HolidayDuringVacationPage onNavigate={handleNavigate} />
           ) : (
             <VacationPayArticlePage onNavigate={handleNavigate} />
           )}

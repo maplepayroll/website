@@ -57,7 +57,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
     },
     {
       q: "Are there long-term contracts?",
-      a: "No. Our 'Core' and 'Professional' plans are month-to-month. You can cancel with 30 days' notice. Enterprise plans may have annual terms depending on complexity."
+      a: "No. Our 'Lil' Kim' and 'Biggie Smalls' plans are month-to-month. You can cancel with 30 days' notice. Lil' Enterprise plans may have annual terms depending on complexity."
     },
     {
       q: "Does the price include T4s?",
@@ -65,23 +65,23 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
     },
     {
       q: "Is there an extra charge for multi-province payroll?",
-      a: "Our Core and Professional plans cover one primary province. For businesses with staff in multiple provinces, we offer an Enterprise tier or a small add-on fee per additional jurisdiction to cover the extra filing complexities."
+      a: "Our Lil' Kim and Biggie Smalls plans cover one primary province. For businesses with staff in multiple provinces, we offer a Lil' Enterprise tier or a small add-on fee per additional jurisdiction to cover the extra filing complexities."
     },
     {
       q: "Are ROE filings included in the monthly price?",
-      a: "Yes, for our Professional and Enterprise tiers, unlimited Record of Employment (ROE) filings are included. For Core Managed, a small per-ROE fee applies if manual intervention is required."
+      a: "Yes, for our Biggie Smalls and Lil' Enterprise tiers, unlimited Record of Employment (ROE) filings are included. For Lil' Kim, a small per-ROE fee applies if manual intervention is required."
     },
     {
       q: "Do you charge extra for Workers' Comp (WSIB/WCB) reporting?",
-      a: "Workers' Comp reporting and remittance management are included in our Professional and Enterprise plans. We ensure your premiums are calculated accurately based on your actual gross pay runs."
+      a: "Workers' Comp reporting and remittance management are included in our Biggie Smalls and Lil' Enterprise plans. We ensure your premiums are calculated accurately based on your actual gross pay runs."
     },
     {
       q: "Do I need to purchase my own payroll software license separately?",
-      a: "No. The cost of the underlying payroll platform is included in your Maple Managed fee. You get a professional department and the technology to run it for one unified price."
+      a: "Yes. The cost of the underlying payroll platform is not included in our fees. If you need help, we can help you select the right software for your business."
     },
     {
       q: "Is there a limit to how often I can contact my dedicated specialist?",
-      a: "No. We don't believe in charging you for asking questions. Our Professional and Enterprise clients enjoy unlimited support from their assigned specialists via phone and email."
+      a: "No. We don't believe in charging you for asking questions. Our Biggie Smalls and Lil' Enterprise clients enjoy unlimited support from their assigned specialists via phone and email."
     },
     {
       q: "Are there any hidden 'per-run' or 'per-report' fees?",
@@ -117,7 +117,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
               <span className="text-red-500">Makes Sense</span>
             </h1>
             <p className="text-xl text-slate-200 leading-relaxed font-medium mb-10 max-w-2xl">
-              Professional managed payroll usually costs less than the penalties for getting it wrong. No hidden fees, no surprises.
+              Professionally managed payroll usually costs less than the penalties for getting it wrong. No hidden fees, no surprises.
             </p>
             <div className="flex flex-col sm:flex-row gap-5">
               <button 

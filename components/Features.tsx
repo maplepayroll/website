@@ -4,38 +4,38 @@ import React from 'react';
 const Features: React.FC = () => {
   const features = [
     {
-      title: "Direct Employee Support",
-      desc: "Your staff speaks to our experts, not you. We handle all pay, banking, and T4 inquiries directly.",
-      icon: "👥",
+      title: "We Talk to Your Team",
+      desc: "If your staff has a question about their pay or T4s, they call us. You stay out of the middle and keep your lunch break.",
+      icon: "☕",
       color: "bg-blue-50 text-blue-600"
     },
     {
-      title: "Full Compliance",
-      desc: "Comprehensive support for all provinces and territories, including Quebec (RL-1/RL-2) and BC (Health Tax).",
-      icon: "🇨🇦",
+      title: "CRA-Proof Compliance",
+      desc: "We handle every provincial and federal filing. If the CRA has a question, we're the ones who answer the phone.",
+      icon: "🛡️",
       color: "bg-red-50 text-red-600"
     },
     {
-      title: "Managed Onboarding",
-      desc: "We collect TD1s, direct deposit info, and contracts. Your new hires are pay-ready before their first day.",
-      icon: "📋",
+      title: "Easy Onboarding",
+      desc: "Hire someone new? Just send us their name. We'll handle the tax forms and banking details before their first day.",
+      icon: "✨",
       color: "bg-green-50 text-green-600"
     },
     {
       title: "Benefits & RRSP Sync",
-      desc: "We reconcile your group insurance bills and RRSP contributions against payroll every single cycle.",
+      desc: "We reconcile your group insurance and savings plans every single cycle. No more manual data entry errors.",
       icon: "🏥",
       color: "bg-amber-50 text-amber-600"
     },
     {
       title: "Taxable Benefits Audit",
-      desc: "Automated tracking for company cars, life insurance, and other non-cash benefits for CRA compliance.",
+      desc: "Company cars? Life insurance? We make sure the 'perks' aren't creating a surprise tax bill at the end of the year.",
       icon: "💎",
       color: "bg-purple-50 text-purple-600"
     },
     {
-      title: "ROE & Termination",
-      desc: "Seamless ROE filing via ROE Web within 24 hours of any work interruption. Full final-pay compliance.",
+      title: "Fast ROE Filings",
+      desc: "When someone leaves, we handle the Record of Employment within 24 hours. No stress, just compliant departures.",
       icon: "📄",
       color: "bg-slate-50 text-slate-600"
     }
@@ -46,10 +46,10 @@ const Features: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-6 uppercase tracking-tighter">
-            The <span className="text-red-600">Complete</span> Service
+            WE DO THE <span className="text-red-600">WORK.</span> YOU DO THE <span className="text-red-600">VISION.</span>
           </h2>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto font-medium">
-            From direct deposits to complex compliance, we handle every aspect of your payroll operations.
+            Think of us as your own internal payroll department, just a quick message away.
           </p>
         </div>
 

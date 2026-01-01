@@ -3,14 +3,14 @@ import React from 'react';
 import { PageType } from '../App';
 
 interface PricingProps {
-  onNavigate?: (page: PageType) => void;
+  onNavigate?: (page: PageType, context?: string) => void;
 }
 
 const Pricing: React.FC<PricingProps> = ({ onNavigate }) => {
   const tiers = [
     {
-      name: "Core Managed",
-      price: "150",
+      name: "Lil' Kim",
+      price: "295",
       period: "per month",
       desc: "Perfect for small teams needing reliable, hands-off processing.",
       features: [
@@ -28,16 +28,16 @@ const Pricing: React.FC<PricingProps> = ({ onNavigate }) => {
         "Dedicated Account Expert",
         "Custom GL Mapping"
       ],
-      cta: "Start with Core",
+      cta: "Start with Lil' Kim",
       highlighted: false
     },
     {
-      name: "Professional",
-      price: "295",
+      name: "Biggie Smalls",
+      price: "695",
       period: "per month",
       desc: "Our most popular tier for growing businesses with complex needs.",
       features: [
-        "Everything in Core",
+        "Everything in Lil' Kim",
         "Managed Employee Onboarding",
         "Benefits Admin Integration",
         "Workplace Safety Reporting",
@@ -50,16 +50,16 @@ const Pricing: React.FC<PricingProps> = ({ onNavigate }) => {
         "Labour Cost Analysis",
         "Audit Defence Representation"
       ],
-      cta: "Go Professional",
+      cta: "Go Biggie Smalls",
       highlighted: true
     },
     {
-      name: "Enterprise",
+      name: "Lil' Enterprise",
       price: "Custom",
       period: "quote required",
       desc: "Complex multi-provincial entities with 50+ employees.",
       features: [
-        "Everything in Professional",
+        "Everything in Biggie Smalls",
         "Multi-Entity Management",
         "Custom GL Mapping",
         "Labour Cost Analysis",
@@ -72,12 +72,9 @@ const Pricing: React.FC<PricingProps> = ({ onNavigate }) => {
     }
   ];
 
-  const handleCtaClick = () => {
+  const handleCtaClick = (tierName: string) => {
     if (onNavigate) {
-      onNavigate('home');
-      setTimeout(() => {
-        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
+      onNavigate('signup', tierName);
     } else {
       document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
     }
@@ -88,7 +85,7 @@ const Pricing: React.FC<PricingProps> = ({ onNavigate }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20">
           <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-6 uppercase tracking-tighter">Transparent <span className="text-red-600">Investment</span></h2>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">Professional managed payroll that costs less than a single compliance error.</p>
+          <p className="text-xl text-slate-600 max-w-2xl mx-auto">Professionally managed payroll that costs less than a single compliance error.</p>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
@@ -137,7 +134,7 @@ const Pricing: React.FC<PricingProps> = ({ onNavigate }) => {
               </div>
 
               <button 
-                onClick={handleCtaClick}
+                onClick={() => handleCtaClick(t.name)}
                 className={`w-full py-4 font-black uppercase tracking-widest text-sm transition-colors rounded-none ${t.highlighted ? 'bg-red-600 text-white hover:bg-red-700' : 'bg-slate-900 text-white hover:bg-black'}`}
               >
                 {t.cta}
@@ -146,9 +143,12 @@ const Pricing: React.FC<PricingProps> = ({ onNavigate }) => {
           ))}
         </div>
         
-        <p className="mt-12 text-center text-slate-400 text-xs font-bold uppercase tracking-widest">
-          * Base fees shown. Additional $5.00 to $10.00 per employee/month processing fee applies.
-        </p>
+        <div className="mt-12 text-center text-slate-400 text-xs font-bold uppercase tracking-widest space-y-2">
+          <p>* Base fees shown. Additional $5.00 to $10.00 per employee/month processing fee applies.</p>
+          <p className="text-slate-500 bg-slate-100/50 inline-block px-4 py-2 border border-slate-200">
+            Keep in mind that our fees do not include the costs of applicable software, which can vary.
+          </p>
+        </div>
       </div>
     </section>
   );

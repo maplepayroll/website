@@ -36,17 +36,17 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-24">
         <div className="animate-fade-in-up max-w-5xl">
           <div className="inline-flex items-center px-4 py-2 bg-red-600 text-white text-[10px] font-black tracking-[0.4em] mb-10 uppercase ring-1 ring-white/20">
-            2025 Elite Canadian Payroll Concierge
+            Maple Managed: Your Behind-the-Scenes Team
           </div>
           
           <h1 className="text-4xl lg:text-[5.5rem] font-black text-white mb-8 leading-[0.95] tracking-tighter uppercase text-balance">
-            YOUR TRUSTED <br/>
-            <span className="text-red-600">PAYROLL</span> <br/>
-            PARTNER.
+            THE LAST TIME <br/>
+            YOU'LL EVER <br/>
+            <span className="text-red-600 text-nowrap">WORRY ABOUT PAYROLL.</span>
           </h1>
           
           <p className="text-xl text-slate-300 leading-relaxed mb-14 max-w-3xl font-medium text-balance">
-            Dedicated certified payroll specialists are included in your service and will help you keep your payroll compliant with payroll-related regulations. No need to worry about <span className="text-white">onboarding, departures, or terminations</span>; send the updates to us and our team will manage the complexities.
+            Stop losing your Sunday nights to spreadsheets. Our certified specialists jump in to handle your <span className="text-white">onboarding, departures, and remittances</span> so you can focus on growing your dream. We're the humans behind your payroll.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6">
@@ -54,13 +54,13 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
               onClick={() => onNavigate ? onNavigate('signup') : scrollTo('signup')}
               className="group relative inline-flex items-center justify-center px-14 py-6 bg-red-600 text-white rounded-none text-lg font-black uppercase tracking-widest hover:bg-red-700 transition-colors overflow-hidden cursor-pointer"
             >
-              <span className="relative z-10">Talk to an Expert</span>
+              <span className="relative z-10">Let's Chat Payroll</span>
             </button>
             <button 
               onClick={() => onNavigate ? onNavigate('payroll-audit') : scrollTo('scorecard')}
               className="inline-flex items-center justify-center px-14 py-6 bg-white/5 backdrop-blur-xl text-white rounded-none text-lg font-black uppercase tracking-widest hover:bg-white/15 transition-all border border-white/20 hover:border-white/40 cursor-pointer"
             >
-              Audit Your Provider
+              Check Your Setup
             </button>
           </div>
         </div>

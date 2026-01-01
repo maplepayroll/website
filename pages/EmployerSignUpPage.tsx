@@ -5,11 +5,12 @@ import { PROVINCES } from '../services/payrollCalculator';
 
 interface EmployerSignUpPageProps {
   onNavigate: (page: PageType) => void;
+  initialTier?: string;
 }
 
 type SignUpStep = 'business' | 'team' | 'service' | 'contact' | 'success';
 
-const EmployerSignUpPage: React.FC<EmployerSignUpPageProps> = ({ onNavigate }) => {
+const EmployerSignUpPage: React.FC<EmployerSignUpPageProps> = ({ onNavigate, initialTier }) => {
   const [step, setStep] = useState<SignUpStep>('business');
   const [formData, setFormData] = useState({
     businessName: '',
@@ -17,7 +18,7 @@ const EmployerSignUpPage: React.FC<EmployerSignUpPageProps> = ({ onNavigate }) =
     industry: '',
     headcount: '1-5',
     frequency: 'Bi-Weekly',
-    tier: 'Professional',
+    tier: (initialTier && ["Lil' Kim", "Biggie Smalls", "Lil' Enterprise"].includes(initialTier)) ? initialTier : 'Biggie Smalls',
     name: '',
     email: '',
     phone: ''
@@ -127,14 +128,14 @@ const EmployerSignUpPage: React.FC<EmployerSignUpPageProps> = ({ onNavigate }) =
         return (
           <div className="animate-in fade-in slide-in-from-right-4 duration-500">
             <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tight">Choose your <span className="text-red-600">Concierge Tier</span></h2>
-            <div className="grid md:grid-cols-3 gap-4 lg:gap-6">
-              {/* Core Tier */}
+            <div className="grid md:grid-cols-3 gap-4 lg:gap-6 mb-12">
+              {/* Lil' Kim Tier */}
               <button 
-                onClick={() => update('tier', 'Core')}
-                className={`flex flex-col p-6 lg:p-8 border-2 text-left transition-all relative overflow-hidden ${formData.tier === 'Core' ? 'bg-white border-slate-900 shadow-xl' : 'bg-slate-50 border-transparent hover:border-red-200'}`}
+                onClick={() => update('tier', "Lil' Kim")}
+                className={`flex flex-col p-6 lg:p-8 border-2 text-left transition-all relative overflow-hidden ${formData.tier === "Lil' Kim" ? 'bg-white border-slate-900 shadow-xl' : 'bg-slate-50 border-transparent hover:border-red-200'}`}
               >
-                <h4 className="font-black text-lg mb-1 uppercase tracking-tight">Core Managed</h4>
-                <p className="text-2xl font-black text-slate-900 mb-4">$150<span className="text-xs font-bold text-slate-400">/mo</span></p>
+                <h4 className="font-black text-lg mb-1 uppercase tracking-tight">Lil' Kim</h4>
+                <p className="text-2xl font-black text-slate-900 mb-4">$295<span className="text-xs font-bold text-slate-400">/mo</span></p>
                 <ul className="text-[11px] font-bold text-slate-500 space-y-2 mb-6 flex-grow">
                   <li className="flex items-start gap-2">
                     <span className="text-green-500">✓</span> Full Processing
@@ -149,20 +150,20 @@ const EmployerSignUpPage: React.FC<EmployerSignUpPageProps> = ({ onNavigate }) =
                     <span className="text-green-500">✓</span> Email Support
                   </li>
                 </ul>
-                {formData.tier === 'Core' && <div className="absolute top-2 right-2 text-slate-900 font-bold">✓</div>}
+                {formData.tier === "Lil' Kim" && <div className="absolute top-2 right-2 text-slate-900 font-bold">✓</div>}
               </button>
 
-              {/* Professional Tier */}
+              {/* Biggie Smalls Tier */}
               <button 
-                onClick={() => update('tier', 'Professional')}
-                className={`flex flex-col p-6 lg:p-8 border-2 text-left transition-all relative overflow-hidden ${formData.tier === 'Professional' ? 'bg-white border-red-600 shadow-xl' : 'bg-slate-50 border-transparent hover:border-red-200'}`}
+                onClick={() => update('tier', 'Biggie Smalls')}
+                className={`flex flex-col p-6 lg:p-8 border-2 text-left transition-all relative overflow-hidden ${formData.tier === 'Biggie Smalls' ? 'bg-white border-red-600 shadow-xl' : 'bg-slate-50 border-transparent hover:border-red-200'}`}
               >
                 <div className="absolute top-0 right-0 bg-red-600 text-white px-3 py-1 text-[8px] font-black uppercase tracking-widest">Most Popular</div>
-                <h4 className="font-black text-lg mb-1 uppercase tracking-tight">Professional</h4>
-                <p className="text-2xl font-black text-slate-900 mb-4">$295<span className="text-xs font-bold text-slate-400">/mo</span></p>
+                <h4 className="font-black text-lg mb-1 uppercase tracking-tight">Biggie Smalls</h4>
+                <p className="text-2xl font-black text-slate-900 mb-4">$695<span className="text-xs font-bold text-slate-400">/mo</span></p>
                 <ul className="text-[11px] font-bold text-slate-600 space-y-2 mb-6 flex-grow">
                   <li className="flex items-start gap-2">
-                    <span className="text-red-600">✓</span> Everything in Core
+                    <span className="text-red-600">✓</span> Everything in Lil' Kim
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-red-600">✓</span> Managed Onboarding
@@ -174,19 +175,19 @@ const EmployerSignUpPage: React.FC<EmployerSignUpPageProps> = ({ onNavigate }) =
                     <span className="text-red-600">✓</span> Dedicated Specialist
                   </li>
                 </ul>
-                {formData.tier === 'Professional' && <div className="absolute bottom-4 right-4 text-red-600 font-bold">✓</div>}
+                {formData.tier === 'Biggie Smalls' && <div className="absolute bottom-4 right-4 text-red-600 font-bold">✓</div>}
               </button>
 
-              {/* Enterprise Tier */}
+              {/* Lil' Enterprise Tier */}
               <button 
-                onClick={() => update('tier', 'Enterprise')}
-                className={`flex flex-col p-6 lg:p-8 border-2 text-left transition-all relative overflow-hidden ${formData.tier === 'Enterprise' ? 'bg-white border-slate-900 shadow-xl' : 'bg-slate-50 border-transparent hover:border-red-200'}`}
+                onClick={() => update('tier', "Lil' Enterprise")}
+                className={`flex flex-col p-6 lg:p-8 border-2 text-left transition-all relative overflow-hidden ${formData.tier === "Lil' Enterprise" ? 'bg-white border-slate-900 shadow-xl' : 'bg-slate-50 border-transparent hover:border-red-200'}`}
               >
-                <h4 className="font-black text-lg mb-1 uppercase tracking-tight">Enterprise</h4>
+                <h4 className="font-black text-lg mb-1 uppercase tracking-tight">Lil' Enterprise</h4>
                 <p className="text-2xl font-black text-slate-900 mb-4">Custom</p>
                 <ul className="text-[11px] font-bold text-slate-500 space-y-2 mb-6 flex-grow">
                   <li className="flex items-start gap-2">
-                    <span className="text-slate-900">✓</span> Everything in Pro
+                    <span className="text-slate-900">✓</span> Everything in Biggie Smalls
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-slate-900">✓</span> Multi-Entity Support
@@ -198,8 +199,14 @@ const EmployerSignUpPage: React.FC<EmployerSignUpPageProps> = ({ onNavigate }) =
                     <span className="text-slate-900">✓</span> Audit Defence Rep
                   </li>
                 </ul>
-                {formData.tier === 'Enterprise' && <div className="absolute top-2 right-2 text-slate-900 font-bold">✓</div>}
+                {formData.tier === "Lil' Enterprise" && <div className="absolute top-2 right-2 text-slate-900 font-bold">✓</div>}
               </button>
+            </div>
+            
+            <div className="bg-slate-50 p-6 border-l-4 border-slate-400">
+              <p className="text-xs font-bold text-slate-500 uppercase tracking-widest leading-relaxed">
+                * Note: Keep in mind that our managed fees do not include the separate costs of applicable payroll software, which can vary.
+              </p>
             </div>
           </div>
         );

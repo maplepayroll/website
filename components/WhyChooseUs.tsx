@@ -5,8 +5,8 @@ const WhyChooseUs: React.FC = () => {
   const flowSteps = [
     {
       step: "01",
-      title: "Send Us Your Updates",
-      desc: "No need to worry about onboarding or departures; simply send the updates to us.",
+      title: "Give us a shout",
+      desc: "Hired someone? Someone leaving? Just send a quick update to your dedicated specialist.",
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -17,8 +17,8 @@ const WhyChooseUs: React.FC = () => {
     },
     {
       step: "02",
-      title: "Certified Specialists Manage",
-      desc: "Our dedicated specialists help you stay compliant with all payroll-related regulations.",
+      title: "We handle the rest",
+      desc: "Our pros run the math, file the taxes, and double-check every single provincial rule for you.",
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -29,8 +29,8 @@ const WhyChooseUs: React.FC = () => {
     },
     {
       step: "03",
-      title: "Complexity Resolved",
-      desc: "Our team manages the complexities of terminations and statutory filings for you.",
+      title: "Total Peace of Mind",
+      desc: "You get back to business. Your team gets paid. The CRA stays happy. Everyone wins.",
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -47,11 +47,10 @@ const WhyChooseUs: React.FC = () => {
         <div className="flex flex-col lg:flex-row items-center gap-16 mb-12">
           <div className="lg:w-1/2">
             <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-6 leading-tight uppercase tracking-tighter">
-              Complexity <span className="text-red-600 italic">Managed</span>. <br/>Compliance <span className="text-red-600 italic">Guaranteed</span>.
+              WE'VE GOT YOUR <span className="text-red-600 italic">BACK.</span> <br/>ACCURACY <span className="text-red-600 italic">GUARANTEED.</span>
             </h2>
             <p className="text-xl text-slate-600 mb-8 leading-relaxed font-medium">
-              Dedicated certified payroll specialists are included in your service and will help you keep your payroll compliant with payroll-related regulations. 
-              No need to worry about employee onboarding, departures, or terminations; send the updates to us and our team will help you manage the complexities.
+              We treat your payroll like it's our own. You get a real person who knows your name and your business, not a generic call centre queue.
             </p>
             <div className="space-y-6">
               <div className="flex gap-4 p-4 rounded-none hover:bg-slate-50 transition-colors group border border-transparent hover:border-slate-100">
@@ -61,8 +60,8 @@ const WhyChooseUs: React.FC = () => {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="font-bold text-slate-900 text-lg mb-1">Dedicated Certified Specialists</h4>
-                  <p className="text-slate-600 text-sm">Included in every service tier. Our experts handle the intricacies of Canadian employment law so you don't have to.</p>
+                  <h4 className="font-bold text-slate-900 text-lg mb-1">Your Personal Expert</h4>
+                  <p className="text-slate-600 text-sm">Included in every plan. An expert who actually cares about your team's compliance and happiness.</p>
                 </div>
               </div>
               <div className="flex gap-4 p-4 rounded-none hover:bg-slate-50 transition-colors group border border-transparent hover:border-slate-100">
@@ -72,8 +71,8 @@ const WhyChooseUs: React.FC = () => {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="font-bold text-slate-900 text-lg mb-1">Zero Onboarding Stress</h4>
-                  <p className="text-slate-600 text-sm">Send us the hire details; we handle the forms, direct deposits, and compliance triggers for their first pay run.</p>
+                  <h4 className="font-bold text-slate-900 text-lg mb-1">Zero-Stress Transitions</h4>
+                  <p className="text-slate-600 text-sm">Coming from another provider? We handle the data export and migration for you. No heavy lifting required.</p>
                 </div>
               </div>
             </div>
@@ -88,10 +87,10 @@ const WhyChooseUs: React.FC = () => {
             <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-none shadow-xl border border-slate-100 z-20 max-w-xs animate-bounce-slow">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Active Specialist</span>
+                <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Always Online</span>
               </div>
-              <p className="text-slate-900 font-bold italic text-sm">"Send me those termination details; I'll handle the ROE and statutory pay immediately."</p>
-              <p className="text-xs text-slate-500 mt-2">— Your Certified Partner</p>
+              <p className="text-slate-900 font-bold italic text-sm">"Don't worry about that T4 question Mike has, I've already sent him the answer!"</p>
+              <p className="text-xs text-slate-500 mt-2">— Your Maple Partner</p>
             </div>
           </div>
         </div>
@@ -100,9 +99,9 @@ const WhyChooseUs: React.FC = () => {
         <div className="py-12 bg-slate-50 rounded-none px-8 lg:px-12 mb-16 border border-slate-100">
           <div className="text-center mb-10">
             <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-6 uppercase tracking-tighter">
-              The <span className="text-red-600">"Concierge"</span> Lifecycle
+              HOW WE <span className="text-red-600">PARTNER</span> WITH YOU
             </h2>
-            <p className="text-slate-600 font-medium">How we manage the complexities of your team's lifecycle.</p>
+            <p className="text-slate-600 font-medium">Simple, human, and completely hands-off for you.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8 relative">
             {/* Connection Lines (Desktop) */}

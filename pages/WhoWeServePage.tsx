@@ -79,7 +79,7 @@ const WhoWeServePage: React.FC<WhoWeServePageProps> = ({ onNavigate }) => {
     },
     {
       q: "I have 2 employees, is my business too small?",
-      a: "Not at all. We support small businesses starting from their very first hire. Our 'Core Managed' tier is designed exactly for smaller teams needing professional support."
+      a: "Not at all. We support small businesses starting from their very first hire. Our 'Lil' Kim' tier is designed exactly for smaller teams needing professional support."
     },
     {
       q: "How do you handle multi-provincial payroll for remote companies?",

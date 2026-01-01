@@ -17,10 +17,10 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
   // Mock Data
   const [companyDetails, setCompanyDetails] = useState({
     legalName: "Acme Corp Inc.",
-    address: "123 Business Way, Suite 400",
-    city: "Toronto",
-    province: "ON",
-    postalCode: "M5V 2T6",
+    address: "Online Account",
+    city: "Remote",
+    province: "Canada",
+    postalCode: "N/A",
     craNumber: "12345 6789 RP0001"
   });
 
@@ -177,7 +177,7 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
               <td className="px-6 py-4">
                 <button className="text-slate-400 hover:text-slate-900">
                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2-0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
                 </button>
               </td>
@@ -307,7 +307,6 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
                   <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Billed To</p>
                   <p className="font-bold text-slate-900">{companyDetails.legalName}</p>
                   <p className="text-xs text-slate-500">{companyDetails.address}</p>
-                  <p className="text-xs text-slate-500">{companyDetails.city}, {companyDetails.province} {companyDetails.postalCode}</p>
                 </div>
                 <div className="text-right">
                   <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Status</p>
@@ -399,12 +398,10 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
                  />
               </div>
                <div>
-                 <label className="block text-xs font-bold text-slate-400 uppercase mb-2">Primary Address</label>
-                 <input 
-                   className="w-full px-4 py-3 bg-white border border-slate-200 font-medium text-slate-900 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all"
-                   value={companyDetails.address}
-                   onChange={(e) => setCompanyDetails({...companyDetails, address: e.target.value})}
-                 />
+                 <label className="block text-xs font-bold text-slate-400 uppercase mb-2">Current Service Status</label>
+                 <div className="px-4 py-3 bg-slate-50 border border-slate-100 text-sm font-bold text-slate-600 uppercase tracking-tight">
+                   Digital-First Managed Account
+                 </div>
               </div>
            </div>
         </div>

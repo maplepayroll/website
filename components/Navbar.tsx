@@ -55,7 +55,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
           
           <div className="flex items-center gap-5 pl-6 border-l border-slate-200/20">
             <button 
-              onClick={() => onNavigate('portals')}
+              onClick={() => onNavigate('employer-portal')}
               className={`text-xs font-black uppercase tracking-widest transition-colors ${scrolled ? 'text-slate-900 hover:text-red-600' : 'text-white hover:text-white/80'}`}
             >
               Login
@@ -94,7 +94,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
             </button>
           ))}
           <button 
-            onClick={() => { onNavigate('portals'); setMobileMenuOpen(false); }}
+            onClick={() => { onNavigate('employer-portal'); setMobileMenuOpen(false); }}
             className="text-left py-4 px-6 font-black text-xl uppercase tracking-tighter text-slate-900 border-b border-slate-50"
           >
             Client Login
