@@ -1,6 +1,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { PageType } from '../App';
+import FAQ from '../components/FAQ';
 
 interface DIYCostCalculatorPageProps {
   onNavigate: (page: PageType, context?: string) => void;
@@ -47,6 +48,49 @@ const DIYCostCalculatorPage: React.FC<DIYCostCalculatorPageProps> = ({ onNavigat
   const formatCurrency = (val: number) => {
     return new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(val);
   };
+
+  const diyFaqs = [
+    {
+      q: "What is 'Shadow Admin' cost?",
+      a: "Shadow Admin refers to the unmeasured time business owners and senior managers spend on back-office tasks like payroll, instead of revenue-generating activities. If you earn $150/hr but spend 5 hours on payroll, that pay cycle cost you $750 in opportunity cost."
+    },
+    {
+      q: "Is it really cheaper to outsource than to do it myself?",
+      a: "Financially, yes. When you calculate the hourly value of an owner's time plus the cost of software subscriptions and the risk of CRA penalties, a managed service is almost always more cost-effective."
+    },
+    {
+      q: "How much is an average CRA penalty?",
+      a: "Late filing or remittance penalties start at 3% of the amount owing and scale up to 10% or more for repeated failures. For a mid-sized business, a single missed remittance can cost $1,500 to $5,000 in avoidable fees."
+    },
+    {
+      q: "Does outsourcing help with employee retention?",
+      a: "Yes. Research shows that 'payroll errors' are one of the top reasons employees start looking for new jobs. Managed services ensure 100% accuracy, which builds massive trust with your team."
+    },
+    {
+      q: "Can I save money on software by outsourcing?",
+      a: "Usually, yes. Maple clients often consolidate separate tools for time-tracking, payroll, and employee records into one managed ecosystem, often saving $500-$1,000 annually in redundant subscriptions."
+    },
+    {
+      q: "How many hours does the average owner spend on payroll?",
+      a: "For a team of 15, the average Canadian business owner spends 6-10 hours per month handling data entry, answering employee questions, and filing government reports."
+    },
+    {
+      q: "What is 'Risk Mitigation Value'?",
+      a: "It's a dollar-value estimate of the liability you remove by having experts handle your compliance. We estimate this at $150 per employee per year based on average Canadian audit outcomes."
+    },
+    {
+      q: "Do I still need an internal payroll software if I outsource?",
+      a: "You need the platform (the 'database'), but you don't need to be the one who operates it. Our managed fees cover the labor of running the system; the software fee is separate."
+    },
+    {
+      q: "What happens to the ROI as my team grows?",
+      a: "The ROI increases exponentially. Managing 50 employees is 5x harder than managing 10 due to increased turnover, more complex benefit plans, and higher CRA scrutiny."
+    },
+    {
+      q: "Can I try a managed service for just one cycle?",
+      a: "We recommend a minimum 3-month commitment to see the full ROI, especially as you transition through one full month of remittances and a month-end reconciliation."
+    }
+  ];
 
   return (
     <div className="bg-white min-h-screen">
@@ -248,6 +292,9 @@ const DIYCostCalculatorPage: React.FC<DIYCostCalculatorPageProps> = ({ onNavigat
 
         </div>
       </section>
+
+      {/* FAQ Section */}
+      <FAQ items={diyFaqs} title={<h2 className="text-4xl font-black text-slate-900 uppercase tracking-tighter mb-4">Shadow-Cost <span className="text-red-600">FAQ</span></h2>} />
 
       {/* Comparison Grid */}
       <section className="bg-slate-50 py-32 border-y border-slate-200">

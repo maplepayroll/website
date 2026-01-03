@@ -2,7 +2,6 @@
 import { GoogleGenAI, FunctionDeclaration, Type } from "@google/genai";
 import { calculatePayroll } from "./payrollCalculator";
 
-// Exporting ChatResponse to fix the import error in Assistant.tsx
 export interface ChatResponse {
   text?: string;
   payrollData?: any;
@@ -14,37 +13,58 @@ const payrollTool: FunctionDeclaration = {
     type: Type.OBJECT,
     description: "Calculate Canadian payroll deductions and net pay.",
     properties: {
-      income: { type: Type.NUMBER },
-      payType: { type: Type.STRING, description: "'annual' or 'hourly'" },
-      province: { type: Type.STRING },
-      year: { type: Type.NUMBER },
-      frequency: { type: Type.STRING }
+      income: { 
+        type: Type.NUMBER,
+        description: "The gross income amount to calculate." 
+      },
+      payType: { 
+        type: Type.STRING, 
+        description: "The type of pay: 'annual' or 'hourly'." 
+      },
+      province: { 
+        type: Type.STRING,
+        description: "The Canadian province for calculation (e.g., 'Ontario')."
+      },
+      year: { 
+        type: Type.NUMBER, 
+        description: "The tax year to calculate for. Defaults to 2026." 
+      },
+      frequency: { 
+        type: Type.STRING,
+        description: "Pay frequency (e.g., 'biweekly', 'monthly')."
+      }
     },
     required: ["income"]
   }
 };
 
 export const getPayrollAdvice = async (history: any[], userPrompt: string): Promise<ChatResponse> => {
-  if (!process.env.API_KEY) return { text: "Concierge is offline. Contact us directly." };
+  const apiKey = process.env.API_KEY;
+  if (!apiKey) {
+    return { text: "The Maple Concierge is currently offline. Please reach out to us at concierge@maplepayroll.ca for direct assistance." };
+  }
 
-  // Initialize client inside the function as per guidelines for reliable key handling
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  // Create a new instance right before making an API call to ensure latest key usage
+  const ai = new GoogleGenAI({ apiKey });
 
   const systemInstruction = `You are the Maple Managed Payroll AI Concierge.
   Maple is an elite Canadian professional service firm.
   Be professional, warm, and highly accurate.
-  Always use the 'calculatePayroll' tool for any math requests.
+  Always use the 'calculatePayroll' tool for any math or payroll projection requests.
+  Prioritize the 2026 tax year for all current calculations and advice unless the user specifically asks for another year.
   Never use Markdown stars (* or **) in your output. Plain text only.
-  Canadian spelling only. Focus on peace of mind and compliance.`;
+  Canadian spelling only. Focus on peace of mind, trust, and total compliance.`;
 
-  // Using gemini-3-pro-preview for complex reasoning and tool use
   const model = 'gemini-3-pro-preview';
   
   try {
-    const contents = history.map(m => ({ 
+    // Correctly map history to Gemini-compliant roles
+    const contents: any[] = history.map(m => ({ 
       role: m.role === 'user' ? 'user' : 'model', 
       parts: [{ text: m.text }] 
     }));
+    
+    // Add the current user request
     contents.push({ role: 'user', parts: [{ text: userPrompt }] });
 
     const response = await ai.models.generateContent({
@@ -53,46 +73,57 @@ export const getPayrollAdvice = async (history: any[], userPrompt: string): Prom
       config: { 
         tools: [{ functionDeclarations: [payrollTool] }], 
         systemInstruction,
-        // Use thinking budget for complex payroll calculations
         thinkingConfig: { thinkingBudget: 4000 }
       }
     });
 
-    // Check for function calls in the candidates
-    const functionCalls = response.candidates?.[0]?.content?.parts?.filter(p => p.functionCall).map(p => p.functionCall);
+    // Check for tool calls using the recommended getter
+    const calls = response.functionCalls;
+    
+    if (calls && calls.length > 0) {
+      const call = calls[0];
+      
+      // Execute the local logic
+      const args = { ...call.args, year: (call.args as any).year || 2026 };
+      const result = calculatePayroll(args as any);
+      
+      // Crucial: Create the follow-up request with the mandatory tool response format (including ID)
+      const secondResponse = await ai.models.generateContent({
+        model,
+        contents: [
+          ...contents,
+          { role: 'model', parts: response.candidates?.[0]?.content?.parts || [] },
+          { 
+            role: 'user', 
+            parts: [{ 
+              functionResponse: { 
+                id: call.id, // Mandatory for stateful tool usage
+                name: call.name, 
+                response: { result } 
+              } 
+            }] 
+          }
+        ],
+        config: { systemInstruction }
+      });
 
-    if (functionCalls && functionCalls.length > 0) {
-      const call = functionCalls[0];
-      if (call) {
-        const result = calculatePayroll(call.args as any);
-        
-        const secondResponse = await ai.models.generateContent({
-          model,
-          contents: [
-            ...contents,
-            { role: 'model', parts: response.candidates?.[0]?.content?.parts || [] },
-            { 
-              role: 'user', 
-              parts: [{ 
-                functionResponse: { 
-                  name: 'calculatePayroll', 
-                  response: { result } 
-                } 
-              }] 
-            }
-          ],
-          config: { systemInstruction }
-        });
-
-        // Correctly accessing .text property
-        return { text: secondResponse.text, payrollData: result };
-      }
+      return { 
+        text: secondResponse.text || "I have calculated those values for you below based on the current 2026 standards.", 
+        payrollData: result 
+      };
     }
 
-    // Correctly accessing .text property
-    return { text: response.text };
+    // Direct text response using the recommended getter
+    const textOutput = response.text;
+    if (!textOutput) {
+      throw new Error("Received empty response from the concierge engine.");
+    }
+    
+    return { text: textOutput };
   } catch (err) {
-    console.error("Gemini API Error:", err);
-    return { text: "Our human experts are best suited for this. Please email concierge@maplepayroll.ca" };
+    console.error("Maple Concierge Execution Error:", err);
+    return { 
+      text: "I encountered a minor technical hurdle. Please try again in a moment or contact our human specialists at concierge@maplepayroll.ca." 
+    };
   }
 };

@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { PageType } from '../App';
 import FAQ from '../components/FAQ';
 
@@ -162,9 +162,15 @@ const KeyTermsPage: React.FC<KeyTermsPageProps> = ({ onNavigate }) => {
     },
     { 
       term: "RRSP / RSP", 
-      def: "Registered Retirement Savings Plan. A tax-advantaged account for retirement savings.", 
+      def: "Registered Retirement Savings Plan (US Equivalent: 401(k)). A tax-advantaged account for retirement savings.", 
       insight: "We handle group RRSP deductions and match contributions directly on the pay run.", 
       tags: ["Federal", "Employee Deduction", "Employer Contribution"] 
+    },
+    { 
+      term: "Salary Continuance", 
+      def: "A termination arrangement where an employee receives their regular salary for a set period after being terminated, rather than a lump-sum severance payment.", 
+      insight: "Technically considered employment income; requires CPP/EI deductions and the ROE is issued only after the final payment.", 
+      tags: ["National", "Termination", "Compliance"] 
     },
     { 
       term: "SIN", 
@@ -183,6 +189,12 @@ const KeyTermsPage: React.FC<KeyTermsPageProps> = ({ onNavigate }) => {
       def: "Statement of Pension, Retirement, Annuity, and Other Income. Often used for reporting contractor pay.", 
       insight: "We help identify which contractors require T4As to avoid CRA misclassification audits.", 
       tags: ["Federal", "Compliance", "Tax Form"] 
+    },
+    { 
+      term: "TFSA", 
+      def: "Tax-Free Savings Account (US Equivalent: Roth IRA). A savings vehicle where contributions are made with after-tax dollars, but investment income and withdrawals are tax-free.", 
+      insight: "Maple can facilitate automated direct deposits from payroll into employee TFSAs as part of our financial wellness offerings.", 
+      tags: ["Federal", "Savings", "Employee Benefit"] 
     },
     { 
       term: "VAC", 
@@ -204,12 +216,35 @@ const KeyTermsPage: React.FC<KeyTermsPageProps> = ({ onNavigate }) => {
     }
   ];
 
-  // Sort alphabetically
+  useEffect(() => {
+    const schemaData = {
+      "@context": "https://schema.org",
+      "@type": "DefinedTermSet",
+      "name": "Canadian Payroll Glossary",
+      "description": "A complete dictionary of Canadian payroll acronyms and terms, including CRA definitions for YMPE, HSF, ROE, and CPP.",
+      "hasDefinedTerm": glossaryEntries.map(entry => ({
+        "@type": "DefinedTerm",
+        "name": entry.term,
+        "description": entry.def
+      }))
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.innerHTML = JSON.stringify(schemaData);
+    document.head.appendChild(script);
+    return () => { 
+      const existingScript = document.head.querySelector('script[type="application/ld+json"]');
+      if (existingScript) {
+        document.head.removeChild(existingScript); 
+      }
+    };
+  }, []);
+
   const sortedEntries = [...glossaryEntries].sort((a, b) => a.term.localeCompare(b.term));
 
   return (
     <div className="bg-white">
-      {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center overflow-hidden bg-slate-900">
         <div className="absolute inset-0 z-0">
           <img 
@@ -236,20 +271,21 @@ const KeyTermsPage: React.FC<KeyTermsPageProps> = ({ onNavigate }) => {
             <h1 className="text-4xl lg:text-[5.5rem] font-black text-white mb-8 leading-[0.95] tracking-tighter uppercase">
               The <span className="text-red-500">Lexicon</span>
             </h1>
-            <p className="text-xl text-slate-300 leading-relaxed font-medium max-w-xl">
-              The A-Z of Canadian Payroll. Every acronym and term defined alphabetically for your reference.
-            </p>
+            
+            <div className="bg-white/5 backdrop-blur-md border-l-4 border-red-600 p-6 mb-10 max-w-2xl">
+              <p className="text-lg text-slate-200 leading-relaxed font-medium italic">
+                The Canadian payroll landscape is defined by specific acronyms like YMPE (Year's Maximum Pensionable Earnings), HSF (Health Services Fund), and ROE (Record of Employment). Understanding these terms is critical for CRA compliance and accurate remittance tracking across all 13 provinces and territories.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Flat Alphabetical List */}
       <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid gap-12">
           {sortedEntries.map((item, idx) => (
             <div key={idx} className="group border-b border-slate-100 pb-12 last:border-0 last:pb-0">
               <div className="flex flex-col lg:flex-row lg:items-start gap-8 lg:gap-16">
-                {/* Term and Tags */}
                 <div className="lg:w-1/4">
                   <h3 className="text-3xl font-black text-slate-900 mb-4 uppercase tracking-tight group-hover:text-red-600 transition-colors">
                     {item.term}
@@ -263,7 +299,6 @@ const KeyTermsPage: React.FC<KeyTermsPageProps> = ({ onNavigate }) => {
                   </div>
                 </div>
 
-                {/* Definition and Insight */}
                 <div className="lg:w-3/4">
                   <p className="text-lg text-slate-600 leading-relaxed font-medium mb-6">
                     {item.def}
@@ -280,7 +315,6 @@ const KeyTermsPage: React.FC<KeyTermsPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* The Bottom Line Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-slate-900 text-white p-10 mb-20 shadow-xl border-l-8 border-red-600">
           <h3 className="text-2xl font-black mb-4 uppercase tracking-tight">The Bottom Line</h3>
@@ -294,59 +328,14 @@ const KeyTermsPage: React.FC<KeyTermsPageProps> = ({ onNavigate }) => {
             <div className="h-px bg-white/20 my-4"></div>
             <div>
               <p className="text-xs font-black text-red-500 uppercase tracking-widest mb-1">Compliance Trap</p>
-              <p className="text-sm font-medium leading-relaxed text-slate-300">
-                Misclassifying "Independent Contractors" (who don't pay CPP/EI) versus "Employees" (who do) is the single largest financial risk for Canadian employers.
+              <p className="text-sm font-medium leading-relaxed">
+                Failing to track YTD totals correctly can lead to over-remitting CPP and EI, which requires a complex PD24 filing to recover.
               </p>
             </div>
           </div>
         </div>
-
-        {/* References Section */}
-        <div className="mb-24 pt-8 border-t border-slate-200">
-            <h4 className="text-sm font-black text-slate-400 uppercase tracking-widest mb-4">Official References</h4>
-            <ul className="space-y-2">
-                <li>
-                    <a href="https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/t4001.html" target="_blank" rel="noreferrer" className="text-red-600 font-bold hover:underline text-sm flex items-center gap-2">
-                        CRA Guide T4001: Employers' Guide - Payroll Deductions and Remittances <span>↗</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.payroll.ca/" target="_blank" rel="noreferrer" className="text-red-600 font-bold hover:underline text-sm flex items-center gap-2">
-                        National Payroll Institute (NPI) - Professional Definitions <span>↗</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="bg-slate-900 py-32 text-center relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-2 bg-red-600"></div>
-        <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-4xl lg:text-5xl font-black text-white mb-8 uppercase tracking-tighter leading-none">
-            Terms are just the start. <br/>
-            <span className="text-red-600">Compliance is the Goal.</span>
-          </h2>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-12 font-medium leading-relaxed">
-            Dedicated certified payroll specialists are included in your service and will help you keep your payroll compliant with these regulations. No need to worry about onboarding, departures, terminations; send the updates to us.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button 
-              onClick={() => onNavigate('home', 'General Quote')}
-              className="px-14 py-6 bg-red-600 text-white font-black uppercase tracking-widest hover:scale-105 transition-transform shadow-2xl shadow-red-600/20"
-            >
-              Get a Managed Quote
-            </button>
-            <button 
-              onClick={() => onNavigate('calculator')}
-              className="px-14 py-6 border-2 border-white/20 text-white font-black uppercase tracking-widest hover:bg-white/5 transition-all"
-            >
-              Try our Calculator
-            </button>
-          </div>
-        </div>
-      </section>
-      
       <FAQ />
     </div>
   );

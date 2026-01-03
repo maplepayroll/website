@@ -7,6 +7,9 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
+  const currentYear = new Date().getFullYear();
+  const copyrightYearDisplay = currentYear === 2024 ? "2024" : `2024–${currentYear}`;
+
   return (
     <footer className="bg-slate-900 py-20 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -15,7 +18,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 bg-red-600 flex items-center justify-center shadow-xl shadow-red-600/20">
                  <svg className="w-8 h-8 text-white drop-shadow-sm" fill="currentColor" viewBox="0 0 24 24">
-                   <path d="M23.3,11.5L20,10.7L20.4,7L17,8L15,4L13,8L12,1L11,8L9,4L7,8L3.6,7L4,10.7L0.7,11.5L3,14L0,15L5,16L4.5,21L8,19L11,23L13,19L16.5,21L16,16L21,15L18,14L23.3,11.5Z" />
+                   <path d="M21.1 12.8c0 .1 0 .1-.1.2l-2.4 1.2 1 3-1.8-.8-1.5 2.3-1.3-3.2v-4l-1.3 1.7-1.2-1.7v4l-1.3 3.2-1.5-2.3-1.8.8 1-3-2.4-1.2c-.1-.1-.1-.1-.1-.2.1-.3.5-1.1 1-1.6L5 8.1l2.5.6L7.3 5l2.4 1.5 1.5-3.3 1.5 3.3 2.4-1.5-.2 3.7 2.5-.6-2.6 1.1c.5.5.9 1.3 1 1.6z M11.2 18.5h1.6V22h-1.6v-3.5z" />
                  </svg>
               </div>
               <span className="font-black text-2xl tracking-tighter uppercase">
@@ -59,7 +62,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         
         <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-slate-500 text-xs font-medium text-center md:text-left">
-            © 2025 Maple Managed Payroll Services Inc. All rights reserved.
+            © {copyrightYearDisplay} Maple Managed Payroll Services Inc. All rights reserved.
           </p>
         </div>
       </div>

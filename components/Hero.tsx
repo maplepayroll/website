@@ -46,7 +46,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           </h1>
           
           <p className="text-xl text-slate-300 leading-relaxed mb-14 max-w-3xl font-medium text-balance">
-            Stop losing your Sunday nights to spreadsheets. Our certified specialists jump in to handle your <span className="text-white">onboarding, departures, and remittances</span> so you can focus on growing your dream. We're the humans behind your payroll.
+            Stop losing your Sunday nights to spreadsheets. Our certified specialists manage your payroll including <span className="text-white">employee onboarding, departures, and remittances</span> so you can focus on growing your dream. We're the humans behind your payroll.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6">

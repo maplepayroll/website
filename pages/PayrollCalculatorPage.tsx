@@ -1,19 +1,65 @@
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { PageType } from '../App';
-import { calculatePayroll, PROVINCES } from '../services/payrollCalculator';
+import { calculatePayroll, PROVINCES, YEARLY_RATES, FEDERAL_BRACKETS } from '../services/payrollCalculator';
+import FAQ from '../components/FAQ';
 
 interface PayrollCalculatorPageProps {
   onNavigate: (page: PageType, context?: string) => void;
+  defaultYear?: number;
 }
 
-const PayrollCalculatorPage: React.FC<PayrollCalculatorPageProps> = ({ onNavigate }) => {
-  const [taxYear, setTaxYear] = useState<number>(2025);
-  const [payRate, setPayRate] = useState<string>('60,000');
+const PayrollCalculatorPage: React.FC<PayrollCalculatorPageProps> = ({ onNavigate, defaultYear = 2025 }) => {
+  const [taxYear, setTaxYear] = useState<number>(defaultYear);
+  const [payRate, setPayRate] = useState<string>('65,000');
   const [payType, setPayType] = useState<'annual' | 'hourly'>('annual');
   const [hoursPerWeek, setHoursPerWeek] = useState<string>('40');
   const [displayFrequency, setDisplayFrequency] = useState<'daily' | 'weekly' | 'biweekly' | 'semi-monthly' | 'monthly' | 'annual'>('biweekly');
   const [selectedProvince, setSelectedProvince] = useState<string>('Ontario');
+  const [perspective, setPerspective] = useState<'employee' | 'employer'>('employee');
+  const [showAuditTrail, setShowAuditTrail] = useState(false);
+  
+  const [isCustomClaim, setIsCustomClaim] = useState(false);
+  const [claimAmount, setClaimAmount] = useState<string>('15,964'); 
+  const [preTaxDeductions, setPreTaxDeductions] = useState<string>('0');
+  const [afterTaxDeductions, setAfterTaxDeductions] = useState<string>('0');
+  
+  // Vacation State
+  const [vacationRate, setVacationRate] = useState<number>(0.04);
+  const [vacationMethod, setVacationMethod] = useState<'accrued' | 'paid_per_cycle'>('accrued');
+  const [isCustomVacation, setIsCustomVacation] = useState(false);
+
+  useEffect(() => {
+    if (defaultYear) setTaxYear(defaultYear);
+  }, [defaultYear]);
+
+  // Inject Schema Markup for AI/SEO
+  useEffect(() => {
+    const schemaData = {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Maple Canadian Payroll Calculator",
+      "operatingSystem": "Web",
+      "applicationCategory": "FinanceApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0.00",
+        "priceCurrency": "CAD"
+      },
+      "description": "Professional-grade Canadian payroll calculator utilizing CRA T4127 computer formulas for 2024, 2025, and 2026. Calculates Net Pay, CPP, EI, and Federal/Provincial Income Tax.",
+      "author": {
+        "@type": "Person",
+        "name": "Arshad Merali",
+        "jobTitle": "Founder & Payroll Expert"
+      }
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.innerHTML = JSON.stringify(schemaData);
+    document.head.appendChild(script);
+    return () => { document.head.removeChild(script); };
+  }, []);
 
   const results = useMemo(() => {
     return calculatePayroll({
@@ -22,27 +68,41 @@ const PayrollCalculatorPage: React.FC<PayrollCalculatorPageProps> = ({ onNavigat
       province: selectedProvince,
       year: taxYear,
       frequency: displayFrequency,
-      hoursPerWeek: parseFloat(hoursPerWeek) || 40
+      hoursPerWeek: parseFloat(hoursPerWeek) || 40,
+      claimAmount: isCustomClaim ? parseFloat(claimAmount.replace(/,/g, '')) : undefined,
+      preTaxDeductions: parseFloat(preTaxDeductions.replace(/,/g, '')) || 0,
+      afterTaxDeductions: parseFloat(afterTaxDeductions.replace(/,/g, '')) || 0,
+      vacationRate,
+      vacationMethod
     });
-  }, [payRate, payType, hoursPerWeek, displayFrequency, selectedProvince, taxYear]);
-
-  const formatCurrency = (val: string | number) => {
-    const num = typeof val === 'string' ? parseFloat(val.replace(/[^0-9.-]+/g,"")) : val;
-    return new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }).format(num);
-  };
+  }, [payRate, payType, hoursPerWeek, displayFrequency, selectedProvince, taxYear, isCustomClaim, claimAmount, preTaxDeductions, afterTaxDeductions, vacationRate, vacationMethod]);
 
   const scrollToCalculator = () => {
     document.getElementById('calculator-tool')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const calculatorFaqs = [
+    {
+      q: "What is the difference between 'Accrued' and 'Paid per Cycle' vacation pay?",
+      a: "'Accrued' means your vacation pay is banked and paid out only when you take time off or leave the company (common for salary). 'Paid per Cycle' means you receive the 4% or 6% on every single paycheque (common for hourly or part-time staff)."
+    },
+    {
+      q: "What are examples of 'After-Tax Deductions'?",
+      a: "After-tax deductions (also called non-statutory deductions) include items like garnishments (child support, CRA debt), social club or coffee fund contributions, repayment of company loans, and voluntary non-RRSP savings plans."
+    },
+    {
+      q: "How accurate is this Canadian payroll calculator?",
+      a: "This tool uses the CRA T4127 'Computer Formula Standard'. Unlike basic calculators, it accounts for the BPA Step-Down (clawback) for high earners and provincial-specific health levies like the Ontario Health Premium."
+    }
+  ];
+
   return (
     <div className="bg-white">
-      {/* Updated Hero Section */}
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-slate-900">
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-slate-900">
         <div className="absolute inset-0 z-0">
           <img 
             src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=2000" 
-            alt="Canadian Payroll Calculator" 
+            alt="Accurate Canadian Payroll Calculator for Small Business" 
             className="w-full h-full object-cover object-center opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/90 to-transparent"></div>
@@ -50,29 +110,28 @@ const PayrollCalculatorPage: React.FC<PayrollCalculatorPageProps> = ({ onNavigat
         </div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-24">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center px-4 py-1.5 rounded-none bg-red-600 text-white text-xs font-bold tracking-[0.2em] mb-8 uppercase shadow-lg shadow-red-900/20">
-              Free Compliance Tool
+          <div className="max-w-4xl">
+            <div className="inline-flex items-center px-4 py-1.5 rounded-none bg-red-600 text-white text-[10px] font-black tracking-[0.3em] mb-8 uppercase shadow-lg">
+              Authorized Compliance Tool
             </div>
-            <h1 className="text-4xl lg:text-[5.5rem] font-black text-white mb-8 leading-[0.95] tracking-tighter uppercase">
-              Canadian <br/>
-              <span className="text-red-500">Payroll Calculator</span>
+            <h1 className="text-4xl lg:text-[5.5rem] font-black text-white mb-8 leading-[0.9] tracking-tighter uppercase">
+              Free Canadian <br/>
+              Payroll Calculator <br/>
+              <span className="text-red-500">2025 & 2026.</span>
             </h1>
-            <p className="text-xl text-slate-300 leading-relaxed font-medium mb-10">
-              Accurate source deduction estimates for every province, including the latest 2025 CPP2 enhancements.
-            </p>
+            
+            <div className="bg-white/5 backdrop-blur-sm border-l-4 border-red-600 p-6 mb-10 max-w-2xl">
+              <p className="text-lg text-slate-200 leading-relaxed font-medium italic">
+                Calculate Canadian net pay, income tax, CPP, and EI premiums across all provinces using verified CRA T4127 formulas. This free tool supports yearly projections for 2024 through 2026, featuring precise calculations for the new CPP2 enhancement and provincial BPA clawback logic for high-earning individuals.
+              </p>
+            </div>
+
              <div className="flex flex-col sm:flex-row gap-5">
               <button 
                 onClick={scrollToCalculator}
-                className="inline-flex items-center justify-center px-12 py-5 bg-red-600 text-white rounded-none text-lg font-black uppercase tracking-widest hover:bg-red-700 transition-all transform hover:-translate-y-1 shadow-2xl shadow-red-600/30"
+                className="inline-flex items-center justify-center px-12 py-5 bg-red-600 text-white rounded-none text-lg font-black uppercase tracking-widest hover:bg-red-700 transition-all shadow-2xl shadow-red-600/30"
               >
-                Start Calculating
-              </button>
-              <button 
-                onClick={() => onNavigate('home', 'General Quote')}
-                className="inline-flex items-center justify-center px-12 py-5 bg-white/10 backdrop-blur-md text-white rounded-none text-lg font-black uppercase tracking-widest hover:bg-white/20 transition-all border border-white/20"
-              >
-                Get Managed Quote
+                Start Calculation
               </button>
             </div>
           </div>
@@ -80,140 +139,316 @@ const PayrollCalculatorPage: React.FC<PayrollCalculatorPageProps> = ({ onNavigat
       </section>
 
       <section id="calculator-tool" className="py-24 max-w-7xl mx-auto px-4 grid lg:grid-cols-12 gap-16">
-        {/* Controls */}
-        <div className="lg:col-span-4 bg-slate-50 p-10 border border-slate-200">
-          <h3 className="text-xl font-black text-slate-900 uppercase tracking-widest mb-8">Inputs</h3>
-          
-          <div className="space-y-8">
-            <div>
-              <label className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-3">Tax Year</label>
-              <select 
-                value={taxYear}
-                onChange={(e) => setTaxYear(Number(e.target.value))}
-                className="w-full bg-white border border-slate-200 px-6 py-4 rounded-none font-bold text-lg outline-none focus:ring-2 focus:ring-red-500"
-              >
-                <option value={2024}>2024</option>
-                <option value={2025}>2025</option>
-                <option value={2026}>2026</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-3">Province</label>
-              <select 
-                value={selectedProvince}
-                onChange={(e) => setSelectedProvince(e.target.value)}
-                className="w-full bg-white border border-slate-200 px-6 py-4 rounded-none font-bold text-lg outline-none focus:ring-2 focus:ring-red-500"
-              >
-                {PROVINCES.map(p => <option key={p.name} value={p.name}>{p.name}</option>)}
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-3">Salary / Wage</label>
-              <div className="flex gap-2 mb-4">
-                {['annual', 'hourly'].map(t => (
-                  <button 
-                    key={t}
-                    onClick={() => setPayType(t as any)}
-                    className={`flex-1 py-3 text-[10px] font-black uppercase tracking-widest border transition-all ${payType === t ? 'bg-slate-900 text-white' : 'bg-white text-slate-500 hover:bg-slate-100'}`}
-                  >
-                    {t}
-                  </button>
-                ))}
+        <div className="lg:col-span-4 space-y-10">
+          <div className="bg-slate-50 p-10 border border-slate-200">
+            <h2 className="text-xl font-black text-slate-900 uppercase tracking-widest mb-8">Basic Pay Details</h2>
+            <div className="space-y-6">
+              <div>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Target Tax Year</label>
+                <div className="flex gap-1 overflow-x-auto pb-2 scrollbar-hide">
+                  {Object.keys(YEARLY_RATES).map(yearStr => {
+                    const y = parseInt(yearStr);
+                    return (
+                      <button 
+                        key={y} 
+                        onClick={() => setTaxYear(y)}
+                        className={`px-4 py-2 text-[10px] font-black uppercase border transition-all ${taxYear === y ? 'bg-red-600 text-white border-red-600' : 'bg-white text-slate-400 border-slate-200 hover:border-red-200'}`}
+                      >
+                        {y}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
-              <input 
-                type="text" 
-                value={payRate} 
-                onChange={(e) => setPayRate(e.target.value)}
-                className="w-full bg-white border border-slate-200 px-6 py-4 rounded-none font-bold text-2xl outline-none focus:ring-2 focus:ring-red-500"
-              />
-            </div>
 
-            <div>
-              <label className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-3">Display Frequency</label>
-              <div className="grid grid-cols-2 gap-2">
-                {['daily', 'weekly', 'biweekly', 'semi-monthly', 'monthly', 'annual'].map(f => (
-                  <button 
-                    key={f}
-                    onClick={() => setDisplayFrequency(f as any)}
-                    className={`py-3 text-[10px] font-black uppercase tracking-widest border transition-all ${displayFrequency === f ? 'bg-red-600 text-white' : 'bg-white text-slate-500 hover:bg-slate-100'}`}
-                  >
-                    {f.replace('-', ' ')}
-                  </button>
-                ))}
+              <div>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Select Province</label>
+                <select 
+                  value={selectedProvince}
+                  onChange={(e) => setSelectedProvince(e.target.value)}
+                  className="w-full bg-white border border-slate-200 px-6 py-4 rounded-none font-bold text-lg outline-none"
+                >
+                  {PROVINCES.map(p => <option key={p.name} value={p.name}>{p.name}</option>)}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Gross Compensation</label>
+                <div className="flex gap-2 mb-4">
+                  {['annual', 'hourly'].map(t => (
+                    <button key={t} onClick={() => setPayType(t as any)} className={`flex-1 py-3 text-[10px] font-black uppercase border transition-all ${payType === t ? 'bg-slate-900 text-white' : 'bg-white text-slate-500'}`}>
+                      {t}
+                    </button>
+                  ))}
+                </div>
+                <div className="relative">
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-400">$</span>
+                  <input type="text" value={payRate} onChange={(e) => setPayRate(e.target.value)} className="w-full bg-white border border-slate-200 pl-10 pr-6 py-4 rounded-none font-bold text-2xl" />
+                </div>
+              </div>
+
+              {payType === 'hourly' && (
+                <div className="animate-in fade-in slide-in-from-top-1 duration-300">
+                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Hours Per Week</label>
+                  <input type="text" value={hoursPerWeek} onChange={(e) => setHoursPerWeek(e.target.value)} className="w-full bg-white border border-slate-200 px-6 py-4 rounded-none font-bold text-lg" />
+                </div>
+              )}
+
+              <div>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Display Frequency</label>
+                <select 
+                  value={displayFrequency}
+                  onChange={(e) => setDisplayFrequency(e.target.value as any)}
+                  className="w-full bg-white border border-slate-200 px-6 py-4 rounded-none font-bold text-lg outline-none"
+                >
+                  <option value="daily">Daily (260)</option>
+                  <option value="weekly">Weekly (52)</option>
+                  <option value="biweekly">Bi-Weekly (26)</option>
+                  <option value="semi-monthly">Semi-Monthly (24)</option>
+                  <option value="monthly">Monthly (12)</option>
+                  <option value="annual">Annual (1)</option>
+                </select>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Display Results */}
-        <div className="lg:col-span-8 space-y-8">
-          <div className="bg-slate-900 p-12 text-white border-l-8 border-red-600 shadow-2xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 bg-red-600 text-white px-6 py-2 text-[10px] font-black uppercase tracking-widest">
-              {displayFrequency.replace('-', ' ')} Net Pay
-            </div>
-            <p className="text-slate-400 text-xs font-black uppercase tracking-[0.3em] mb-4">Estimated Take-Home</p>
-            <h2 className="text-6xl lg:text-8xl font-black tracking-tighter mb-4">{results.netPay}</h2>
-            <div className="h-2 w-24 bg-red-600 mb-8"></div>
-            
-            <div className="grid sm:grid-cols-2 gap-12">
+          <div className="bg-slate-900 p-10 text-white border-l-4 border-red-600">
+            <h3 className="text-sm font-black text-red-500 uppercase tracking-widest mb-8">Vacation Pay</h3>
+            <div className="space-y-6">
               <div>
-                <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-6 border-b border-white/10 pb-2">Income Tax Breakdown</p>
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="font-bold text-slate-400">Federal Tax</span>
-                    <span className="font-black text-red-500">-{results.deductions.fedTax}</span>
-                  </div>
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="font-bold text-slate-400">Provincial Tax ({selectedProvince})</span>
-                    <span className="font-black text-red-500">-{results.deductions.provTax}</span>
-                  </div>
+                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">Payment Method</label>
+                <div className="grid grid-cols-2 gap-2">
+                   <button 
+                    onClick={() => setVacationMethod('accrued')}
+                    className={`py-3 text-[9px] font-black uppercase border transition-all ${vacationMethod === 'accrued' ? 'bg-white text-slate-900 border-white' : 'bg-transparent text-slate-500 border-slate-700'}`}
+                   >
+                     Accrued (Bank)
+                   </button>
+                   <button 
+                    onClick={() => setVacationMethod('paid_per_cycle')}
+                    className={`py-3 text-[9px] font-black uppercase border transition-all ${vacationMethod === 'paid_per_cycle' ? 'bg-white text-slate-900 border-white' : 'bg-transparent text-slate-500 border-slate-700'}`}
+                   >
+                     Paid Per Cycle
+                   </button>
                 </div>
               </div>
+
               <div>
-                <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-6 border-b border-white/10 pb-2">Statutory Deductions</p>
-                <div className="space-y-4 text-sm">
-                  <div className="flex justify-between items-center">
-                    <span className="font-bold text-slate-400">CPP (Base)</span>
-                    <span className="font-black text-red-500">-{results.deductions.cppBase}</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="font-bold text-slate-400">CPP2 (Enhanced)</span>
-                    <span className="font-black text-red-500">-{results.deductions.cpp2}</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="font-bold text-slate-400">EI Premium</span>
-                    <span className="font-black text-red-500">-{results.deductions.ei}</span>
-                  </div>
+                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">Vacation Rate (%)</label>
+                <div className="flex gap-1 mb-4">
+                  {[0.04, 0.06].map(rate => (
+                    <button 
+                      key={rate} 
+                      onClick={() => {setVacationRate(rate); setIsCustomVacation(false);}}
+                      className={`flex-1 py-2 text-[10px] font-black uppercase border transition-all ${!isCustomVacation && vacationRate === rate ? 'bg-red-600 text-white border-red-600' : 'bg-transparent text-slate-500 border-slate-700'}`}
+                    >
+                      {rate * 100}%
+                    </button>
+                  ))}
+                  <button 
+                    onClick={() => setIsCustomVacation(true)}
+                    className={`flex-1 py-2 text-[10px] font-black uppercase border transition-all ${isCustomVacation ? 'bg-red-600 text-white border-red-600' : 'bg-transparent text-slate-500 border-slate-700'}`}
+                  >
+                    Custom
+                  </button>
                 </div>
+                {isCustomVacation && (
+                  <div className="relative animate-in slide-in-from-top-1 duration-200">
+                    <input 
+                      type="number" 
+                      value={vacationRate * 100} 
+                      onChange={(e) => setVacationRate(parseFloat(e.target.value) / 100)} 
+                      className="w-full bg-slate-800 border border-slate-700 px-4 py-3 text-white font-bold" 
+                      placeholder="e.g. 8"
+                    />
+                    <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 font-bold">%</span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
 
           <div className="bg-slate-50 p-10 border border-slate-200">
-             <h4 className="text-xl font-black text-slate-900 mb-6 uppercase tracking-tight">Compliance Context</h4>
-             <p className="text-slate-600 font-medium leading-relaxed italic">
-               Note: These values are professional estimates for {selectedProvince} in {taxYear}. Final paychecks depend on specific TD1 claim codes, group benefit premiums, and multi-entity exemptions which Maple manages for you.
+            <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest mb-6">additional deductions</h3>
+            <div className="space-y-6">
+              <div>
+                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Pre-Tax Deductions (Union/RPP)</label>
+                <input type="text" value={preTaxDeductions} onChange={(e) => setPreTaxDeductions(e.target.value)} className="w-full bg-white border border-slate-200 px-4 py-3 text-slate-900 font-bold" />
+              </div>
+              <div>
+                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">After-Tax Deductions</label>
+                <input type="text" value={afterTaxDeductions} onChange={(e) => setAfterTaxDeductions(e.target.value)} className="w-full bg-white border border-slate-200 px-4 py-3 text-slate-900 font-bold" />
+                <div className="mt-3 p-4 bg-slate-100 rounded-none border-l-2 border-slate-300">
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Examples:</p>
+                  <ul className="text-[10px] font-bold text-slate-500 space-y-1 uppercase tracking-tight">
+                    <li>⚖️ Garnishments (FRO / child support)</li>
+                    <li>💰 CRA debt repayment plans</li>
+                    <li>☕ social club or coffee funds</li>
+                    <li>🏠 repayment of company loans</li>
+                  </ul>
+                </div>
+              </div>
+              <div className="pt-4 border-t border-slate-200">
+                <button 
+                  onClick={() => onNavigate('formula-manifest')}
+                  className="text-[9px] text-slate-400 hover:text-red-500 transition-colors uppercase font-black tracking-widest flex items-center gap-2"
+                >
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                  Inspect Math Sequence (CRA T4127)
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="lg:col-span-8 space-y-8">
+          <div className="bg-slate-900 p-12 text-white border-l-8 border-red-600 shadow-2xl relative">
+            <div className="flex justify-between items-center mb-12">
+               <p className="text-slate-400 text-xs font-black uppercase tracking-[0.3em]">Estimated Results for {taxYear}</p>
+               <div className="flex bg-white/10 p-1 rounded-sm">
+                  <button onClick={() => setPerspective('employee')} className={`px-4 py-2 text-[9px] font-black uppercase tracking-widest transition-all ${perspective === 'employee' ? 'bg-red-600 text-white' : 'text-slate-400'}`}>Net Pay</button>
+                  <button onClick={() => setPerspective('employer')} className={`px-4 py-2 text-[9px] font-black uppercase tracking-widest transition-all ${perspective === 'employer' ? 'bg-red-600 text-white' : 'text-slate-400'}`}>Total Cost</button>
+               </div>
+            </div>
+
+            <h2 className="text-6xl lg:text-[7rem] font-black tracking-tighter mb-4">
+              {perspective === 'employee' ? results.netPay : results.totalEmployerCost}
+            </h2>
+            <p className="text-red-500 font-black uppercase tracking-widest mb-10">/ {displayFrequency.replace('-', ' ')} {perspective === 'employee' ? 'TAKE HOME' : 'OUT-OF-POCKET'}</p>
+            
+            <div className="grid sm:grid-cols-2 gap-12 border-t border-white/10 pt-10">
+              {perspective === 'employee' ? (
+                <>
+                  <div>
+                    <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-6">Income Breakdown</p>
+                    <div className="space-y-4 text-sm font-medium">
+                      <div className="flex justify-between"><span>Base Pay</span><span className="text-white">{results.basePay}</span></div>
+                      {vacationMethod === 'paid_per_cycle' && (
+                        <div className="flex justify-between animate-in fade-in slide-in-from-top-1 duration-300">
+                          <span>Vacation Pay ({vacationRate * 100}%)</span>
+                          <span className="text-green-500">+{results.vacationPay}</span>
+                        </div>
+                      )}
+                      <div className="flex justify-between pt-2 border-t border-white/5"><span>Federal Tax</span><span className="text-red-500">-{results.deductions.fedTax}</span></div>
+                      <div className="flex justify-between"><span>Provincial Tax ({selectedProvince})</span><span className="text-red-500">-{results.deductions.provTax}</span></div>
+                      {parseFloat(results.deductions.healthPremium.replace(/[^0-9.]/g, '')) > 0 && (
+                        <div className="flex justify-between"><span>Health Premium (OHP)</span><span className="text-red-500">-{results.deductions.healthPremium}</span></div>
+                      )}
+                      {parseFloat(results.deductions.afterTax.replace(/[^0-9.]/g, '')) > 0 && (
+                        <div className="flex justify-between border-t border-white/5 pt-2"><span>After-Tax Deductions</span><span className="text-red-500">-{results.deductions.afterTax}</span></div>
+                      )}
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-6">Statutory Contributions</p>
+                    <div className="space-y-4 text-sm font-medium">
+                      <div className="flex justify-between">
+                        <span className="text-slate-400">{results.deductions.pensionLabel}</span>
+                        <span className="text-red-500">-{results.deductions.pensionBase}</span>
+                      </div>
+                      {parseFloat(results.deductions.pension2.replace(/[^0-9.]/g, '')) > 0 && (
+                        <div className="flex justify-between animate-in fade-in slide-in-from-top-1 duration-300">
+                          <span className="text-slate-400">{results.deductions.pension2Label}</span>
+                          <span className="text-red-500">-{results.deductions.pension2}</span>
+                        </div>
+                      )}
+                      <div className="flex justify-between">
+                        <span className="text-slate-400">EI Premium</span>
+                        <span className="text-red-500">-{results.deductions.ei}</span>
+                      </div>
+                      {vacationMethod === 'accrued' && (
+                        <div className="mt-8 p-4 bg-white/5 border border-white/10">
+                           <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Accrual Note</p>
+                           <p className="text-[11px] text-slate-300 font-medium">
+                             {results.vacationPay} is being held in your vacation bank this period.
+                           </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div>
+                    <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-6">Employer Burden</p>
+                    <div className="space-y-4 text-sm font-medium">
+                      <div className="flex justify-between text-slate-300">
+                        <span>{results.deductions.pensionLabel} Match</span>
+                        <span className="text-red-500">+{results.employerBurden.cppBaseMatch}</span>
+                      </div>
+                      <div className="flex justify-between text-slate-300">
+                        <span>EI Match (1.4x)</span>
+                        <span className="text-red-500">+{results.employerBurden.eiMatch}</span>
+                      </div>
+                      <div className="flex justify-between text-slate-300">
+                        <span>Workplace Safety (Est.)</span>
+                        <span className="text-red-500">+{results.employerBurden.wsib}</span>
+                      </div>
+                      <div className="flex justify-between text-slate-300">
+                        <span>Vacation {vacationMethod === 'accrued' ? 'Accrual' : 'Payout'} ({vacationRate*100}%)</span>
+                        <span className="text-red-500">+{results.employerBurden.vacation}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-red-600/10 p-6 border border-red-600/20">
+                    <p className="text-[10px] font-black text-red-500 uppercase tracking-[0.2em] mb-4">Total Burden Profile</p>
+                    <p className="text-3xl font-black text-white">+{Math.round((parseFloat(results.employerBurden.totalBurden.replace(/[^0-9.]/g, '')) / parseFloat(results.basePay.replace(/[^0-9.]/g, ''))) * 100)}%</p>
+                    <p className="text-[10px] text-slate-500 mt-2 font-bold uppercase tracking-tight">Relative to base gross</p>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+
+          <div className="bg-white p-10 border border-slate-100">
+             <h2 className="text-2xl font-black text-slate-900 mb-6 uppercase tracking-tight">How is Canadian payroll calculated?</h2>
+             <p className="text-slate-600 font-medium leading-relaxed mb-6">
+               Calculating net pay in Canada involves a multi-step process prescribed by the Canada Revenue Agency (CRA). This calculator follows the <strong>How-To steps</strong> identified for computer-based payroll processing:
              </p>
+             <ol className="space-y-4 mb-10">
+               {[
+                 { step: "Gross Determination", desc: "Convert hourly or annual rates into a total projected yearly income, including vacation pay if paid per cycle." },
+                 { step: "Statutory Deductions", desc: "Calculate CPP (5.95%) and EI (1.64%) up to the yearly maximum ceilings." },
+                 { step: "BPA Clawback", desc: "Apply the Basic Personal Amount reduction for incomes exceeding $181,232 (for 2025)." },
+                 { step: "Graduated Tax Brackets", desc: "Apply both Federal T1 and Provincial T2 tax rates across specific income thresholds." }
+               ].map((s, i) => (
+                 <li key={i} className="flex gap-4">
+                   <span className="w-6 h-6 bg-red-600 text-white flex-shrink-0 flex items-center justify-center font-black text-xs">{i+1}</span>
+                   <p className="text-sm font-bold text-slate-700"><strong>{s.step}:</strong> <span className="font-medium text-slate-600">{s.desc}</span></p>
+                 </li>
+               ))}
+             </ol>
           </div>
           
-          <div className="flex justify-center">
+          <div className="flex justify-center pt-4">
             <button 
               onClick={() => onNavigate('home', constructCalcBrief(results, selectedProvince, taxYear))}
-              className="px-14 py-6 bg-red-600 text-white font-black uppercase tracking-widest shadow-xl hover:scale-105 transition-transform"
+              className="px-14 py-6 bg-red-600 text-white font-black uppercase tracking-widest shadow-xl hover:scale-105 transition-all"
             >
-              Get This Managed by Maple
+              Verify Calculations with Expert
             </button>
+          </div>
+
+          <div className="mt-16 p-8 bg-slate-50 flex flex-col md:flex-row items-center gap-8 border border-slate-200">
+             <img src="https://picsum.photos/seed/payroll/100/100" className="w-20 h-20 rounded-full border-2 border-red-600" alt="Arshad Merali - Canadian Payroll Authority" />
+             <div>
+                <p className="text-[10px] font-black text-red-600 uppercase tracking-widest mb-1">Author & Expert Reviewer</p>
+                <h4 className="text-xl font-black text-slate-900 uppercase">Arshad Merali</h4>
+                <p className="text-sm text-slate-600 font-medium leading-relaxed">
+                  Founder of Maple Managed Payroll with over 15 years of experience in Canadian compliance and NPI-certified operations. Regularly reviewed for accuracy against CRA Guide T4127.
+                </p>
+             </div>
           </div>
         </div>
       </section>
+
+      <FAQ items={calculatorFaqs} title={<h2 className="text-3xl font-black text-slate-900 mb-6 uppercase tracking-tight">Calculator <span className="text-red-600">FAQ</span></h2>} />
     </div>
   );
 };
 
 const constructCalcBrief = (results: any, province: string, year: number) => {
-  return `CALC_BRIEF: Net ${results.netPay} | Gross ${results.grossPay} | Prov ${province} | Year ${year}`;
+  return `CALC_BRIEF: Net ${results.netPay} | Cost ${results.totalEmployerCost} | Prov ${province} | Year ${year}`;
 };
 
 export default PayrollCalculatorPage;

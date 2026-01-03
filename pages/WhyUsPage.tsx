@@ -4,7 +4,7 @@ import { PageType } from '../App';
 import FAQ from '../components/FAQ';
 
 interface WhyUsPageProps {
-  onNavigate: (page: PageType) => void;
+  onNavigate: (page: PageType, context?: string, anchor?: string) => void;
 }
 
 const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
@@ -49,18 +49,15 @@ const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
 
   return (
     <div className="bg-white">
-      {/* Updated Hero Section to match Home Page */}
+      {/* Hero Section */}
       <section className="relative min-h-screen flex items-center overflow-hidden bg-slate-900">
-        {/* Background Image Layer */}
         <div className="absolute inset-0 z-0">
           <img 
             src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=2000" 
             alt="Trusted Professional Payroll Support" 
             className="w-full h-full object-cover object-center"
           />
-          {/* Gradient Overlay for Text Legibility */}
           <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent"></div>
-          {/* Subtle Red Edge Accent */}
           <div className="absolute top-0 left-0 w-2 h-full bg-red-600 z-20"></div>
         </div>
         
@@ -78,15 +75,11 @@ const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
             </p>
             <div className="flex flex-col sm:flex-row gap-5">
               <button 
-                onClick={() => {
-                  onNavigate('home');
-                  setTimeout(() => document.getElementById('contact')?.scrollIntoView(), 100);
-                }}
+                onClick={() => onNavigate('home', 'General Inquiry')}
                 className="inline-flex items-center justify-center px-12 py-5 bg-red-600 text-white rounded-none text-lg font-black uppercase tracking-widest hover:bg-red-700 transition-all transform hover:-translate-y-1 shadow-2xl shadow-red-600/30"
               >
                 Talk to an Expert
               </button>
-              {/* Corrected navigation target from 'features' to 'what-we-do' to match PageType defined in App.tsx */}
               <button 
                 onClick={() => onNavigate('what-we-do')}
                 className="inline-flex items-center justify-center px-12 py-5 bg-white/10 backdrop-blur-md text-white rounded-none text-lg font-black uppercase tracking-widest hover:bg-white/20 transition-all border border-white/20"
@@ -160,10 +153,7 @@ const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
               <div className="text-6xl lg:text-8xl font-extrabold mb-4 text-white">100,000+</div>
               <p className="text-xl font-medium mb-8 text-white/90">Employees managed across Canada</p>
               <button 
-                onClick={() => {
-                  onNavigate('home');
-                  setTimeout(() => document.getElementById('contact')?.scrollIntoView(), 100);
-                }}
+                onClick={() => onNavigate('home', 'General Quote')}
                 className="bg-white text-slate-900 px-8 py-4 rounded-none font-bold hover:bg-slate-100 transition-colors shadow-xl"
               >
                 Join the Maple Family
@@ -188,7 +178,6 @@ const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
       <section className="py-32 text-center bg-white">
         <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-10 uppercase tracking-tighter">Still curious about our <br/> <span className="text-red-600">"Human-in-the-Middle"</span> approach?</h2>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          {/* Corrected navigation target from 'features' to 'what-we-do' to match PageType defined in App.tsx */}
           <button 
             onClick={() => onNavigate('what-we-do')}
             className="px-10 py-4 bg-white border-2 border-slate-200 text-slate-700 rounded-none font-bold hover:bg-slate-50 transition-all"
@@ -196,10 +185,7 @@ const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
             Explore Detailed Features
           </button>
           <button 
-            onClick={() => {
-              onNavigate('home');
-              setTimeout(() => document.getElementById('scorecard')?.scrollIntoView(), 100);
-            }}
+            onClick={() => onNavigate('home', undefined, 'scorecard')}
             className="px-10 py-4 bg-red-600 text-white rounded-none font-bold hover:bg-red-700 transition-all shadow-lg shadow-red-100"
           >
             Take the Payroll Audit

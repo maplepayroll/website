@@ -11,10 +11,10 @@ interface Message {
 const CHAT_STORAGE_KEY = 'maple_concierge_history';
 
 const SUGGESTED_PROMPTS = [
-  { label: "🧮 Calculate Pay", text: "Calculate biweekly payroll for an Ontario employee earning $75,000 annually." },
-  { label: "🍁 2025 Rates", text: "What are the 2025 CPP and EI rates?" },
-  { label: "🏖️ Vacation Pay", text: "Explain how vacation pay works on year-end bonuses." },
-  { label: "🛡️ EHT Thresholds", text: "What is the BC EHT threshold for 2025?" },
+  { label: "🧮 Calculate Pay", text: "Calculate biweekly payroll for an Ontario employee earning $75,000 annually in 2026." },
+  { label: "🍁 2026 Rates", text: "What are the 2026 CPP and EI rates?" },
+  { label: "🏖️ Vacation Pay", text: "Explain how vacation pay works on year-end bonuses for the 2026 cycle." },
+  { label: "🛡️ EHT Thresholds", text: "What is the BC EHT threshold for 2026?" },
   { label: "📄 ROE Handling", text: "How does Maple handle ROE filings?" },
   { label: "🤝 Onboarding", text: "Tell me about your Managed Onboarding service." }
 ];
@@ -100,7 +100,7 @@ const Assistant: React.FC = () => {
             <div className="flex items-center gap-4">
               <div className="w-11 h-11 bg-red-600 flex items-center justify-center shadow-lg shadow-red-900/20">
                 <svg className="w-7 h-7 text-white drop-shadow-sm" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M23.3,11.5L20,10.7L20.4,7L17,8L15,4L13,8L12,1L11,8L9,4L7,8L3.6,7L4,10.7L0.7,11.5L3,14L0,15L5,16L4.5,21L8,19L11,23L13,19L16.5,21L16,16L21,15L18,14L23.3,11.5Z" />
+                  <path d="M21.1 12.8c0 .1 0 .1-.1.2l-2.4 1.2 1 3-1.8-.8-1.5 2.3-1.3-3.2v-4l-1.3 1.7-1.2-1.7v4l-1.3 3.2-1.5-2.3-1.8.8 1-3-2.4-1.2c-.1-.1-.1-.1-.1-.2.1-.3.5-1.1 1-1.6L5 8.1l2.5.6L7.3 5l2.4 1.5 1.5-3.3 1.5 3.3 2.4-1.5-.2 3.7 2.5-.6-2.6 1.1c.5.5.9 1.3 1 1.6z M11.2 18.5h1.6V22h-1.6v-3.5z" />
                 </svg>
               </div>
               <div>

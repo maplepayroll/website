@@ -37,6 +37,8 @@ import PublicHolidaysPage from './pages/PublicHolidaysPage';
 import Payroll2026ChangesPage from './pages/Payroll2026ChangesPage';
 import BreaksAndEatingPeriodsPage from './pages/BreaksAndEatingPeriodsPage';
 import HolidayDuringVacationPage from './pages/HolidayDuringVacationPage';
+import FormulaManifestPage from './pages/FormulaManifestPage';
+import SalaryContinuancePage from './pages/SalaryContinuancePage';
 
 export type PageType = 
   | 'home' 
@@ -44,7 +46,11 @@ export type PageType =
   | 'why-us'
   | 'what-we-do' 
   | 'audit' 
-  | 'calculator' 
+  | 'calculator' // Default (Current Year)
+  | 'calculator-2024'
+  | 'calculator-2025'
+  | 'calculator-2026'
+  | 'formula-manifest' // Hidden Expert Page
   | 'diy-calculator'
   | 'resources' 
   | 'vacation-pay-article' 
@@ -61,32 +67,44 @@ export type PageType =
   | 'public-holidays-2026'
   | 'payroll-2026-changes'
   | 'breaks-and-eating-periods'
-  | 'holiday-during-vacation';
+  | 'holiday-during-vacation'
+  | 'salary-continuance';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<PageType>('home');
   const [contactContext, setContactContext] = useState<string>('');
+  const [pendingAnchor, setPendingAnchor] = useState<string | null>(null);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [currentPage]);
-
-  const handleNavigate = (page: PageType, context?: string) => {
-    setContactContext(context || '');
-    setCurrentPage(page);
-    
-    if (page === 'home' && context) {
-      setTimeout(() => {
-        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
+    if (pendingAnchor) {
+      // Small delay to allow component to mount
+      const timer = setTimeout(() => {
+        const element = document.getElementById(pendingAnchor);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+          setPendingAnchor(null);
+        }
+      }, 150);
+      return () => clearTimeout(timer);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'auto' });
     }
+  }, [currentPage, pendingAnchor]);
+
+  const handleNavigate = (page: PageType, context?: string, anchor?: string) => {
+    setContactContext(context || '');
+    
+    // If context is provided but no specific anchor, default to contact section for home
+    const targetAnchor = anchor || (page === 'home' && context ? 'contact' : null);
+    
+    setPendingAnchor(targetAnchor);
+    setCurrentPage(page);
   };
 
   return (
     <div className="min-h-screen flex flex-col selection:bg-red-600 selection:text-white">
-      {/* Conditionally render Navbar: Hide it when on the employer portal to give it a standalone app feel */}
       {currentPage !== 'employer-portal' && (
-        <Navbar onNavigate={(p) => handleNavigate(p)} currentPage={currentPage} />
+        <Navbar onNavigate={handleNavigate} currentPage={currentPage} />
       )}
       
       <main className="flex-grow">
@@ -114,7 +132,15 @@ const App: React.FC = () => {
           ) : currentPage === 'audit' ? (
             <AuditServicePage onNavigate={handleNavigate} />
           ) : currentPage === 'calculator' ? (
-            <PayrollCalculatorPage onNavigate={handleNavigate} />
+            <PayrollCalculatorPage onNavigate={handleNavigate} defaultYear={2025} />
+          ) : currentPage === 'calculator-2024' ? (
+            <PayrollCalculatorPage onNavigate={handleNavigate} defaultYear={2024} />
+          ) : currentPage === 'calculator-2025' ? (
+            <PayrollCalculatorPage onNavigate={handleNavigate} defaultYear={2025} />
+          ) : currentPage === 'calculator-2026' ? (
+            <PayrollCalculatorPage onNavigate={handleNavigate} defaultYear={2026} />
+          ) : currentPage === 'formula-manifest' ? (
+            <FormulaManifestPage onNavigate={handleNavigate} />
           ) : currentPage === 'diy-calculator' ? (
             <DIYCostCalculatorPage onNavigate={handleNavigate} />
           ) : currentPage === 'resources' ? (
@@ -147,13 +173,14 @@ const App: React.FC = () => {
             <BreaksAndEatingPeriodsPage onNavigate={handleNavigate} />
           ) : currentPage === 'holiday-during-vacation' ? (
             <HolidayDuringVacationPage onNavigate={handleNavigate} />
+          ) : currentPage === 'salary-continuance' ? (
+            <SalaryContinuancePage onNavigate={handleNavigate} />
           ) : (
             <VacationPayArticlePage onNavigate={handleNavigate} />
           )}
         </div>
       </main>
 
-      {/* Only show the footer on non-portal pages */}
       {currentPage !== 'employer-portal' && (
         <>
           <Footer onNavigate={handleNavigate} />

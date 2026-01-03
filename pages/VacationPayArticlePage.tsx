@@ -32,6 +32,22 @@ const VacationPayArticlePage: React.FC<VacationPayArticlePageProps> = ({ onNavig
     {
       q: "Is vacation pay pensionable (CPP) and insurable (EI)?",
       a: "Yes. When vacation pay is paid out, it is considered income. You must deduct CPP, EI, and Income Tax from it."
+    },
+    {
+      q: "How does vacation pay work for part-time staff?",
+      a: "Part-time staff are entitled to the same percentage (usually 4%) as full-time staff. Because it's a percentage of their earnings, it naturally pro-rates based on the hours they work."
+    },
+    {
+      q: "When does the rate increase from 4% to 6%?",
+      a: "In most provinces (like Ontario and BC), the entitlement increases to 3 weeks of time and 6% pay after 5 consecutive years of employment with the same employer."
+    },
+    {
+      q: "Can I include vacation pay in an employee's salary?",
+      a: "You can state that a salary is 'inclusive' of vacation pay, but you must ensure the base pay is high enough to cover the legal minimums. If they earn a bonus, you still owe 4% on that bonus regardless of the salary contract."
+    },
+    {
+      q: "What is a 'Vacation Year'?",
+      a: "It's a 12-month period you define (e.g., Jan-Dec or an employee's anniversary year) during which an employee earns their vacation time and pay to be used in the *following* year."
     }
   ];
 
