@@ -50,14 +50,12 @@ const INITIAL_COMPANIES: Company[] = [
 ];
 
 const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) => {
-  // Mock User Session - Superuser can switch between roles using the new dropdown
   const [currentUser, setCurrentUser] = useState<MapleEmployee>(MAPLE_TEAM[0]); 
   const [showUserMenu, setShowUserMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   
   const [companies, setCompanies] = useState<Company[]>(INITIAL_COMPANIES);
   
-  // Filter companies based on role
   const accessibleCompanies = currentUser.role === 'Superuser' 
     ? companies 
     : companies.filter(c => c.assignedAdminIds.includes(currentUser.id));
@@ -65,7 +63,6 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
   const [activeCompany, setActiveCompany] = useState<Company>(accessibleCompanies[0] || companies[0]);
   const [activeTab, setActiveTab] = useState<'overview' | 'employees' | 'payroll' | 'billing' | 'settings' | 'maple-control'>('overview');
   
-  // Modal States
   const [selectedInvoice, setSelectedInvoice] = useState<any | null>(null);
   const [selectedPayRun, setSelectedPayRun] = useState<PayRun | null>(null);
   const [showInviteModal, setShowInviteModal] = useState(false);
@@ -73,28 +70,19 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
   const [showManualInvoiceModal, setShowManualInvoiceModal] = useState(false);
   const [showAdminAssignModal, setShowAdminAssignModal] = useState<Company | null>(null);
 
-  // Role Checks
   const isSuperuser = currentUser.role === 'Superuser';
   const isAdministrator = currentUser.role === 'Administrator';
   const isMapleEmployee = isSuperuser || isAdministrator;
-  const isClientOwner = currentUser.role === 'Owner';
 
-  // Handle switching personas (Role switching capability for Superusers)
   const handleSwitchUser = (user: MapleEmployee) => {
     setCurrentUser(user);
     setShowUserMenu(false);
-    
-    // Auto-update accessible client list
     const newAccess = user.role === 'Superuser' 
       ? companies 
       : companies.filter(c => c.assignedAdminIds.includes(user.id));
-    
-    if (newAccess.length > 0) {
-      setActiveCompany(newAccess[0]);
-    }
+    if (newAccess.length > 0) setActiveCompany(newAccess[0]);
   };
 
-  // Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -105,8 +93,7 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Mock Detailed Data (simulated per company)
-  const [employees, setEmployees] = useState([
+  const [employees] = useState([
     { id: 1, name: "Sarah Jenkins", role: "Manager", status: "Active", dept: "Sales" },
     { id: 2, name: "Mike Chen", role: "Developer", status: "Active", dept: "Engineering" },
     { id: 3, name: "Jessica Wu", role: "Designer", status: "Active", dept: "Product" },
@@ -314,20 +301,12 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
                     >
                       <span className="text-[10px] font-black uppercase tracking-widest underline">Audit Trail</span>
                     </button>
-                    {!isMapleEmployee && (
-                       <button className="text-red-600 font-bold text-xs uppercase tracking-widest hover:underline">Delete</button>
-                    )}
                   </div>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-        {isMapleEmployee && (
-           <div className="bg-amber-50 p-4 border-t border-amber-100 text-center text-[10px] font-black text-amber-700 uppercase tracking-widest">
-             History deletion is restricted to Client Primary Owner
-           </div>
-        )}
       </div>
     </div>
   );
@@ -343,11 +322,6 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
                className="px-6 py-3 bg-red-600 text-white text-xs font-black uppercase tracking-widest hover:bg-red-700 transition-all shadow-lg"
              >
                Create Manual Invoice
-             </button>
-           )}
-           {!isMapleEmployee && (
-             <button className="px-6 py-3 bg-white border border-slate-200 text-slate-900 text-xs font-black uppercase tracking-widest hover:bg-slate-50 transition-all">
-               Update Payment Method
              </button>
            )}
         </div>
@@ -381,11 +355,11 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
         <div className={`p-8 shadow-lg relative overflow-hidden transition-all ${isMapleEmployee ? 'bg-slate-100 grayscale' : 'bg-slate-900 text-white'}`}>
           <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Payment Method</p>
           {isMapleEmployee ? (
-             <div className="flex items-center gap-4">
+             <div className="flex items-center gap-4 text-slate-400">
                 <div className="w-12 h-8 bg-slate-200 rounded-sm"></div>
                 <div>
-                   <p className="font-bold text-lg tracking-widest text-slate-300">•••• ••••</p>
-                   <p className="text-[10px] font-black text-slate-400 uppercase">ACCESS RESTRICTED</p>
+                   <p className="font-bold text-lg tracking-widest">•••• ••••</p>
+                   <p className="text-[8px] font-black uppercase tracking-widest">ACCESS RESTRICTED</p>
                 </div>
              </div>
           ) : (
@@ -395,11 +369,6 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
                 <p className="font-bold text-lg tracking-widest">•••• 4242</p>
                 <p className="text-[10px] font-bold text-slate-400 uppercase">Visa • Exp 12/28</p>
               </div>
-            </div>
-          )}
-          {isMapleEmployee && (
-            <div className="absolute inset-0 bg-slate-50/50 backdrop-blur-[2px] flex items-center justify-center">
-               <span className="bg-white px-3 py-1 text-[8px] font-black uppercase tracking-widest border border-slate-200 shadow-sm text-slate-600">Superuser View Restricted</span>
             </div>
           )}
         </div>
@@ -417,7 +386,7 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
                 <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">Date</th>
                 <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">Amount</th>
                 <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">Status</th>
-                <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">Action</th>
+                <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">Action</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
@@ -431,25 +400,15 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
                       {inv.status}
                     </span>
                   </td>
-                  <td className="px-6 py-4">
-                    <div className="flex gap-4">
-                      <button onClick={() => setSelectedInvoice(inv)} className="text-slate-400 hover:text-slate-900">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
-                      </button>
-                      {!isMapleEmployee && (
-                        <button className="text-red-600 font-bold text-xs uppercase tracking-widest hover:underline">Delete</button>
-                      )}
-                    </div>
+                  <td className="px-6 py-4 text-right">
+                    <button onClick={() => setSelectedInvoice(inv)} className="text-slate-400 hover:text-slate-900">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                    </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-          {isMapleEmployee && (
-             <div className="bg-amber-50 p-4 border-t border-amber-100 text-center text-[10px] font-black text-amber-700 uppercase tracking-widest">
-               Transaction deletion is restricted to Client Primary Owner
-             </div>
-          )}
         </div>
       </div>
     </div>
@@ -471,49 +430,6 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
               <label className="block text-xs font-bold text-slate-400 uppercase mb-2">Legal Business Name</label>
               <input readOnly={isMapleEmployee} className={`w-full px-4 py-3 bg-white border border-slate-200 font-medium text-slate-900 focus:outline-none focus:border-red-600 ${isMapleEmployee ? 'opacity-60 cursor-not-allowed' : ''}`} value={activeCompany.legalName} />
            </div>
-        </div>
-      </section>
-
-      <section>
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tight">Managed Payroll Accounts</h2>
-          {!isMapleEmployee && (
-             <button onClick={() => setShowAccountModal(true)} className="px-6 py-3 bg-slate-900 text-white text-xs font-black uppercase tracking-widest hover:bg-black transition-all shadow-lg">
-               Add New Account
-             </button>
-          )}
-        </div>
-        <div className="bg-white border border-slate-200 shadow-sm overflow-hidden">
-          <table className="w-full text-left">
-            <thead className="bg-slate-50 border-b border-slate-200">
-              <tr>
-                <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">Nickname</th>
-                <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">CRA Number (RP)</th>
-                <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">Action</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100">
-              {payrollAccounts.map((acc) => (
-                <tr key={acc.id} className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4 text-sm font-bold">{acc.nickname}</td>
-                  <td className="px-6 py-4 text-sm font-medium text-slate-600 font-mono">{acc.number}</td>
-                  <td className="px-6 py-4">
-                     <button 
-                      disabled={isMapleEmployee}
-                      className={`text-xs font-bold uppercase tracking-wide transition-colors ${isMapleEmployee ? 'text-slate-200 cursor-not-allowed' : 'text-slate-400 hover:text-red-600'}`}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          {isMapleEmployee && (
-            <div className="p-4 bg-amber-50 text-amber-700 text-[10px] font-bold uppercase tracking-widest text-center border-t border-amber-100">
-              Account Deletion restricted to System Owners
-            </div>
-          )}
         </div>
       </section>
 
@@ -555,11 +471,6 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
               ))}
             </tbody>
           </table>
-          {isMapleEmployee && (
-            <div className="p-4 bg-amber-50 text-amber-700 text-[10px] font-bold uppercase tracking-widest text-center border-t border-amber-100">
-              User revocation is restricted to Client Primary Owner
-            </div>
-          )}
         </div>
       </section>
     </div>
@@ -573,6 +484,12 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
             <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tight">Maple Client Portfolio</h2>
             <p className="text-slate-500 text-sm font-medium">Global management of all clients and employee assignments.</p>
           </div>
+          <button 
+            onClick={() => onNavigate('audit-dashboard')}
+            className="px-8 py-4 bg-red-600 text-white font-black uppercase tracking-widest text-xs hover:bg-red-700 transition-all shadow-xl"
+          >
+            Audit Intelligence Hub
+          </button>
         </div>
 
         <div className="bg-white border border-slate-200 shadow-sm overflow-hidden">
@@ -649,7 +566,7 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
                  onChange={(e) => setActiveCompany(companies.find(c => c.id === parseInt(e.target.value))!)}
                  className="w-full bg-slate-800 text-white text-xs font-bold border-none outline-none focus:ring-1 focus:ring-red-600 py-2 rounded-sm"
                >
-                 {accessibleCompanies.map(c => <option key={c.id} value={c.id}>{c.name} {c.primaryAdminId === currentUser.id ? '(Primary)' : ''}</option>)}
+                 {accessibleCompanies.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                </select>
             </div>
           )}
@@ -707,19 +624,16 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
               {isSuperuser && (
                 <span className="bg-red-600 text-white text-[10px] font-black uppercase px-2 py-1 tracking-widest">Superuser Mode</span>
               )}
-              {isAdministrator && (
-                <span className="bg-slate-800 text-white text-[10px] font-black uppercase px-2 py-1 tracking-widest">Maple Expert</span>
-              )}
             </div>
             <p className="text-slate-500 font-medium">
-              {activeTab === 'maple-control' ? `Welcome, ${currentUser.name}. Manage your team and portfolio.` : `Viewing ${activeCompany.name} as ${currentUser.name}`}
+              {activeTab === 'maple-control' ? `Welcome, ${currentUser.name}` : `Viewing ${activeCompany.name} as ${currentUser.name}`}
             </p>
           </div>
           
           <div className="relative" ref={menuRef}>
             <button 
               onClick={() => setShowUserMenu(!showUserMenu)}
-              className="w-12 h-12 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold border-2 border-transparent hover:border-red-600 transition-all shadow-lg active:scale-95"
+              className="w-12 h-12 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold border-2 border-transparent hover:border-red-600 transition-all shadow-lg"
             >
               {currentUser.name.split(' ').map(n => n[0]).join('')}
             </button>
@@ -735,35 +649,17 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
                 </div>
                 
                 <div className="py-2">
-                  <button className="w-full text-left px-6 py-3 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-red-600 transition-colors uppercase tracking-widest">
-                    My Profile
-                  </button>
-                  
-                  {/* Assigned Clients List (Always shows for Admin/Superuser) */}
-                  <div className="px-6 py-3 border-t border-slate-100">
-                    <p className="text-[8px] font-black text-slate-400 uppercase tracking-[0.2em] mb-3">Your Assigned Portfolio</p>
-                    <div className="max-h-32 overflow-y-auto space-y-1 pr-2 scrollbar-thin scrollbar-thumb-slate-200">
-                      {accessibleCompanies.map(c => (
-                        <div key={c.id} className="flex items-center gap-2 text-[10px] font-bold text-slate-700">
-                          <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
-                          {c.name}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Switch Role Logic (Visible if user has the ability - mocking for Superuser/Admins) */}
                   {isMapleEmployee && (
                     <div className="px-6 py-3 border-t border-slate-100 bg-slate-50">
-                      <p className="text-[8px] font-black text-red-500 uppercase tracking-[0.2em] mb-3">Persona Switcher (Expert View)</p>
+                      <p className="text-[8px] font-black text-red-500 uppercase tracking-[0.2em] mb-3">Persona Switcher</p>
                       <div className="space-y-1">
                         {MAPLE_TEAM.map(member => (
                           <button 
                             key={member.id}
                             onClick={() => handleSwitchUser(member)}
-                            className={`w-full text-left text-[10px] font-black uppercase p-2 rounded-sm transition-all ${currentUser.id === member.id ? 'bg-red-600 text-white shadow-sm' : 'text-slate-500 hover:bg-white hover:shadow-sm'}`}
+                            className={`w-full text-left text-[10px] font-black uppercase p-2 rounded-sm transition-all ${currentUser.id === member.id ? 'bg-red-600 text-white' : 'text-slate-500 hover:bg-white'}`}
                           >
-                            {member.name} ({member.role.charAt(0)})
+                            {member.name}
                           </button>
                         ))}
                       </div>
@@ -772,10 +668,9 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
 
                   <button 
                     onClick={() => onNavigate('home')}
-                    className="w-full text-left px-6 py-4 border-t border-slate-100 text-xs font-black text-slate-400 hover:text-red-600 transition-colors uppercase tracking-widest flex items-center justify-between group"
+                    className="w-full text-left px-6 py-4 border-t border-slate-100 text-xs font-black text-slate-400 hover:text-red-600 transition-colors uppercase tracking-widest"
                   >
                     Logout System
-                    <span className="group-hover:translate-x-1 transition-transform">→</span>
                   </button>
                 </div>
               </div>
@@ -873,37 +768,6 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
                 <button className="flex-1 py-4 bg-slate-900 text-white font-black uppercase tracking-widest text-xs">Download PDF</button>
                 <button onClick={() => setSelectedInvoice(null)} className="px-8 py-4 border border-slate-200 text-slate-600 font-black uppercase tracking-widest text-xs">Close</button>
               </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Admin Assignment Modal (Superuser only) */}
-      {showAdminAssignModal && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white w-full max-w-md shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
-            <div className="bg-red-600 p-6 flex justify-between items-center text-white">
-              <h3 className="font-black text-lg uppercase tracking-tight">Assign Expert: {showAdminAssignModal.name}</h3>
-              <button onClick={() => setShowAdminAssignModal(null)} className="text-white/70 hover:text-white transition-colors">✕</button>
-            </div>
-            <div className="p-8 space-y-6">
-              <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Select Primary Maple Administrator:</p>
-              <div className="space-y-2">
-                {MAPLE_TEAM.filter(e => e.role === 'Administrator').map(admin => (
-                  <button 
-                    key={admin.id}
-                    onClick={() => updatePrimaryAdmin(showAdminAssignModal.id, admin.id)}
-                    className={`w-full p-4 text-left border-2 flex items-center justify-between transition-all ${showAdminAssignModal.primaryAdminId === admin.id ? 'bg-red-50 border-red-600' : 'bg-white border-slate-100 hover:border-red-200'}`}
-                  >
-                    <div>
-                      <p className="font-black text-slate-900 text-sm">{admin.name}</p>
-                      <p className="text-[10px] text-slate-400 uppercase tracking-widest font-bold">{admin.email}</p>
-                    </div>
-                    {showAdminAssignModal.primaryAdminId === admin.id && <span className="text-red-600 font-black">✓</span>}
-                  </button>
-                ))}
-              </div>
-              <button onClick={() => setShowAdminAssignModal(null)} className="w-full py-4 bg-slate-900 text-white font-black uppercase tracking-widest text-xs">Close Manager</button>
             </div>
           </div>
         </div>

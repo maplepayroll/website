@@ -39,6 +39,9 @@ import BreaksAndEatingPeriodsPage from './pages/BreaksAndEatingPeriodsPage';
 import HolidayDuringVacationPage from './pages/HolidayDuringVacationPage';
 import FormulaManifestPage from './pages/FormulaManifestPage';
 import SalaryContinuancePage from './pages/SalaryContinuancePage';
+import PayrollReviewArticlePage from './pages/PayrollReviewArticlePage';
+import PayrollOperationalAuditPage from './pages/PayrollOperationalAuditPage';
+import AuditManagementPage from './pages/AuditManagementPage';
 
 export type PageType = 
   | 'home' 
@@ -68,16 +71,19 @@ export type PageType =
   | 'payroll-2026-changes'
   | 'breaks-and-eating-periods'
   | 'holiday-during-vacation'
-  | 'salary-continuance';
+  | 'salary-continuance'
+  | 'payroll-review-guide'
+  | 'survey'
+  | 'audit-dashboard';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<PageType>('home');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [contactContext, setContactContext] = useState<string>('');
   const [pendingAnchor, setPendingAnchor] = useState<string | null>(null);
 
   useEffect(() => {
     if (pendingAnchor) {
-      // Small delay to allow component to mount
       const timer = setTimeout(() => {
         const element = document.getElementById(pendingAnchor);
         if (element) {
@@ -93,18 +99,21 @@ const App: React.FC = () => {
 
   const handleNavigate = (page: PageType, context?: string, anchor?: string) => {
     setContactContext(context || '');
-    
-    // If context is provided but no specific anchor, default to contact section for home
     const targetAnchor = anchor || (page === 'home' && context ? 'contact' : null);
-    
     setPendingAnchor(targetAnchor);
     setCurrentPage(page);
+    setIsMobileMenuOpen(false);
   };
 
   return (
     <div className="min-h-screen flex flex-col selection:bg-red-600 selection:text-white">
-      {currentPage !== 'employer-portal' && (
-        <Navbar onNavigate={handleNavigate} currentPage={currentPage} />
+      {currentPage !== 'employer-portal' && currentPage !== 'audit-dashboard' && (
+        <Navbar 
+          onNavigate={handleNavigate} 
+          currentPage={currentPage} 
+          isOpen={isMobileMenuOpen}
+          setIsOpen={setIsMobileMenuOpen}
+        />
       )}
       
       <main className="flex-grow">
@@ -133,12 +142,6 @@ const App: React.FC = () => {
             <AuditServicePage onNavigate={handleNavigate} />
           ) : currentPage === 'calculator' ? (
             <PayrollCalculatorPage onNavigate={handleNavigate} defaultYear={2025} />
-          ) : currentPage === 'calculator-2024' ? (
-            <PayrollCalculatorPage onNavigate={handleNavigate} defaultYear={2024} />
-          ) : currentPage === 'calculator-2025' ? (
-            <PayrollCalculatorPage onNavigate={handleNavigate} defaultYear={2025} />
-          ) : currentPage === 'calculator-2026' ? (
-            <PayrollCalculatorPage onNavigate={handleNavigate} defaultYear={2026} />
           ) : currentPage === 'formula-manifest' ? (
             <FormulaManifestPage onNavigate={handleNavigate} />
           ) : currentPage === 'diy-calculator' ? (
@@ -175,13 +178,19 @@ const App: React.FC = () => {
             <HolidayDuringVacationPage onNavigate={handleNavigate} />
           ) : currentPage === 'salary-continuance' ? (
             <SalaryContinuancePage onNavigate={handleNavigate} />
+          ) : currentPage === 'payroll-review-guide' ? (
+            <PayrollReviewArticlePage onNavigate={handleNavigate} />
+          ) : currentPage === 'survey' ? (
+            <PayrollOperationalAuditPage onNavigate={handleNavigate} />
+          ) : currentPage === 'audit-dashboard' ? (
+            <AuditManagementPage onNavigate={handleNavigate} />
           ) : (
             <VacationPayArticlePage onNavigate={handleNavigate} />
           )}
         </div>
       </main>
 
-      {currentPage !== 'employer-portal' && (
+      {currentPage !== 'employer-portal' && currentPage !== 'audit-dashboard' && !isMobileMenuOpen && (
         <>
           <Footer onNavigate={handleNavigate} />
           <Assistant />

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { PageType } from '../App';
 
@@ -17,7 +16,7 @@ const ResourcesPage: React.FC<ResourcesPageProps> = ({ onNavigate }) => {
       ]
     },
     {
-      title: "Google AI Overview Snippets",
+      title: "Compliance Quick-Glance",
       items: [
         { title: "2026 Rate Changes", desc: "Quick breakdown of YMPE and CPP2 ceilings.", link: 'payroll-2026-changes' as PageType, icon: "📈" },
         { title: "Stat Holiday Map", desc: "Reference guide for 2026 statutory holiday pay.", link: 'public-holidays-2026' as PageType, icon: "🗓️" },
@@ -27,6 +26,7 @@ const ResourcesPage: React.FC<ResourcesPageProps> = ({ onNavigate }) => {
     {
       title: "Expert Compliance",
       items: [
+        { title: "Audit Guardrails", desc: "Why your payroll review needs fixed limits to prevent catastrophic errors.", link: 'payroll-review-guide' as PageType, icon: "🥅", badge: "Strategic" },
         { title: "Vacation Pay Trap", desc: "The #1 compliance risk for salaried and commission staff.", link: 'vacation-pay-article' as PageType, icon: "🏖️" },
         { title: "Salary Continuance", desc: "The legal and tax rules for paying severance over time.", link: 'salary-continuance' as PageType, icon: "🌉" },
         { title: "Taxable Benefits", desc: "CRA rules on perks, parking, and non-cash gifts.", link: 'taxable-benefits' as PageType, icon: "💎" },
@@ -41,7 +41,7 @@ const ResourcesPage: React.FC<ResourcesPageProps> = ({ onNavigate }) => {
         <div className="absolute top-0 right-0 w-96 h-96 bg-red-600/10 rounded-full blur-3xl -mr-48 -mt-48"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center px-3 py-1 bg-red-600 text-white text-[10px] font-black uppercase tracking-[0.4em] mb-6">Certified Repository</div>
+            <div className="inline-flex items-center px-3 py-1 bg-red-600 text-white text-[10px] font-black uppercase tracking-widest mb-6">Certified Repository</div>
             <h1 className="text-4xl lg:text-7xl font-black text-white uppercase tracking-tighter leading-none mb-6">
               Expert <br/> <span className="text-red-600">Resources.</span>
             </h1>

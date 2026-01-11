@@ -58,7 +58,10 @@ const PayrollCalculatorPage: React.FC<PayrollCalculatorPageProps> = ({ onNavigat
     script.type = 'application/ld+json';
     script.innerHTML = JSON.stringify(schemaData);
     document.head.appendChild(script);
-    return () => { document.head.removeChild(script); };
+    return () => { 
+      const existing = document.head.querySelector('script[type="application/ld+json"]');
+      if (existing) document.head.removeChild(existing); 
+    };
   }, []);
 
   const results = useMemo(() => {
@@ -83,8 +86,28 @@ const PayrollCalculatorPage: React.FC<PayrollCalculatorPageProps> = ({ onNavigat
 
   const calculatorFaqs = [
     {
+      q: "What is CPP2 and why is it showing up in my 2025/2026 results?",
+      a: "CPP2 is the second tier of the Canada Pension Plan enhancement. It applies a 4% employee and 4% employer contribution only on earnings between the first ceiling (YMPE) and the second ceiling (YAMPE). Our calculator automatically triggers this once your projected annual income exceeds approximately $71,300."
+    },
+    {
+      q: "Does this calculator handle the Basic Personal Amount (BPA) clawback?",
+      a: "Yes. For high earners (typically over $181,232 in 2025), the Federal BPA is gradually reduced. This calculator uses the specific CRA step-down formula to ensure your tax estimates remain accurate for six-figure salaries."
+    },
+    {
+      q: "Why are the results for Quebec different from other provinces?",
+      a: "Quebec manages its own pension plan (QPP) and parental insurance (QPIP) which have different rates and ceilings than the federal CPP and EI. Furthermore, Quebec income tax is not integrated with the federal return in the same way, requiring separate T2 calculation logic which this tool supports."
+    },
+    {
+      q: "What is the Ontario Health Premium (OHP)?",
+      a: "The OHP is a provincial tax applied to individuals with taxable income above $20,000. It is collected through the payroll system. This calculator includes the graduated OHP rates (up to $900/year) for all Ontario-based calculations."
+    },
+    {
       q: "What is the difference between 'Accrued' and 'Paid per Cycle' vacation pay?",
       a: "'Accrued' means your vacation pay is banked and paid out only when you take time off or leave the company (common for salary). 'Paid per Cycle' means you receive the 4% or 6% on every single paycheque (common for hourly or part-time staff)."
+    },
+    {
+      q: "Can I use this for my year-end T4 reconciliation?",
+      a: "While this tool is highly accurate, it is for estimation and projection. Year-end T4s require a full audit of every single pay run throughout the year to account for mid-year rate changes or status updates. Maple's managed service includes a full white-glove T4 audit as part of our core offering."
     },
     {
       q: "What are examples of 'After-Tax Deductions'?",
@@ -116,8 +139,7 @@ const PayrollCalculatorPage: React.FC<PayrollCalculatorPageProps> = ({ onNavigat
             </div>
             <h1 className="text-4xl lg:text-[5.5rem] font-black text-white mb-8 leading-[0.9] tracking-tighter uppercase">
               Free Canadian <br/>
-              Payroll Calculator <br/>
-              <span className="text-red-500">2025 & 2026.</span>
+              <span className="text-red-500">Payroll Calculator.</span>
             </h1>
             
             <div className="bg-white/5 backdrop-blur-sm border-l-4 border-red-600 p-6 mb-10 max-w-2xl">

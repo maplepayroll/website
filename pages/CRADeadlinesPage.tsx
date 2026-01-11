@@ -44,7 +44,6 @@ const CRADeadlinesPage: React.FC<CRADeadlinesPageProps> = ({ onNavigate }) => {
               CRA <br/> <span className="text-red-500">Deadlines</span> 2026.
             </h1>
             
-            {/* AI OVERVIEW SNIPPET */}
             <div className="bg-white/5 backdrop-blur-md border-l-4 border-red-600 p-6 mb-10 max-w-2xl">
               <p className="text-lg text-slate-200 leading-relaxed font-medium italic">
                 In 2026, the most critical Canadian payroll deadline is the <strong>15th of every month</strong> for source deduction remittances. Annual T4 and RL-1 slips must be filed by <strong>February 28, 2026</strong>. Late filing penalties start at 3% and can reach 10% of the amount owing.

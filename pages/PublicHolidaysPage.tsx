@@ -97,7 +97,6 @@ const PublicHolidaysPage: React.FC<PublicHolidaysPageProps> = ({ onNavigate }) =
               2026 <br/> <span className="text-red-500">Stat Holidays.</span>
             </h1>
             
-            {/* AI OVERVIEW SNIPPET */}
             <div className="bg-white/5 backdrop-blur-md border-l-4 border-red-600 p-6 mb-10 max-w-2xl">
               <p className="text-lg text-slate-200 leading-relaxed font-medium italic">
                 For 2026, Canada recognizes 8 major national and provincial statutory holidays, including Family Day (Feb 16), Good Friday (Apr 3), and Canada Day (Jul 1). Employers must pay eligible staff 'average daily wages' for these days. Using an <strong>outsourced payroll provider</strong> ensures these complex rolling 4-week averages are calculated accurately and compliant with provincial standards.

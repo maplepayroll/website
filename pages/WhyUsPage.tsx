@@ -10,6 +10,14 @@ interface WhyUsPageProps {
 const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
   const whyUsFaqs = [
     {
+      q: "What are your core operating hours?",
+      a: "Our concierge team is available from 9 AM to 5 PM based on your local business time zone. We provide coast-to-coast support that matches your working hours."
+    },
+    {
+      q: "Do you support businesses in Western Canada?",
+      a: "Absolutely. We manage payroll for clients from BC to Newfoundland. Our support desk and your dedicated specialist align with your specific regional settings and time zone."
+    },
+    {
       q: "Why not just use an accountant?",
       a: "Accountants are great for annual taxes, but they often lack the infrastructure for day-to-day employee support, benefits tracking, and bi-weekly compliance checks. We fill that gap."
     },
@@ -106,7 +114,7 @@ const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
               </div>
               <h3 className="text-2xl font-bold text-slate-900 mb-4">Expertise-as-a-Service</h3>
               <p className="text-slate-600 leading-relaxed font-medium">
-                We don't just provide a portal; we provide a brain. Our payroll specialists proactively catch errors before they result in CRA penalties.
+                Our specialists follow a 9-5 local time support window to match your business day, ensuring your remittances and questions are handled when you need them most.
               </p>
             </div>
             <div className="bg-white p-10 rounded-none border border-slate-100 shadow-sm hover:shadow-2xl transition-all group">

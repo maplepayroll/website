@@ -9,6 +9,11 @@ const ICPSection: React.FC = () => {
       img: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800&h=600"
     },
     {
+      title: "Restaurants & Hospitality",
+      desc: "High-volume teams with seasonal surges. We manage complex tip compliance, statutory holiday pay math, and high-turnover ROE filings.",
+      img: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&q=80&w=800&h=600"
+    },
+    {
       title: "The Growing 15",
       desc: "When you hit 15+ employees, DIY payroll usually starts to break. We give you the professional department you now need to scale smoothly.",
       img: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800&h=600"
@@ -28,11 +33,11 @@ const ICPSection: React.FC = () => {
           <p className="text-lg text-slate-600 font-medium">We really shine when working with these types of businesses.</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {icps.map((item, i) => (
-            <div key={i} className="group rounded-none overflow-hidden border border-slate-100 bg-slate-50 hover:bg-white hover:shadow-xl transition-all duration-300">
+            <div key={i} className="group rounded-none overflow-hidden border border-slate-100 bg-slate-50 hover:bg-white hover:shadow-xl transition-all duration-300 flex flex-col">
               <img src={item.img} alt={item.title} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500 rounded-none" />
-              <div className="p-8">
+              <div className="p-8 flex-grow">
                 <h3 className="text-xl font-bold text-slate-900 mb-4">{item.title}</h3>
                 <p className="text-slate-600 text-sm leading-relaxed font-medium">{item.desc}</p>
               </div>

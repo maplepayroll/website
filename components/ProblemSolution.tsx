@@ -3,57 +3,50 @@ import React from 'react';
 
 const ProblemSolution: React.FC = () => {
   return (
-    <section className="py-16 bg-slate-50">
+    <section className="py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-6 uppercase tracking-tighter">
-            SOFTWARE HANDLES THE MATH. <br/><span className="text-red-600">WE HANDLE THE HEADACHES.</span>
-          </h2>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto font-medium">
-            Most payroll software still leaves you with a part-time job. We step in to do the work, so you don't have to.
+        <div className="max-w-3xl mb-24">
+          <h2 className="text-xs font-black text-red-600 uppercase tracking-[0.4em] mb-6">The Efficiency Gap</h2>
+          <h3 className="text-4xl lg:text-6xl font-black text-slate-900 uppercase tracking-tighter leading-none mb-8">
+            Software isn't <br/><span className="text-slate-400">the whole solution.</span>
+          </h3>
+          <p className="text-xl text-slate-500 font-medium leading-relaxed">
+            Most payroll tools still leave you with a part-time job as a data-entry clerk. Maple steps in to actually <span className="text-slate-900 font-bold italic">do the work</span> for you.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-stretch">
-          <div className="bg-white p-10 lg:p-14 rounded-none border border-slate-200 shadow-sm relative overflow-hidden group hover:shadow-lg transition-all">
-            <div className="absolute top-0 right-0 bg-slate-400 text-white px-6 py-2 text-[10px] font-black uppercase tracking-[0.2em]">The Old Way</div>
-            <h3 className="text-3xl font-black text-slate-900 mb-10 uppercase tracking-tight">The Admin Burden</h3>
-            <ul className="space-y-6">
+        <div className="grid lg:grid-cols-2 gap-4">
+          <div className="bg-slate-50 p-12 lg:p-20 relative overflow-hidden">
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-12">The DIY Burden</p>
+            <ul className="space-y-10">
               {[
-                "Answering 'Why is my net pay different?' over dinner",
-                "Chasing down banking info for every new hire",
-                "Panicking over CRA deadlines every single month",
-                "Second-guessing your stat holiday pay math",
-                "Wrestling with ROEs when someone moves on",
-                "Handling a CRA audit entirely on your own"
+                { t: "The Sunday Night Slog", d: "You spend hours verifying timesheets and banking info." },
+                { t: "The Support Desk", d: "Your staff calls YOU with their T4 and tax questions." },
+                { t: "The Compliance Trap", d: "You cross your fingers every time you file with the CRA." }
               ].map((item, i) => (
-                <li key={i} className="flex items-start gap-4 text-slate-600 font-medium text-lg leading-tight">
-                  <svg className="w-6 h-6 text-red-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                  <span>{item}</span>
+                <li key={i} className="group">
+                  <h4 className="text-lg font-black text-slate-400 uppercase tracking-tight mb-2 group-hover:text-slate-900 transition-colors">{item.t}</h4>
+                  <p className="text-slate-500 font-medium text-sm leading-relaxed">{item.d}</p>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="bg-slate-900 p-10 lg:p-14 rounded-none border border-slate-800 shadow-2xl relative overflow-hidden group transform hover:scale-[1.02] transition-transform">
-            <div className="absolute top-0 right-0 bg-red-600 text-white px-6 py-2 text-[10px] font-black uppercase tracking-[0.2em]">The Maple Way</div>
-            <h3 className="text-3xl font-black text-white mb-10 uppercase tracking-tight">Real Human Support</h3>
-            <ul className="space-y-6">
+          <div className="bg-slate-900 p-12 lg:p-20 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-red-600/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
+            <p className="text-[10px] font-black text-red-500 uppercase tracking-widest mb-12">The Maple Managed Way</p>
+            <ul className="space-y-10 relative z-10">
               {[
-                "Your staff calls us with their questions, not you",
-                "We handle the forms and filings for every new teammate",
-                "CRA remittances are filed and guaranteed on time",
-                "We reconcile your benefits bills automatically",
-                "ROEs and final pay handled within 24 hours",
-                "We act as your authorized representative with the CRA"
+                { t: "Total Hands-Off", d: "You send us a quick update. We handle the data entry and the math." },
+                { t: "Dedicated Concierge", d: "Your staff calls US. You never hear a payroll question again." },
+                { t: "Guaranteed Compliance", d: "We take full legal liability for the accuracy of every filing." }
               ].map((item, i) => (
-                <li key={i} className="flex items-start gap-4 text-slate-300 font-medium text-lg leading-tight">
-                  <svg className="w-6 h-6 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span>{item}</span>
+                <li key={i}>
+                  <h4 className="text-lg font-black text-white uppercase tracking-tight mb-2 flex items-center gap-3">
+                    <span className="w-1.5 h-1.5 bg-red-600 rounded-full"></span>
+                    {item.t}
+                  </h4>
+                  <p className="text-slate-400 font-medium text-sm leading-relaxed ml-4.5">{item.d}</p>
                 </li>
               ))}
             </ul>

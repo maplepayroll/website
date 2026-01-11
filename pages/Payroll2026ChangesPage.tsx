@@ -70,7 +70,7 @@ const Payroll2026ChangesPage: React.FC<Payroll2026ChangesPageProps> = ({ onNavig
     <div className="bg-white">
       <section className="relative min-h-[80vh] flex items-center overflow-hidden bg-slate-900">
         <div className="absolute inset-0 z-0">
-          <img src="https://images.unsplash.com/photo-1554224155-1696413565d3?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover opacity-40" alt="2026 Changes" />
+          <img src="https://images.unsplash.com/photo-1554224153-b6bda4e38+f71?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover opacity-40" alt="2026 Changes" />
           <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/90 to-transparent"></div>
           <div className="absolute top-0 left-0 w-2 h-full bg-red-600 z-20"></div>
         </div>

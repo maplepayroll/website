@@ -23,6 +23,12 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
       desc: "For payrolls submitted less than 3 business days before the pay date. Ensures same-day or next-day direct deposit."
     },
     {
+      title: "After-Hours Support",
+      price: "$150.00",
+      unit: "/ hour",
+      desc: "Standard concierge hours are 9 AM to 5 PM client local time. Services requested outside these window are billed at a premium rate."
+    },
+    {
       title: "Year-End Amendments",
       price: "$100.00",
       unit: "/ emp (min $500)",
@@ -43,6 +49,18 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
   ];
 
   const pricingFaqs = [
+    {
+      q: "What are your standard support hours?",
+      a: "Our core concierge services are available from 9 AM to 5 PM in your local business time zone. We align our support with your working day."
+    },
+    {
+      q: "What if my business is in a different time zone?",
+      a: "We support clients across all Canadian time zones. Whether you are in BC, Alberta, or the Maritimes, your dedicated specialist follows your local 9-5 window."
+    },
+    {
+      q: "Are there fees for work outside of standard hours?",
+      a: "Yes. Any processing or support requested outside of your local 9 AM to 5 PM window is subject to an after-hours premium fee to ensure specialist availability."
+    },
     {
       q: "Is there a setup fee?",
       a: "Our standard setup fee is $250, which covers data migration from your previous provider, CRA authorization, and parallel testing. This fee is waived for annual contracts."
@@ -103,7 +121,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
             alt="Transparent Payroll Pricing" 
             className="w-full h-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/90 to-transparent"></div>
           <div className="absolute top-0 left-0 w-2 h-full bg-red-600 z-20"></div>
         </div>
         
