@@ -16,14 +16,15 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-slate-900">
-      {/* Visual Background Element - Brighter restaurant kitchen scene */}
+      {/* Visual Background Element - Fun, collaborative office team */}
       <div className="absolute top-0 right-0 w-full lg:w-3/5 h-full z-0">
         <img 
-          src="https://images.unsplash.com/photo-1581299894007-aaa50297cf16?auto=format&fit=crop&q=80&w=2000" 
-          alt="Professional Restaurant Kitchen Staff" 
-          className="w-full h-full object-cover opacity-60"
+          src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=2000" 
+          alt="Happy, productive office team collaborating" 
+          className="w-full h-full object-cover opacity-90"
         />
-        <div className="absolute inset-0 bg-gradient-to-r lg:bg-gradient-to-l from-slate-900/0 via-slate-900/60 to-slate-900"></div>
+        {/* Lighter gradient to ensure image brightness while keeping text readable. Dark on left, transparent on right. */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/60 to-transparent"></div>
       </div>
 
       {/* Red accent line for consistency with other high-end pages */}

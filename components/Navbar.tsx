@@ -72,17 +72,24 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, isOpen, setIsO
               </button>
             ))}
             
-            <div className="flex items-center gap-5 pl-6 border-l border-slate-200/20">
+            <div className="flex items-center gap-4 pl-6 border-l border-slate-200/20">
               <button 
                 onClick={() => onNavigate('employer-portal')}
-                className={`text-xs font-black uppercase tracking-widest transition-colors ${scrolled ? 'text-slate-900 hover:text-red-600' : 'text-white hover:text-white/80'}`}
+                className={`px-6 py-2.5 text-[10px] font-black uppercase tracking-widest transition-all border-2 rounded-none ${
+                  scrolled 
+                    ? 'border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white' 
+                    : 'border-white/30 text-white hover:bg-white hover:text-slate-900'
+                }`}
               >
                 Login
               </button>
-              <span className={`h-4 w-px ${scrolled ? 'bg-slate-300' : 'bg-white/30'}`}></span>
               <button 
                 onClick={() => onNavigate('signup')} 
-                className={`px-6 py-3 rounded-none text-xs font-black uppercase tracking-widest transition-all ${scrolled ? 'bg-red-600 text-white hover:bg-red-700' : 'bg-white text-slate-900 hover:bg-slate-50'}`}
+                className={`px-6 py-3 rounded-none text-xs font-black uppercase tracking-widest transition-all shadow-lg ${
+                  scrolled 
+                    ? 'bg-red-600 text-white hover:bg-red-700' 
+                    : 'bg-white text-slate-900 hover:bg-slate-50'
+                }`}
               >
                 Sign Up
               </button>

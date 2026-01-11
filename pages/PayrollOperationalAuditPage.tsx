@@ -160,9 +160,10 @@ const PayrollOperationalAuditPage: React.FC<PayrollOperationalAuditPageProps> = 
     setStatus('success');
   };
 
-  const inputClasses = "w-full px-6 py-4 bg-white border-2 border-slate-100 rounded-none text-slate-900 font-bold placeholder-slate-300 focus:border-red-600 outline-none transition-all shadow-sm";
-  const labelClasses = "block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3";
-  const sectionTitleClasses = "text-2xl font-black text-slate-900 uppercase tracking-tight mb-10 pb-4 border-b-4 border-slate-100 inline-block";
+  // High Contrast Style Definitions
+  const inputClasses = "w-full px-6 py-4 bg-white border-2 border-slate-300 rounded-none text-slate-900 font-bold placeholder-slate-500 focus:border-red-600 outline-none transition-all shadow-sm focus:shadow-md";
+  const labelClasses = "block text-[11px] font-black text-slate-800 uppercase tracking-widest mb-3";
+  const sectionTitleClasses = "text-2xl font-black text-slate-900 uppercase tracking-tight mb-10 pb-4 border-b-4 border-slate-200 inline-block";
 
   if (status === 'success') {
     return (
@@ -313,26 +314,26 @@ const PayrollOperationalAuditPage: React.FC<PayrollOperationalAuditPageProps> = 
               {formData.hasUnions === 'Yes' && (
                 <div className="mb-12 animate-in slide-in-from-top-4 duration-500">
                   <label className={labelClasses}>Collective Agreements (Select all that apply)</label>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 bg-slate-50 p-8 border border-slate-100">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 bg-slate-50 p-8 border-2 border-slate-200">
                     {COMMON_UNIONS.map(u => (
                       <label key={u} className="flex items-center gap-3 cursor-pointer group">
                         <input 
                           type="checkbox" 
-                          className="w-4 h-4 accent-red-600"
+                          className="w-5 h-5 accent-red-600"
                           checked={formData.selectedUnions.includes(u)}
                           onChange={() => handleUnionToggle(u)}
                         />
-                        <span className="text-[10px] font-bold text-slate-500 uppercase group-hover:text-slate-900 transition-colors">{u}</span>
+                        <span className="text-[11px] font-bold text-slate-700 uppercase group-hover:text-slate-900 transition-colors">{u}</span>
                       </label>
                     ))}
                     <label className="flex items-center gap-3 cursor-pointer group">
                       <input 
                         type="checkbox" 
-                        className="w-4 h-4 accent-red-600"
+                        className="w-5 h-5 accent-red-600"
                         checked={formData.selectedUnions.includes('Other')}
                         onChange={() => handleUnionToggle('Other')}
                       />
-                      <span className="text-[10px] font-bold text-slate-500 uppercase group-hover:text-slate-900 transition-colors">Other (Specify)</span>
+                      <span className="text-[11px] font-bold text-slate-700 uppercase group-hover:text-slate-900 transition-colors">Other (Specify)</span>
                     </label>
                   </div>
                   {formData.selectedUnions.includes('Other') && (
@@ -349,11 +350,11 @@ const PayrollOperationalAuditPage: React.FC<PayrollOperationalAuditPageProps> = 
                 </div>
               )}
 
-              <div className="mb-12 bg-red-50 p-8 border border-red-100">
-                <label className="block text-[10px] font-black text-red-600 uppercase tracking-widest mb-3">Risk History Profile</label>
+              <div className="mb-12 bg-red-50 p-8 border-2 border-red-100">
+                <label className="block text-[11px] font-black text-red-700 uppercase tracking-widest mb-3">Risk History Profile</label>
                 <div className="flex flex-col md:flex-row gap-8 items-center">
                    <div className="flex-1">
-                      <p className="text-xs font-bold text-slate-700 leading-relaxed mb-4">Have you received any CRA or Provincial payroll-related penalties/notices in the last 24 months?</p>
+                      <p className="text-sm font-bold text-slate-800 leading-relaxed mb-4">Have you received any CRA or Provincial payroll-related penalties/notices in the last 24 months?</p>
                       <select value={formData.hasHadPenalties} onChange={e => update('hasHadPenalties', e.target.value)} className={inputClasses}>
                         <option>No</option>
                         <option>Yes (Minor Notices)</option>
@@ -365,12 +366,12 @@ const PayrollOperationalAuditPage: React.FC<PayrollOperationalAuditPageProps> = 
 
               <div>
                 <label className={labelClasses}>Jurisdictional Footprint (Provinces/Territories)</label>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 bg-slate-50 p-8 border border-slate-100">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 bg-slate-50 p-8 border-2 border-slate-200">
                   {PROVINCES.map(p => (
                     <label key={p.name} className="flex items-center gap-3 cursor-pointer group">
                       <input 
                         type="checkbox" 
-                        className="w-4 h-4 accent-red-600"
+                        className="w-5 h-5 accent-red-600"
                         checked={formData.jurisdictions.includes(p.name)}
                         onChange={e => {
                           const list = e.target.checked 
@@ -379,7 +380,7 @@ const PayrollOperationalAuditPage: React.FC<PayrollOperationalAuditPageProps> = 
                           update('jurisdictions', list);
                         }}
                       />
-                      <span className="text-[10px] font-bold text-slate-500 uppercase group-hover:text-slate-900 transition-colors">{p.name}</span>
+                      <span className="text-[11px] font-bold text-slate-700 uppercase group-hover:text-slate-900 transition-colors">{p.name}</span>
                     </label>
                   ))}
                 </div>
@@ -431,18 +432,18 @@ const PayrollOperationalAuditPage: React.FC<PayrollOperationalAuditPageProps> = 
                 <div className="bg-slate-900 p-8 text-white">
                   <div className="grid md:grid-cols-2 gap-8">
                     <div>
-                      <p className="text-[10px] font-black text-red-500 uppercase tracking-widest mb-3">Benefits Reconciliation Audit</p>
-                      <p className="text-xs text-slate-400 mb-6">Do you manually reconcile your monthly insurance invoices (e.g. SunLife/Manulife) against your active payroll?</p>
-                      <select value={formData.reconcilesBenefits} onChange={e => update('reconcilesBenefits', e.target.value)} className="w-full px-6 py-4 bg-white/5 border-2 border-white/10 rounded-none text-white font-bold outline-none">
+                      <p className="text-[11px] font-black text-red-500 uppercase tracking-widest mb-3">Benefits Reconciliation Audit</p>
+                      <p className="text-sm text-slate-300 mb-6">Do you manually reconcile your monthly insurance invoices (e.g. SunLife/Manulife) against your active payroll?</p>
+                      <select value={formData.reconcilesBenefits} onChange={e => update('reconcilesBenefits', e.target.value)} className="w-full px-6 py-4 bg-white/5 border-2 border-white/20 rounded-none text-white font-bold outline-none hover:bg-white/10 transition-colors">
                         <option className="bg-slate-900">No, we trust the billing is correct</option>
                         <option className="bg-slate-900">Yes, it's a manual monthly task</option>
                         <option className="bg-slate-900">It happens sporadically</option>
                       </select>
                     </div>
                     <div>
-                      <p className="text-[10px] font-black text-red-500 uppercase tracking-widest mb-3">Data Distribution Method</p>
-                      <p className="text-xs text-slate-400 mb-6">How are sensitive employee pay stubs and T4s currently delivered to your workforce?</p>
-                      <select value={formData.stubDistributionMethod} onChange={e => update('stubDistributionMethod', e.target.value)} className="w-full px-6 py-4 bg-white/5 border-2 border-white/10 rounded-none text-white font-bold outline-none">
+                      <p className="text-[11px] font-black text-red-500 uppercase tracking-widest mb-3">Data Distribution Method</p>
+                      <p className="text-sm text-slate-300 mb-6">How are sensitive employee pay stubs and T4s currently delivered to your workforce?</p>
+                      <select value={formData.stubDistributionMethod} onChange={e => update('stubDistributionMethod', e.target.value)} className="w-full px-6 py-4 bg-white/5 border-2 border-white/20 rounded-none text-white font-bold outline-none hover:bg-white/10 transition-colors">
                         <option className="bg-slate-900">Online Secure Portal</option>
                         <option className="bg-slate-900">Encrypted Email</option>
                         <option className="bg-slate-900">Unencrypted Email Attachment</option>
@@ -453,12 +454,12 @@ const PayrollOperationalAuditPage: React.FC<PayrollOperationalAuditPageProps> = 
                 </div>
                 
                 <div className="grid md:grid-cols-2 gap-8">
-                  <div className="bg-green-50/50 p-8 border border-green-100">
-                    <label className="block text-[10px] font-black text-green-600 uppercase tracking-widest mb-3">Operational Strengths (What works well?)</label>
+                  <div className="bg-green-50/50 p-8 border-2 border-green-200">
+                    <label className="block text-[11px] font-black text-green-700 uppercase tracking-widest mb-3">Operational Strengths (What works well?)</label>
                     <textarea value={formData.likes} onChange={e => update('likes', e.target.value)} className={`${inputClasses} h-32 resize-none`} placeholder="Three aspects you enjoy..." />
                   </div>
-                  <div className="bg-red-50/50 p-8 border border-red-100">
-                    <label className="block text-[10px] font-black text-red-600 uppercase tracking-widest mb-3">Operational Friction (Frustrations?)</label>
+                  <div className="bg-red-50/50 p-8 border-2 border-red-200">
+                    <label className="block text-[11px] font-black text-red-700 uppercase tracking-widest mb-3">Operational Friction (Frustrations?)</label>
                     <textarea value={formData.dislikes} onChange={e => update('dislikes', e.target.value)} className={`${inputClasses} h-32 resize-none`} placeholder="Three pain points..." />
                   </div>
                 </div>
@@ -506,9 +507,9 @@ const PayrollOperationalAuditPage: React.FC<PayrollOperationalAuditPageProps> = 
                   <textarea value={formData.approvalWorkflow} onChange={e => update('approvalWorkflow', e.target.value)} className={`${inputClasses} h-32 resize-none`} placeholder="Describe the steps for final sign-off..." />
                 </div>
                 <div className="bg-slate-900 p-10 border-l-8 border-red-600 text-white">
-                  <label className="block text-[10px] font-black text-red-500 uppercase tracking-widest mb-3">Core Strategic Focus (Outside of Payroll)</label>
-                  <p className="text-slate-400 text-xs font-medium mb-6">What primary responsibilities occupy your time when you are not managing payroll?</p>
-                  <textarea value={formData.otherResponsibilities} onChange={e => update('otherResponsibilities', e.target.value)} className="w-full px-6 py-4 bg-white/5 border-2 border-white/10 rounded-none text-white font-bold placeholder-white/10 focus:border-red-600 outline-none transition-all shadow-sm h-32 resize-none" placeholder="e.g. Revenue strategy, legal, recruitment..." />
+                  <label className="block text-[11px] font-black text-red-500 uppercase tracking-widest mb-3">Core Strategic Focus (Outside of Payroll)</label>
+                  <p className="text-slate-300 text-sm font-medium mb-6">What primary responsibilities occupy your time when you are not managing payroll?</p>
+                  <textarea value={formData.otherResponsibilities} onChange={e => update('otherResponsibilities', e.target.value)} className="w-full px-6 py-4 bg-white/5 border-2 border-white/20 rounded-none text-white font-bold placeholder-white/20 focus:border-red-600 outline-none transition-all shadow-sm h-32 resize-none" placeholder="e.g. Revenue strategy, legal, recruitment..." />
                 </div>
               </div>
 
@@ -532,7 +533,7 @@ const PayrollOperationalAuditPage: React.FC<PayrollOperationalAuditPageProps> = 
             {/* Section 5: Manuality & Statutory Friction Audit */}
             <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-400">
               <h2 className={sectionTitleClasses}>05. Manuality & Friction Audit</h2>
-              <p className="text-slate-500 text-sm font-medium mb-12 leading-relaxed">
+              <p className="text-slate-600 text-sm font-bold mb-12 leading-relaxed">
                 Many businesses underestimate the time spent on "Shadow Admin" tasks. Please specify the manuality level of these critical statutory processes.
               </p>
               
@@ -578,9 +579,9 @@ const PayrollOperationalAuditPage: React.FC<PayrollOperationalAuditPageProps> = 
                 </div>
               </div>
 
-              <div className="bg-red-50 p-10 border border-red-100">
-                <label className="block text-[10px] font-black text-red-600 uppercase tracking-widest mb-3 text-center">Funds Distribution & Payment Execution</label>
-                <p className="text-slate-700 text-xs font-bold text-center mb-8">How are funds physically moved to your employees' bank accounts?</p>
+              <div className="bg-red-50 p-10 border-2 border-red-100">
+                <label className="block text-[11px] font-black text-red-700 uppercase tracking-widest mb-3 text-center">Funds Distribution & Payment Execution</label>
+                <p className="text-slate-800 text-sm font-bold text-center mb-8">How are funds physically moved to your employees' bank accounts?</p>
                 <div className="grid md:grid-cols-3 gap-4">
                    {[
                      { id: 'Software EFT', label: 'Direct EFT via Software', desc: 'Money moves automatically from our bank.' },
@@ -591,18 +592,18 @@ const PayrollOperationalAuditPage: React.FC<PayrollOperationalAuditPageProps> = 
                        key={opt.id}
                        type="button"
                        onClick={() => update('paymentExecution', opt.id)}
-                       className={`p-6 border-2 transition-all text-left group ${formData.paymentExecution === opt.id ? 'bg-white border-red-600 shadow-lg' : 'bg-white/50 border-slate-200 hover:border-red-200'}`}
+                       className={`p-6 border-2 transition-all text-left group ${formData.paymentExecution === opt.id ? 'bg-white border-red-600 shadow-xl scale-[1.02]' : 'bg-white border-slate-300 hover:border-red-300'}`}
                      >
                        <p className="font-black text-slate-900 uppercase text-[11px] mb-2">{opt.label}</p>
-                       <p className="text-[10px] text-slate-500 font-medium leading-tight">{opt.desc}</p>
+                       <p className="text-[11px] text-slate-600 font-medium leading-tight">{opt.desc}</p>
                      </button>
                    ))}
                 </div>
               </div>
 
-              <div className="mt-16 bg-slate-50 p-10 border border-slate-100 flex flex-col items-center text-center">
+              <div className="mt-16 bg-slate-50 p-10 border-2 border-slate-200 flex flex-col items-center text-center">
                  <h3 className="text-xl font-black text-slate-900 uppercase mb-4">Final Infrastructure Notes</h3>
-                 <p className="text-slate-500 text-sm font-medium mb-8 max-w-lg">Any additional context or internal opinions on your current payroll setup that we should be aware of?</p>
+                 <p className="text-slate-600 text-sm font-bold mb-8 max-w-lg">Any additional context or internal opinions on your current payroll setup that we should be aware of?</p>
                  <textarea value={formData.additionalOpinion} onChange={e => update('additionalOpinion', e.target.value)} className={`${inputClasses} h-32 resize-none`} placeholder="Global thoughts on efficiency or risks..." />
               </div>
             </div>
@@ -610,7 +611,7 @@ const PayrollOperationalAuditPage: React.FC<PayrollOperationalAuditPageProps> = 
             {/* Section 6: Next Steps & Consultation */}
             <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-500">
               <h2 className={sectionTitleClasses}>06. Next Steps & Consultation</h2>
-              <p className="text-slate-500 text-sm font-medium mb-12 leading-relaxed">
+              <p className="text-slate-600 text-sm font-bold mb-12 leading-relaxed">
                 We will automatically send a high-fidelity copy of this operational audit report to <strong>{formData.email || '[email not yet provided]'}</strong>. 
                 Our senior specialists are also available to provide a professional analysis of your current infrastructure.
               </p>
@@ -628,10 +629,10 @@ const PayrollOperationalAuditPage: React.FC<PayrollOperationalAuditPageProps> = 
                           key={opt.id}
                           type="button"
                           onClick={() => update('interestLevel', opt.id)}
-                          className={`p-6 border-2 transition-all text-left group ${formData.interestLevel === opt.id ? 'bg-slate-900 text-white border-slate-900 shadow-lg' : 'bg-white border-slate-100 hover:border-red-200'}`}
+                          className={`p-6 border-2 transition-all text-left group ${formData.interestLevel === opt.id ? 'bg-slate-900 text-white border-slate-900 shadow-xl scale-[1.02]' : 'bg-white border-slate-300 hover:border-red-300'}`}
                         >
                           <p className={`font-black uppercase text-[11px] mb-2 ${formData.interestLevel === opt.id ? 'text-white' : 'text-slate-900'}`}>{opt.label}</p>
-                          <p className={`text-[10px] font-medium leading-tight ${formData.interestLevel === opt.id ? 'text-slate-400' : 'text-slate-500'}`}>{opt.desc}</p>
+                          <p className={`text-[11px] font-bold leading-tight ${formData.interestLevel === opt.id ? 'text-slate-300' : 'text-slate-600'}`}>{opt.desc}</p>
                         </button>
                       ))}
                    </div>
@@ -648,41 +649,54 @@ const PayrollOperationalAuditPage: React.FC<PayrollOperationalAuditPageProps> = 
                           </select>
                        </div>
                        <div>
-                          <label className={labelClasses}>Direct Phone Number (If Phone Selected)</label>
-                          <input 
-                            type="tel" 
-                            value={formData.contactPhone} 
-                            onChange={e => update('contactPhone', e.target.value)} 
-                            className={inputClasses} 
-                            placeholder="(416) 000-0000" 
-                            required={formData.contactMethod === 'Phone Call'}
-                          />
+                          <label className={labelClasses}>
+                            {formData.contactMethod === 'Phone Call' ? 'Direct Phone Number' : 'Contact Email Address'}
+                          </label>
+                          {formData.contactMethod === 'Phone Call' ? (
+                            <input 
+                              type="tel" 
+                              value={formData.contactPhone} 
+                              onChange={e => update('contactPhone', e.target.value)} 
+                              className={inputClasses} 
+                              placeholder="(416) 000-0000" 
+                              required={formData.contactMethod === 'Phone Call'}
+                            />
+                          ) : (
+                            <input 
+                              type="email" 
+                              value={formData.email} 
+                              onChange={e => update('email', e.target.value)} 
+                              className={inputClasses} 
+                              placeholder="alex@company.ca" 
+                              required={formData.contactMethod === 'Email'}
+                            />
+                          )}
                        </div>
                     </div>
 
                     <div>
                       <label className={labelClasses}>Best Times for Consultation (Select all that apply)</label>
-                      <div className="bg-slate-50 border border-slate-200 overflow-hidden">
+                      <div className="bg-slate-50 border-2 border-slate-300 overflow-hidden">
                         <table className="w-full text-center border-collapse">
                           <thead>
-                             <tr className="bg-slate-100 border-b border-slate-200">
-                               <th className="p-4 text-[10px] font-black text-slate-400 uppercase tracking-widest text-left border-r border-slate-200">Window</th>
+                             <tr className="bg-slate-100 border-b-2 border-slate-300">
+                               <th className="p-4 text-[11px] font-black text-slate-700 uppercase tracking-widest text-left border-r-2 border-slate-300">Window</th>
                                {DAYS.map(day => (
-                                 <th key={day} className="p-4 text-[10px] font-black text-slate-900 uppercase tracking-widest">{day}</th>
+                                 <th key={day} className="p-4 text-[11px] font-black text-slate-900 uppercase tracking-widest">{day}</th>
                                ))}
                              </tr>
                           </thead>
                           <tbody>
                             {TIMES.map(time => (
-                              <tr key={time} className="border-b border-slate-200 last:border-0 group hover:bg-white transition-colors">
-                                <td className="p-4 text-[10px] font-black text-slate-600 uppercase tracking-widest text-left border-r border-slate-200 bg-slate-50/50">
+                              <tr key={time} className="border-b-2 border-slate-300 last:border-0 group hover:bg-white transition-colors">
+                                <td className="p-4 text-[11px] font-black text-slate-800 uppercase tracking-widest text-left border-r-2 border-slate-300 bg-slate-100">
                                   {time}
                                 </td>
                                 {DAYS.map(day => (
                                   <td key={`${day}-${time}`} className="p-4">
                                     <input 
                                       type="checkbox"
-                                      className="w-5 h-5 accent-red-600 cursor-pointer"
+                                      className="w-6 h-6 accent-red-600 cursor-pointer"
                                       checked={!!formData.availability[`${day}-${time}`]}
                                       onChange={() => handleAvailabilityToggle(day, time)}
                                     />
@@ -699,14 +713,14 @@ const PayrollOperationalAuditPage: React.FC<PayrollOperationalAuditPageProps> = 
               </div>
             </div>
 
-            <div className="pt-12 border-t border-slate-100 flex flex-col items-center">
+            <div className="pt-12 border-t-2 border-slate-200 flex flex-col items-center">
               <button 
                 type="submit"
                 className="px-20 py-8 bg-red-600 text-white font-black uppercase tracking-[0.3em] text-xl hover:bg-red-700 transition-all shadow-2xl shadow-red-100 transform hover:-translate-y-1 active:scale-95"
               >
                 Transmit Operational Audit
               </button>
-              <p className="mt-8 text-[10px] font-black text-slate-300 uppercase tracking-widest">
+              <p className="mt-8 text-[10px] font-black text-slate-400 uppercase tracking-widest">
                 🔒 Secure PIPEDA-Compliant Data Processing
               </p>
             </div>
