@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { PageType } from '../App';
 import FAQ from '../components/FAQ';
@@ -10,8 +9,8 @@ interface WhyUsPageProps {
 const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
   const whyUsFaqs = [
     {
-      q: "What are your core operating hours?",
-      a: "Our concierge team is available from 9 AM to 5 PM based on your local business time zone. We provide coast-to-coast support that matches your working hours."
+      q: "What're your core operating hours?",
+      a: "Our concierge team's available from 9 AM to 5 PM based on your local business time zone. We provide coast-to-coast support that matches your working hours."
     },
     {
       q: "Do you support businesses in Western Canada?",
@@ -19,11 +18,11 @@ const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
     },
     {
       q: "Why not just use an accountant?",
-      a: "Accountants are great for annual taxes, but they often lack the infrastructure for day-to-day employee support, benefits tracking, and bi-weekly compliance checks. We fill that gap."
+      a: "Accountants're great for annual taxes, but they often lack the infrastructure for day-to-day employee support, benefits tracking, and bi-weekly compliance checks. We fill that gap."
     },
     {
       q: "What if I make a mistake submitting hours?",
-      a: "With Maple, our team reviews your inputs before processing. We flag anomalies (like a 100-hour week) and verify with you, preventing costly errors before they happen."
+      a: "With Maple, our team reviews your inputs before processing. We'll flag anomalies (like a 100-hour week) and verify with you, preventing costly errors before they happen."
     },
     {
       q: "Is my data secure?",
@@ -31,26 +30,26 @@ const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
     },
     {
       q: "Can I upgrade my service tier later?",
-      a: "Yes. As you grow, you can seamlessly upgrade to our Biggie Smalls or Lil' Enterprise tiers to add HR support, benefits administration, and more complex reporting."
+      a: "Yes. As you grow, you're able to seamlessly upgrade to our Biggie Smalls or Lil' Enterprise tiers to add HR support, benefits administration, and more complex reporting."
     },
     {
-      q: "How are you different from a PEO?",
+      q: "How're you different from a PEO?",
       a: "A PEO becomes the 'employer of record'. With Maple, YOU remain the employer, retaining full control and culture, while we act as your back-office payroll department."
     },
     {
       q: "Do I get a dedicated account manager?",
-      a: "Yes. On Biggie Smalls and Lil' Enterprise plans, you are assigned a lead expert who knows your business, not a rotating call centre agent. Every lead is backed up by another resource to ensure continuity."
+      a: "Yes. On Biggie Smalls and Lil' Enterprise plans, you're assigned a lead expert who knows your business, not a rotating call centre agent. Every lead's backed up by another resource to ensure continuity."
     },
     {
       q: "What happens if my main payroll contact goes on vacation?",
-      a: "Since we act as your department, we have built-in redundancy. Our team ensures your payroll smoothly 52 weeks a year, regardless of your internal staff availability."
+      a: "Since we're acting as your department, we've got built-in redundancy. Our team ensures your payroll runs smoothly 52 weeks a year, regardless of your internal staff availability."
     },
     {
-      q: "How do you handle confidentiality for executive payroll?",
-      a: "We can set up restricted-access pay runs for executives, ensuring that general HR staff or managers only see the data they are authorized to see."
+      q: "How're you handling confidentiality for executive payroll?",
+      a: "We're able to set up restricted-access pay runs for executives, ensuring that general HR staff or managers only see the data they're authorized to see."
     },
     {
-      q: "What qualifications do your experts have?",
+      q: "What qualifications've your experts got?",
       a: "Our team members hold NPI (National Payroll Institute) designations, such as PCP (Payroll Compliance Professional) or CPM (Certified Payroll Manager)."
     }
   ];
@@ -75,11 +74,11 @@ const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
               Our Philosophy
             </div>
             <h1 className="text-4xl lg:text-[5.5rem] font-black text-white mb-8 leading-[0.95] tracking-tighter uppercase">
-              Payroll is a <br/>
+              Payroll's a <br/>
               <span className="text-red-500">Human</span> Relationship.
             </h1>
             <p className="text-xl text-slate-200 leading-relaxed font-medium mb-10 max-w-xl">
-              We treat payroll as an employee trust imperative, not just a data entry task. When your staff has a question, they talk to a dedicated person who cares.
+              We treat payroll as an employee trust imperative, not just a data entry task. When your staff's got a question, they'll talk to a dedicated person who cares.
             </p>
             <div className="flex flex-col sm:flex-row gap-5">
               <button 
@@ -114,7 +113,7 @@ const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
               </div>
               <h3 className="text-2xl font-bold text-slate-900 mb-4">Expertise-as-a-Service</h3>
               <p className="text-slate-600 leading-relaxed font-medium">
-                Our specialists follow a 9-5 local time support window to match your business day, ensuring your remittances and questions are handled when you need them most.
+                Our specialists follow a 9-5 local time support window to match your business day, ensuring your remittances and questions're handled when you need them most.
               </p>
             </div>
             <div className="bg-white p-10 rounded-none border border-slate-100 shadow-sm hover:shadow-2xl transition-all group">
@@ -123,7 +122,7 @@ const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
               </div>
               <h3 className="text-2xl font-bold text-slate-900 mb-4">Zero-Liability Guarantee</h3>
               <p className="text-slate-600 leading-relaxed font-medium">
-                We take full legal responsibility for the accuracy of your remittances. If there's a filing error, we pay the fines and handle the CRA dispute.
+                We take full legal responsibility for the accuracy of your remittances. If there's a filing error, we'll pay the fines and handle the CRA dispute.
               </p>
             </div>
             <div className="bg-white p-10 rounded-none border border-slate-100 shadow-sm hover:shadow-2xl transition-all group">
@@ -132,7 +131,7 @@ const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
               </div>
               <h3 className="text-2xl font-bold text-slate-900 mb-4">Employee Well-being</h3>
               <p className="text-slate-600 leading-relaxed font-medium">
-                By handling your staff's questions directly, we remove you as the middle-man. This speeds up resolutions and keeps your relationship positive.
+                By handling your staff's questions directly, we're removing you as the middle-man. This speeds up resolutions and keeps your relationship positive.
               </p>
             </div>
           </div>
@@ -145,7 +144,7 @@ const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
           <div className="lg:w-1/2 p-12 lg:p-20 text-white">
             <h2 className="text-4xl lg:text-5xl font-black text-white mb-8 uppercase tracking-tighter">A note from our <span className="text-red-600">founder</span></h2>
             <p className="text-slate-400 text-lg mb-8 italic leading-relaxed">
-              "After working with over 50 companies helping them improve their Canadian payroll operations, I started Maple to better help those stressed over getting the calculations right, being compliant with remittances, doing T4s and all other filings. With so many payroll products available, business owners are overwhelmed and end up making costly mistakes."
+              "After working with over 50 companies helping them improve their Canadian payroll operations, I started Maple to better help those who're stressed over getting the calculations right, being compliant with remittances, doing T4s and all other filings. With so many payroll products available, business owners're overwhelmed and end up making costly mistakes."
             </p>
             <div className="flex items-center gap-4">
               <img src="https://picsum.photos/seed/founder/100/100" className="w-16 h-16 border-2 border-red-600" alt="Founder" />
@@ -177,7 +176,7 @@ const WhyUsPage: React.FC<WhyUsPageProps> = ({ onNavigate }) => {
         title={
           <>
             <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-6 uppercase tracking-tighter">Our Philosophy <span className="text-red-600">FAQ</span></h2>
-            <p className="text-lg text-slate-600 font-medium">Questions about how we partner with your business.</p>
+            <p className="text-lg text-slate-600 font-medium">Questions about how we're partnering with your business.</p>
           </>
         } 
       />

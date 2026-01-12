@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const ICPSection: React.FC = () => {
@@ -6,22 +5,26 @@ const ICPSection: React.FC = () => {
     {
       title: "Professional Services",
       desc: "Law firms, dental offices, and clinics. High-value teams who deserve expert support, so owners can stop playing part-time administrator.",
-      img: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800&h=600"
+      img: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800&h=600",
+      alt: "Modern office building representing professional services like law and accounting"
     },
     {
       title: "Restaurants & Hospitality",
       desc: "High-volume teams with seasonal surges. We manage complex tip compliance, statutory holiday pay math, and high-turnover ROE filings.",
-      img: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&q=80&w=800&h=600"
+      img: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&q=80&w=800&h=600",
+      alt: "Busy Canadian restaurant kitchen representing hospitality sector payroll"
     },
     {
       title: "The Growing 15",
       desc: "When you hit 15+ employees, DIY payroll usually starts to break. We give you the professional department you now need to scale smoothly.",
-      img: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800&h=600"
+      img: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800&h=600",
+      alt: "Growing team meeting to scale their Canadian small business"
     },
     {
       title: "High-Growth Startups",
       desc: "Scaling fast and hiring across provinces? We handle the cross-country tax math so your team can stay focused on the next big launch.",
-      img: "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=800&h=600"
+      img: "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=800&h=600",
+      alt: "Dynamic startup environment for high-growth tech firms in Canada"
     }
   ];
 
@@ -30,16 +33,21 @@ const ICPSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-6 uppercase tracking-tighter">Is Maple <span className="text-red-600">for you?</span></h2>
-          <p className="text-lg text-slate-600 font-medium">We really shine when working with these types of businesses.</p>
+          <p className="text-lg text-slate-600 font-medium">We specialize in Canadian payroll outsourcing for growth-oriented sectors.</p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {icps.map((item, i) => (
             <div key={i} className="group rounded-none overflow-hidden border border-slate-100 bg-slate-50 hover:bg-white hover:shadow-xl transition-all duration-300 flex flex-col">
-              <img src={item.img} alt={item.title} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500 rounded-none" />
+              <img 
+                src={item.img} 
+                alt={item.alt} 
+                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500 rounded-none" 
+                loading="lazy"
+              />
               <div className="p-8 flex-grow">
                 <h3 className="text-xl font-bold text-slate-900 mb-4">{item.title}</h3>
-                <p className="text-slate-600 text-sm leading-relaxed font-medium">{item.desc}</p>
+                <p className="text-slate-700 text-sm leading-relaxed font-medium">{item.desc}</p>
               </div>
             </div>
           ))}

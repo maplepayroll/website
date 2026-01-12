@@ -30,7 +30,7 @@ const PayrollReviewArticlePage: React.FC<PayrollReviewArticlePageProps> = ({ onN
     },
     {
       q: "What is the most commonly missed guardrail?",
-      a: "The termination logic. Businesses often stop paying an employee but fail to check if they were accidentally left on the benefits enrollment or if their final vacation pay math was audited by a second set of eyes."
+      a: "The termination logic. Businesses often stop paying an employee but fail to check if they were accidentally left on the benefits enrolment or if their final vacation pay math was audited by a second set of eyes."
     },
     {
       q: "Does this strategy apply to micro-businesses (1-5 staff)?",
@@ -46,7 +46,7 @@ const PayrollReviewArticlePage: React.FC<PayrollReviewArticlePageProps> = ({ onN
     },
     {
       q: "Can I automate the guardrail checking process entirely?",
-      a: "Automation identifies the flags, but the 'validation' must remain human. True compliance requires professional judgment to determine if a variance is legitimate or an error."
+      a: "Automation identifies the flags, but the 'validation' must remain human. True compliance requires professional judgement to determine if a variance is legitimate or an error."
     }
   ];
 
@@ -106,7 +106,7 @@ const PayrollReviewArticlePage: React.FC<PayrollReviewArticlePageProps> = ({ onN
 
               <h2 className="text-3xl font-black text-slate-900 mb-6 uppercase tracking-tight">The $1.6M Cautionary Tale</h2>
               <p className="text-slate-600 mb-12">
-                A recent <a href="https://www.hrreporter.com/focus-areas/payroll/health-pei-payroll-probe-flags-costly-hr-control-gaps/393911" target="_blank" rel="noopener noreferrer" className="text-red-600 font-bold underline">probe into Health PEI</a> revealed significant HR control gaps that led to widespread payroll overpayments. Errors in data entry and unauthorized rate changes went undetected for months because no one was required to explain <em>why</em> a specific pay period deviated from the norm.
+                A recent <a href="https://www.hrreporter.com/focus-areas/payroll/health-pei-payroll-probe-flags-costly-hr-control-gaps/393911" target="_blank" rel="noopener noreferrer" className="text-red-600 font-bold underline">probe into Health PEI</a> revealed significant HR control gaps that led to widespread payroll overpayments. Errors in data entry and unauthorised rate changes went undetected for months because no one was required to explain <em>why</em> a specific pay period deviated from the norm.
               </p>
 
               {/* The Maple Standard Section */}
@@ -190,7 +190,7 @@ const PayrollReviewArticlePage: React.FC<PayrollReviewArticlePageProps> = ({ onN
                   <div className="group">
                     <h4 className="text-xl font-black text-slate-900 uppercase tracking-tight mb-4 flex items-center gap-4">
                       <span className="w-8 h-8 bg-red-600 text-white flex items-center justify-center text-sm">4</span>
-                      Categorized Benefit/Leave Variances
+                      Categorised Benefit/Leave Variances
                     </h4>
                     <p className="text-slate-600 mb-4">Break down your "Holiday" and "Vacation" checks into these specific buckets:</p>
                     <ul className="space-y-3 pl-12 text-slate-600 text-sm font-medium">
@@ -228,9 +228,9 @@ const PayrollReviewArticlePage: React.FC<PayrollReviewArticlePageProps> = ({ onN
                       <td className="px-6 py-4 text-sm font-bold text-red-600">Tax code changes or new benefit deductions</td>
                     </tr>
                     <tr>
-                      <td className="px-6 py-4 text-sm font-black text-slate-900">Manual Checks</td>
+                      <td className="px-6 py-4 text-sm font-black text-slate-900">Manual Cheques</td>
                       <td className="px-6 py-4 text-sm text-slate-600">Were any "Off-cycle" payments made?</td>
-                      <td className="px-6 py-4 text-sm font-bold text-red-600">Manual check log and CFO approval</td>
+                      <td className="px-6 py-4 text-sm font-bold text-red-600">Manual cheque log and CFO approval</td>
                     </tr>
                   </tbody>
                 </table>

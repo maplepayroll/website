@@ -63,8 +63,8 @@ const Comparison: React.FC = () => {
               {categories.map((cat, i) => (
                 <tr key={i} className="hover:bg-slate-50 transition-colors group">
                   <td className="px-8 py-6 font-bold text-slate-900 text-sm border-r border-slate-100 uppercase tracking-tight">{cat.feature}</td>
-                  <td className="px-8 py-6 text-slate-500 text-sm italic border-r border-slate-100">{cat.diy}</td>
-                  <td className="px-8 py-6 text-slate-500 text-sm italic border-r border-slate-100">{cat.bureau}</td>
+                  <td className="px-8 py-6 text-slate-600 text-sm italic border-r border-slate-100">{cat.diy}</td>
+                  <td className="px-8 py-6 text-slate-600 text-sm italic border-r border-slate-100">{cat.bureau}</td>
                   <td className="px-8 py-6 text-slate-900 font-black text-sm bg-red-50/30 group-hover:bg-red-50 transition-colors">{cat.maple}</td>
                 </tr>
               ))}
@@ -73,7 +73,7 @@ const Comparison: React.FC = () => {
         </div>
         
         <div className="mt-12 text-center">
-          <p className="text-slate-400 text-sm italic">
+          <p className="text-slate-500 text-sm italic">
             "Software is just a tool. We are your partner."
           </p>
         </div>

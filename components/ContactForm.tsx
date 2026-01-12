@@ -108,7 +108,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ context }) => {
     return "Request Concierge Support";
   };
 
-  const inputClasses = "w-full px-5 py-4 bg-white border-2 border-slate-300 rounded-none text-slate-900 font-bold placeholder-slate-400 focus:border-red-600 focus:ring-4 focus:ring-red-50 transition-all outline-none shadow-sm";
+  const inputClasses = "w-full px-5 py-4 bg-white border-2 border-slate-300 rounded-none text-slate-900 font-bold placeholder-slate-500 focus:border-red-600 focus:ring-4 focus:ring-red-50 transition-all outline-none shadow-sm";
 
   return (
     <section id="contact" className="py-16 bg-white scroll-mt-20">
@@ -134,7 +134,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ context }) => {
                     {item.icon}
                   </div>
                   <div>
-                    <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{item.label}</p>
+                    <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">{item.label}</p>
                     <p className="text-slate-900 font-bold">{item.value}</p>
                   </div>
                 </div>
@@ -166,21 +166,21 @@ const ContactForm: React.FC<ContactFormProps> = ({ context }) => {
               <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2">First Name</label>
+                    <label className="block text-xs font-black text-slate-500 uppercase tracking-widest mb-2">First Name</label>
                     <input required value={firstName} onChange={e => setFirstName(e.target.value)} type="text" className={inputClasses} placeholder="John" />
                   </div>
                   <div>
-                    <label className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Last Name</label>
+                    <label className="block text-xs font-black text-slate-500 uppercase tracking-widest mb-2">Last Name</label>
                     <input required value={lastName} onChange={e => setLastName(e.target.value)} type="text" className={inputClasses} placeholder="Doe" />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Work Email</label>
+                  <label className="block text-xs font-black text-slate-500 uppercase tracking-widest mb-2">Work Email</label>
                   <input required value={email} onChange={e => setEmail(e.target.value)} type="email" className={inputClasses} placeholder="john@company.com" />
                 </div>
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Company Size</label>
+                    <label className="block text-xs font-black text-slate-500 uppercase tracking-widest mb-2">Company Size</label>
                     <select value={companySize} onChange={e => setCompanySize(e.target.value)} className={`${inputClasses} appearance-none cursor-pointer`}>
                       <option>1-5 Employees</option>
                       <option>6-15 Employees</option>
@@ -189,7 +189,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ context }) => {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Current Software</label>
+                    <label className="block text-xs font-black text-slate-500 uppercase tracking-widest mb-2">Current Software</label>
                     <select value={currentSoftware} onChange={e => setCurrentSoftware(e.target.value)} className={`${inputClasses} appearance-none cursor-pointer`}>
                       <option value="None">None / Manual</option>
                       <option value="ADP">ADP</option>
@@ -208,7 +208,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ context }) => {
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2">How can we help?</label>
+                  <label className="block text-xs font-black text-slate-500 uppercase tracking-widest mb-2">How can we help?</label>
                   <textarea 
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
@@ -219,7 +219,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ context }) => {
                 <button type="submit" className="w-full py-5 bg-red-600 text-white font-black uppercase tracking-widest text-lg hover:bg-red-700 transition-all">
                   {getButtonText()}
                 </button>
-                <p className="text-center text-[10px] text-slate-400 font-black uppercase tracking-[0.2em]">
+                <p className="text-center text-[10px] text-slate-500 font-black uppercase tracking-[0.2em]">
                   🔒 Secure PIPEDA-Compliant Processing
                 </p>
               </form>
@@ -238,30 +238,30 @@ const ContactForm: React.FC<ContactFormProps> = ({ context }) => {
                   ✓
                 </div>
                 <h3 className="text-2xl font-black text-slate-900 text-center mb-4 uppercase tracking-tight">Lead Simulation Summary</h3>
-                <p className="text-slate-500 text-sm text-center mb-8">This is the notification email sent to the Maple Concierge team:</p>
+                <p className="text-slate-600 text-sm text-center mb-8">This is the notification email sent to the Maple Concierge team:</p>
                 
                 <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">From</p>
+                      <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">From</p>
                       <p className="text-sm font-bold text-slate-900">{firstName} {lastName}</p>
-                      <p className="text-xs text-slate-500">{email}</p>
+                      <p className="text-xs text-slate-600">{email}</p>
                     </div>
                     <div>
-                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Infrastructure</p>
+                      <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Infrastructure</p>
                       <p className="text-sm font-bold text-slate-900">{companySize}</p>
                       <p className="text-xs text-red-600 font-black uppercase tracking-tight">Software: {currentSoftware}</p>
                     </div>
                   </div>
                   <div>
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Attached Context</p>
+                    <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Attached Context</p>
                     <p className="text-xs font-bold text-red-600 bg-red-50 inline-block px-2 py-1 rounded">
                       {context || 'General Site Lead'}
                     </p>
                   </div>
                   <div>
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Message Payload</p>
-                    <div className="text-[11px] text-slate-600 bg-white p-3 rounded-lg border border-slate-100 whitespace-pre-wrap leading-relaxed max-h-40 overflow-y-auto">
+                    <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Message Payload</p>
+                    <div className="text-[11px] text-slate-700 bg-white p-3 rounded-lg border border-slate-100 whitespace-pre-wrap leading-relaxed max-h-40 overflow-y-auto">
                       {message}
                     </div>
                   </div>

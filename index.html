@@ -1,10 +1,28 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Maple Managed Payroll | The Last Payroll Service You'll Ever Need</title>
+    <title>Maple Managed Payroll | Canadian Small Business Payroll Service</title>
+    <meta name="description" content="Maple provides high-end, human-centred managed payroll services for Canadian small businesses. Reclaim 10+ hours a month with our dedicated CRA compliance concierge." />
+    <meta name="keywords" content="Canadian payroll services, managed payroll Canada, small business payroll Ontario, CRA compliance payroll, T4 filing services, outsourced payroll department" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://maplepayroll.ca/" />
+    <meta property="og:title" content="Maple Managed Payroll | The Last Payroll Service You'll Ever Need" />
+    <meta property="og:description" content="Professional concierge payroll for Canadian growth teams. We handle the math, the humans, and the CRA." />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=1200&h=630" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://maplepayroll.ca/" />
+    <meta property="twitter:title" content="Maple Managed Payroll | Canadian Small Business Support" />
+    <meta property="twitter:description" content="Reclaim your Sunday nights. Maple is the dedicated payroll department your Canadian business needs." />
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=1200&h=630" />
+
+    <link rel="canonical" href="https://maplepayroll.ca/" />
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,6 +71,39 @@
       }
       .animate-page-enter {
         animation: page-enter 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      }
+
+      /* Print Styles for Report Exporting */
+      @media print {
+        nav, aside, header, .no-print, button, .no-print-section {
+          display: none !important;
+        }
+        main {
+          margin: 0 !important;
+          padding: 0 !important;
+          width: 100% !important;
+        }
+        .bg-slate-50, .bg-white {
+          background-color: transparent !important;
+        }
+        .shadow-sm, .shadow-xl, .shadow-2xl {
+          box-shadow: none !important;
+        }
+        .border {
+          border-color: #eee !important;
+        }
+        table {
+          width: 100% !important;
+          border-collapse: collapse !important;
+        }
+        th {
+          background-color: #000 !important;
+          color: #fff !important;
+          -webkit-print-color-adjust: exact;
+        }
+        .text-red-600 {
+          color: #dc2626 !important;
+        }
       }
     </style>
   <script type="importmap">

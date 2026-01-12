@@ -22,14 +22,14 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </div>
               <span className="font-black text-xl tracking-tighter uppercase">MAPLE</span>
             </div>
-            <p className="text-slate-500 font-medium leading-relaxed mb-10 max-w-xs">
+            <p className="text-slate-600 font-medium leading-relaxed mb-10 max-w-xs">
               Providing professional concierge payroll services to Canadian growth businesses. Reclaim your time.
             </p>
             <div className="space-y-4">
-               <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest">Connect</p>
+               <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Connect</p>
                <a href="tel:1-416-252-1000" className="block font-black hover:text-red-600 transition-colors uppercase tracking-tight">1 (416) 252-1000</a>
                <a href="mailto:concierge@maplepayroll.ca" className="block font-black hover:text-red-600 transition-colors uppercase tracking-tight">concierge@maplepayroll.ca</a>
-               <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-4 flex items-center gap-2">
+               <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-4 flex items-center gap-2">
                 <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
                 9 AM – 5 PM Client Local Time
               </p>
@@ -37,7 +37,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </div>
           
           <div className="md:col-span-2">
-            <h4 className="font-black text-[10px] text-slate-300 uppercase tracking-[0.2em] mb-10">Strategy</h4>
+            <h4 className="font-black text-[10px] text-slate-500 uppercase tracking-[0.2em] mb-10">Strategy</h4>
             <ul className="space-y-6 text-sm font-black uppercase tracking-widest">
               <li><button onClick={() => onNavigate?.('home')} className="hover:text-red-600 transition-colors text-left">Home</button></li>
               <li><button onClick={() => onNavigate?.('why-us')} className="hover:text-red-600 transition-colors text-left">Who We Are</button></li>
@@ -48,18 +48,18 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </div>
 
           <div className="md:col-span-3">
-            <h4 className="font-black text-[10px] text-slate-300 uppercase tracking-[0.2em] mb-10">Resources</h4>
+            <h4 className="font-black text-[10px] text-slate-500 uppercase tracking-[0.2em] mb-10">Resources</h4>
             <ul className="space-y-6 text-sm font-black uppercase tracking-widest">
               <li><button onClick={() => onNavigate?.('audit')} className="hover:text-red-600 transition-colors text-left">Payroll Audit</button></li>
-              <li><button onClick={() => onNavigate?.('calculator')} className="hover:text-red-600 transition-colors text-left">Tax Calculator</button></li>
+              <li><button onClick={() => onNavigate?.('calculator')} className="hover:text-red-600 transition-colors text-left">Payroll Calculator</button></li>
               <li><button onClick={() => onNavigate?.('resources')} className="hover:text-red-600 transition-colors text-left">Knowledge Hub</button></li>
               <li><button onClick={() => onNavigate?.('key-terms')} className="hover:text-red-600 transition-colors text-left">Glossary</button></li>
             </ul>
           </div>
 
           <div className="md:col-span-3 bg-slate-50 p-8">
-            <h4 className="font-black text-[10px] text-slate-400 uppercase tracking-[0.2em] mb-6">Security & Trust</h4>
-            <p className="text-xs text-slate-500 font-medium leading-relaxed mb-6">
+            <h4 className="font-black text-[10px] text-slate-500 uppercase tracking-[0.2em] mb-6">Security & Trust</h4>
+            <p className="text-xs text-slate-600 font-medium leading-relaxed mb-6">
               All data is stored exclusively on secure Canadian servers and is fully PIPEDA compliant.
             </p>
             <div className="flex gap-4">
@@ -72,12 +72,22 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         </div>
         
         <div className="pt-12 border-t border-slate-50 flex flex-col md:flex-row justify-between items-center gap-8">
-          <p className="text-slate-300 text-[10px] font-black uppercase tracking-[0.3em]">
+          <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.3em]">
             © {copyrightYearDisplay} Maple Managed Payroll Services Inc.
           </p>
           <div className="flex gap-10">
-            <button className="text-[10px] font-black text-slate-400 hover:text-red-600 transition-colors uppercase tracking-widest">Privacy</button>
-            <button className="text-[10px] font-black text-slate-400 hover:text-red-600 transition-colors uppercase tracking-widest">Terms</button>
+            <button 
+              onClick={() => onNavigate?.('privacy')}
+              className="text-[10px] font-black text-slate-500 hover:text-red-600 transition-colors uppercase tracking-widest"
+            >
+              Privacy
+            </button>
+            <button 
+              onClick={() => onNavigate?.('terms')}
+              className="text-[10px] font-black text-slate-500 hover:text-red-600 transition-colors uppercase tracking-widest"
+            >
+              Terms
+            </button>
           </div>
         </div>
       </div>

@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { PageType } from '../App';
 import FAQ from '../components/FAQ';
@@ -27,7 +26,7 @@ const HolidayDuringVacationPage: React.FC<HolidayDuringVacationPageProps> = ({ o
     },
     {
       q: "Does the 'First and Last' rule apply during vacation?",
-      a: "No. Because the vacation is an 'authorized leave of absence,' the employee is considered to have worked their last scheduled shift before the holiday, even if that shift was several days prior to the vacation starting."
+      a: "No. Because the vacation is an 'authorised leave of absence,' the employee is considered to have worked their last scheduled shift before the holiday, even if that shift was several days prior to the vacation starting."
     },
     {
       q: "How do I calculate pay for a stat during vacation?",

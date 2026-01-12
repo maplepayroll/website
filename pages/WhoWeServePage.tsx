@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { PageType } from '../App';
 import FAQ from '../components/FAQ';
@@ -38,7 +37,7 @@ const WhoWeServePage: React.FC<WhoWeServePageProps> = ({ onNavigate }) => {
       image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=800&h=600"
     },
     {
-      title: "Fitness & Wellness Centers",
+      title: "Fitness & Wellness Centres",
       icon: "💪",
       desc: "Managing personal trainer commissions and diverse class schedules is an admin nightmare. We automate the math for your high-performance team across multiple locations.",
       features: ["Trainer Commission Splitting", "Multi-Location Pay Runs", "Sub-contractor Management"],
@@ -182,7 +181,7 @@ const WhoWeServePage: React.FC<WhoWeServePageProps> = ({ onNavigate }) => {
             <div className="lg:w-1/3">
               <h2 className="text-4xl lg:text-5xl font-black mb-6 text-white uppercase tracking-tighter">Our <span className="text-red-600">Sweet Spot</span></h2>
               <p className="text-slate-400 text-lg leading-relaxed">
-                While we can handle larger teams, our services are optimized for small-to-medium enterprises who want a dedicated department feel without the internal overhead.
+                While we can handle larger teams, our services are optimised for small-to-medium enterprises who want a dedicated department feel without the internal overhead.
               </p>
             </div>
             <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-3 gap-8 w-full">

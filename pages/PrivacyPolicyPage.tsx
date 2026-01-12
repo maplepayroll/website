@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { PageType } from '../App';
 
@@ -9,7 +8,7 @@ interface PrivacyPolicyPageProps {
 const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate }) => {
   return (
     <div className="bg-white">
-      {/* Hero Section - Standardized to match Home Page */}
+      {/* Hero Section - Standardised to match Home Page */}
       <section className="relative min-h-screen flex items-center overflow-hidden bg-slate-900">
         <div className="absolute inset-0 z-0">
           <img 
@@ -94,7 +93,7 @@ const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate }) => 
               <ul className="list-disc pl-6 text-slate-600 mb-8 space-y-2">
                 <li><strong>Identity Information:</strong> Name, Social Insurance Number (SIN), date of birth, and home address.</li>
                 <li><strong>Financial Information:</strong> Bank account details for direct deposit, salary/wage information, and tax brackets.</li>
-                <li><strong>Employment Information:</strong> Job titles, start dates, termination dates, and benefit enrollment status.</li>
+                <li><strong>Employment Information:</strong> Job titles, start dates, termination dates, and benefit enrolment status.</li>
                 <li><strong>Tax Information:</strong> TD1 forms, provincial tax forms, and record of remittances to the CRA and Revenu Québec.</li>
               </ul>
 
@@ -125,7 +124,7 @@ const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate }) => 
 
               <h2 className="text-2xl font-black text-slate-900 mb-6 uppercase tracking-tight">7. Disclosure to Third Parties</h2>
               <p className="text-slate-600 mb-8">
-                We do not sell, rent, or trade personal information to third parties. We only disclose personal information to authorized government agencies (CRA, Revenu Québec, WSIB/WCB) as required for tax and compliance purposes, or to third-party service providers (such as bank clearing houses) necessary to complete pay transactions.
+                We do not sell, rent, or trade personal information to third parties. We only disclose personal information to authorised government agencies (CRA, Revenu Québec, WSIB/WCB) as required for tax and compliance purposes, or to third-party service providers (such as bank clearing houses) necessary to complete pay transactions.
               </p>
 
               <h2 className="text-2xl font-black text-slate-900 mb-6 uppercase tracking-tight">8. Access and Correction</h2>

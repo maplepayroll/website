@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -42,6 +41,8 @@ import SalaryContinuancePage from './pages/SalaryContinuancePage';
 import PayrollReviewArticlePage from './pages/PayrollReviewArticlePage';
 import PayrollOperationalAuditPage from './pages/PayrollOperationalAuditPage';
 import AuditManagementPage from './pages/AuditManagementPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import TermsOfServicePage from './pages/TermsOfServicePage';
 
 export type PageType = 
   | 'home' 
@@ -74,7 +75,9 @@ export type PageType =
   | 'salary-continuance'
   | 'payroll-review-guide'
   | 'survey'
-  | 'audit-dashboard';
+  | 'audit-dashboard'
+  | 'privacy'
+  | 'terms';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<PageType>('home');
@@ -96,6 +99,76 @@ const App: React.FC = () => {
       window.scrollTo({ top: 0, behavior: 'auto' });
     }
   }, [currentPage, pendingAnchor]);
+
+  // Global Home SEO Logic
+  useEffect(() => {
+    if (currentPage === 'home') {
+      const homeSchema = {
+        "@context": "https://schema.org",
+        "@type": "FinancialService",
+        "name": "Maple Managed Payroll",
+        "alternateName": "Maple Payroll Services Canada",
+        "description": "Premium managed payroll concierge for Canadian small and medium businesses. We provide dedicated certified payroll specialists, CRA compliance guarantees, and direct employee support.",
+        "url": "https://maplepayroll.ca/",
+        "logo": "https://maplepayroll.ca/logo.png",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Toronto",
+          "addressRegion": "ON",
+          "addressCountry": "CA"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 43.6532,
+          "longitude": -79.3832
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Payroll Services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Managed Payroll Processing"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "CRA Compliance Audit"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Employee Support Concierge"
+              }
+            }
+          ]
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+1-416-252-1000",
+          "contactType": "customer service",
+          "areaServed": "CA",
+          "availableLanguage": "English"
+        }
+      };
+
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.innerHTML = JSON.stringify(homeSchema);
+      document.head.appendChild(script);
+
+      return () => {
+        const existing = document.head.querySelector('script[type="application/ld+json"]');
+        if (existing) document.head.removeChild(existing);
+      };
+    }
+  }, [currentPage]);
 
   const handleNavigate = (page: PageType, context?: string, anchor?: string) => {
     setContactContext(context || '');
@@ -141,7 +214,7 @@ const App: React.FC = () => {
           ) : currentPage === 'audit' ? (
             <AuditServicePage onNavigate={handleNavigate} />
           ) : currentPage === 'calculator' ? (
-            <PayrollCalculatorPage onNavigate={handleNavigate} defaultYear={2025} />
+            <PayrollCalculatorPage onNavigate={handleNavigate} defaultYear={new Date().getFullYear()} />
           ) : currentPage === 'formula-manifest' ? (
             <FormulaManifestPage onNavigate={handleNavigate} />
           ) : currentPage === 'diy-calculator' ? (
@@ -184,6 +257,10 @@ const App: React.FC = () => {
             <PayrollOperationalAuditPage onNavigate={handleNavigate} />
           ) : currentPage === 'audit-dashboard' ? (
             <AuditManagementPage onNavigate={handleNavigate} />
+          ) : currentPage === 'privacy' ? (
+            <PrivacyPolicyPage onNavigate={handleNavigate} />
+          ) : currentPage === 'terms' ? (
+            <TermsOfServicePage onNavigate={handleNavigate} />
           ) : (
             <VacationPayArticlePage onNavigate={handleNavigate} />
           )}

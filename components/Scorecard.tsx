@@ -71,7 +71,7 @@ const Scorecard: React.FC<ScorecardProps> = ({ onNavigate }) => {
                 🎯
               </div>
               <h3 className="text-3xl font-extrabold text-slate-900 mb-4">Your Risk Score: {Math.round(((7 - score) / 7) * 100)}%</h3>
-              <p className="text-slate-600 text-lg mb-8 font-medium">
+              <p className="text-slate-700 text-lg mb-8 font-medium">
                 {score > 5 ? 
                   "You have a solid setup, but there's room for efficiency." : 
                   "Your current process is likely causing significant admin overhead and compliance risk."}

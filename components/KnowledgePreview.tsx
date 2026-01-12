@@ -62,13 +62,13 @@ const KnowledgePreview: React.FC<KnowledgePreviewProps> = ({ onNavigate }) => {
               onClick={() => onNavigate(art.link)}
               className="bg-slate-50 p-8 border-l-4 border-transparent hover:border-red-600 hover:bg-white hover:shadow-xl transition-all cursor-pointer group relative"
             >
-              <div className="absolute top-4 right-4 text-[10px] font-black uppercase tracking-widest text-slate-300 group-hover:text-red-600 transition-colors">
+              <div className="absolute top-4 right-4 text-[10px] font-black uppercase tracking-widest text-slate-500 group-hover:text-red-600 transition-colors">
                 {art.tag}
               </div>
               <div className="text-4xl mb-6 group-hover:scale-110 transition-transform origin-left">{art.icon}</div>
               <h3 className="text-xl font-black text-slate-900 mb-3 uppercase tracking-tight group-hover:text-red-600 transition-colors">{art.title}</h3>
               <p className="text-slate-600 text-sm font-medium leading-relaxed mb-6">{art.desc}</p>
-              <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-400 group-hover:text-slate-900 transition-colors">
+              <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500 group-hover:text-slate-900 transition-colors">
                 {art.tag === "Interactive Tool" ? "Try Tool" : "Read More"} <span className="group-hover:translate-x-1 transition-transform">→</span>
               </div>
             </div>

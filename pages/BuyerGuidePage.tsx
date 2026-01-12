@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { PageType } from '../App';
 import FAQ from '../components/FAQ';
@@ -9,18 +8,18 @@ interface BuyerGuidePageProps {
 
 const BuyerGuidePage: React.FC<BuyerGuidePageProps> = ({ onNavigate }) => {
   const steps = [
-    "Identify Internal Capacity: Determine if payroll takes more than 5 hours per month.",
+    "Identify Internal Capacity: Determine if payroll's taking more than 5 hours per month.",
     "Assess Risk: Evaluate the cost of CRA penalties vs. the cost of a provider.",
-    "Vet Technology: Ensure the provider uses modern cloud software like Wagepoint or ADP.",
-    "Check for 'Human' Support: Verify you get a dedicated specialist, not a call center.",
-    "Verify Full Outsourcing: Ensure they handle onboarding, ROEs, and CRA inquiries."
+    "Vet Technology: Ensure the provider's using modern cloud software like Wagepoint or ADP.",
+    "Check for 'Human' Support: Verify you'll get a dedicated specialist, not a call centre.",
+    "Verify Full Outsourcing: Ensure they're handling onboarding, ROEs, and CRA inquiries."
   ];
 
   const migrationSteps = [
     { week: "01", title: "Data Extraction", desc: "Our migration team pulls history from your current system (Manual, ADP, Ceridian) to ensure continuity." },
-    { week: "02", title: "CRA Authorization", desc: "We set up 'Authorized Representative' status with the CRA and provincial bodies so we can handle filings." },
+    { week: "02", title: "CRA Authorization", desc: "We'll set up 'Authorized Representative' status with the CRA and provincial bodies so we're able to handle filings." },
     { week: "03", title: "Parallel Testing", desc: "We run a test cycle alongside your current process to verify every penny and tax code matches perfectly." },
-    { week: "04", title: "Live Launch", desc: "Your first managed pay run. You send hours, we do the rest. Your dedicated specialist is on standby." }
+    { week: "04", title: "Live Launch", desc: "Your first managed pay run's here. You send hours, we'll do the rest. Your specialist's on standby." }
   ];
 
   useEffect(() => {
@@ -47,24 +46,24 @@ const BuyerGuidePage: React.FC<BuyerGuidePageProps> = ({ onNavigate }) => {
 
   const guideFaqs = [
     {
-      q: "What is an outsourced payroll provider?",
-      a: "An outsourced payroll provider is an external firm that acts as your company's payroll department. Unlike software-only tools, they manage calculations, remittances, onboarding, and employee support directly."
+      q: "What's an outsourced payroll provider?",
+      a: "An outsourced payroll provider's an external firm that acts as your company's payroll department. Unlike software-only tools, they're managing calculations, remittances, onboarding, and employee support directly."
     },
     {
       q: "How does outsourcing differ from just using payroll software?",
-      a: "Software is a tool you have to operate. Outsourcing means a team of experts operates the tool for you. You send updates (new hires, raises, hours), and they handle the data entry, compliance checks, and filings."
+      a: "Software's a tool you've got to operate. Outsourcing means a team of experts're operating the tool for you. You send updates (new hires, raises, hours), and they'll handle the data entry, compliance checks, and filings."
     },
     {
       q: "Is there a minimum employee count required for outsourcing?",
-      a: "While many providers focus on 50+ employees, Maple specializes in small-to-medium businesses (1-75 staff). Even with a single employee, the compliance risk and admin burden often justify outsourcing."
+      a: "While many providers're focused on 50+ employees, Maple specialises in small-to-medium businesses (1-75 staff). Even with a single employee, the compliance risk and admin burden often're enough to justify outsourcing."
     },
     {
       q: "What should I look for in a service agreement?",
-      a: "Ensure the contract includes a 100% Accuracy Guarantee. If the provider makes a filing error or misses a CRA deadline, they should be contractually liable for the resulting penalties and interest."
+      a: "Ensure the contract's got a 100% Accuracy Guarantee. If the provider's made a filing error or's missed a CRA deadline, they've got to be contractually liable for the resulting penalties."
     },
     {
       q: "Do I lose control over my payroll data?",
-      a: "Not with modern providers. You should always have 'View' access to the underlying software. Outsourcing adds a layer of expert management; it doesn't take away your transparency."
+      a: "Not with modern providers. You'll always have 'View' access to the underlying software. Outsourcing's adding a layer of expert management; it isn't taking away your transparency."
     }
   ];
 
@@ -98,7 +97,7 @@ const BuyerGuidePage: React.FC<BuyerGuidePageProps> = ({ onNavigate }) => {
             
             <div className="bg-white/5 backdrop-blur-md border-l-4 border-red-600 p-8 mb-10 max-w-2xl">
               <p className="text-xl text-slate-200 leading-relaxed font-medium italic">
-                In Canada, an <strong>outsourced payroll provider</strong> serves as your professional department. Small businesses reclaim an average of <strong>10.5 hours per month</strong> of administrative recovery time, shifting liability from the owner to a certified specialist.
+                In Canada, an <strong>outsourced payroll provider</strong>'s acting as your professional department. Small businesses reclaim an average of <strong>10.5 hours per month</strong>, shifting liability from the owner to a certified specialist.
               </p>
             </div>
 
@@ -126,7 +125,7 @@ const BuyerGuidePage: React.FC<BuyerGuidePageProps> = ({ onNavigate }) => {
           <div className="lg:col-span-8">
             <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tight border-b-4 border-slate-100 pb-4">The Compliance Shield</h2>
             <p className="text-lg text-slate-600 leading-relaxed font-medium mb-12">
-              DIY payroll is a high-stakes gamble. For a Canadian business with 15 employees, a single missed remittance can trigger a 10% penalty from the CRA, potentially costing over <strong>$1,500 in one afternoon</strong>. Outsourcing moves that risk to us.
+              DIY payroll's a high-stakes gamble. For a Canadian business with 15 employees, a single missed remittance can trigger a 10% penalty from the CRA, potentially costing over <strong>$1,500 in one afternoon</strong>. Outsourcing moves that risk to us.
             </p>
 
             <div className="grid md:grid-cols-2 gap-8 mb-20">
@@ -134,21 +133,21 @@ const BuyerGuidePage: React.FC<BuyerGuidePageProps> = ({ onNavigate }) => {
                 <div className="text-3xl mb-4">🛡️</div>
                 <h3 className="font-black text-slate-900 uppercase text-sm mb-4">Liability Transfer</h3>
                 <p className="text-slate-600 text-sm leading-relaxed font-medium">
-                  Maple Managed takes legal responsibility for the accuracy of your source deductions. If the CRA identifies an error we made, <strong>we pay the fines and handle the audit.</strong>
+                  Maple Managed's taking legal responsibility for the accuracy of your source deductions. If the CRA identifies an error we've made, <strong>we'll pay the fines and handle the audit.</strong>
                 </p>
               </div>
               <div className="p-8 bg-slate-50 border border-slate-100 group hover:shadow-xl transition-all">
                 <div className="text-3xl mb-4">⚖️</div>
                 <h3 className="font-black text-slate-900 uppercase text-sm mb-4">Threshold Monitoring</h3>
                 <p className="text-slate-600 text-sm leading-relaxed font-medium">
-                  We proactively monitor provincial health tax (EHT) thresholds and WSIB/WCB rate changes, ensuring you don't overpay or miss a reporting tier.
+                  We're proactively monitoring provincial health tax (EHT) thresholds and WSIB/WCB rate changes, ensuring you don't overpay or miss a reporting tier.
                 </p>
               </div>
             </div>
 
             <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tight border-b-4 border-slate-100 pb-4">A Seamless Migration</h2>
             <p className="text-lg text-slate-600 leading-relaxed font-medium mb-12">
-              The biggest fear of switching is the effort. We have standardized a 4-week "Concierge Onboarding" process designed to require less than 1 hour of your time.
+              The biggest fear of switching's the effort. We've standardised a 4-week "Concierge Onboarding" process designed to require less than 1 hour of your time.
             </p>
 
             <div className="space-y-4 mb-20">
@@ -200,7 +199,7 @@ const BuyerGuidePage: React.FC<BuyerGuidePageProps> = ({ onNavigate }) => {
                      Concierge Insight
                    </h4>
                    <p className="text-slate-600 text-sm font-medium leading-relaxed mb-6 italic">
-                     "Most providers focus on the math. Maple focuses on the people. When your employee has a question about their tax code, they call us. That is the true case for outsourcing: removing the owner as the middle-man."
+                     "Most providers focus on the math. Maple focuses on the people. When your employee's got a question about their tax code, they'll call us. That's the true case for outsourcing: removing the owner as the middle-man."
                    </p>
                    <div className="flex items-center gap-3">
                       <img src="https://picsum.photos/seed/merali/40/40" className="w-10 h-10 rounded-full" alt="Expert" />
@@ -214,7 +213,7 @@ const BuyerGuidePage: React.FC<BuyerGuidePageProps> = ({ onNavigate }) => {
                 <div className="bg-red-600 p-8 text-white shadow-2xl shadow-red-200">
                   <h4 className="font-black uppercase text-xs text-white mb-4 tracking-[0.2em]">The Compliance Shield</h4>
                   <p className="text-sm font-bold text-red-100 leading-relaxed mb-6">
-                    84% of Canadian small businesses under audit by the CRA have manually managed or DIY systems. Outsourcing provides an instant verifiable audit trail.
+                    84% of Canadian small businesses under audit by the CRA've got manually managed or DIY systems. Outsourcing provides an instant verifiable audit trail.
                   </p>
                   <button 
                     onClick={() => onNavigate('home', 'System Audit')}
@@ -233,7 +232,7 @@ const BuyerGuidePage: React.FC<BuyerGuidePageProps> = ({ onNavigate }) => {
         <div className="max-w-4xl mx-auto px-4 text-center">
            <h2 className="text-4xl lg:text-6xl font-black text-slate-900 mb-8 uppercase tracking-tighter leading-none">Ready to reclaim <br/><span className="text-red-600">your Sunday nights?</span></h2>
            <p className="text-xl text-slate-600 font-medium mb-12 max-w-2xl mx-auto">
-             Get a custom quote for a professionally managed payroll department that costs less than a single compliance mistake.
+             Get a custom quote for a professionally managed payroll department that's costing less than a single compliance mistake.
            </p>
            <button 
              onClick={() => onNavigate('home', 'Outsourcing Transition')}

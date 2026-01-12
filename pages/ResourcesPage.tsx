@@ -43,7 +43,7 @@ const ResourcesPage: React.FC<ResourcesPageProps> = ({ onNavigate }) => {
           <div className="max-w-3xl">
             <div className="inline-flex items-center px-3 py-1 bg-red-600 text-white text-[10px] font-black uppercase tracking-widest mb-6">Certified Repository</div>
             <h1 className="text-4xl lg:text-7xl font-black text-white uppercase tracking-tighter leading-none mb-6">
-              Expert <br/> <span className="text-red-600">Resources.</span>
+              Expert Payroll <br/> <span className="text-red-600">Resources.</span>
             </h1>
             <p className="text-xl text-slate-400 font-medium leading-relaxed max-w-2xl">
               Authoritative guides for businesses seeking an <strong>outsourced payroll provider</strong> or specialized compliance support.

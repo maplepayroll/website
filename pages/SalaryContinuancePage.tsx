@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { PageType } from '../App';
 import FAQ from '../components/FAQ';
@@ -10,20 +9,20 @@ interface SalaryContinuancePageProps {
 const SalaryContinuancePage: React.FC<SalaryContinuancePageProps> = ({ onNavigate }) => {
   const continuanceFaqs = [
     {
-      q: "Is CPP and EI deducted from salary continuance?",
-      a: "Yes. Because the employee is technically still 'on payroll' during the notice period, the payments are considered regular employment income and attract mandatory CPP and EI withholdings."
+      q: "Are CPP and EI deducted from salary continuance?",
+      a: "Yes. Because the employee's technically still 'on payroll' during the notice period, the payments're considered regular employment income and attract mandatory CPP and EI withholdings."
     },
     {
-      q: "When do I issue the ROE for salary continuance?",
-      a: "You issue the Record of Employment (ROE) only after the continuance period ends and the final payment is made. You must include all the continuance earnings in the pay period fields of the ROE."
+      q: "When'm I supposed to issue the ROE for salary continuance?",
+      a: "You issue the Record of Employment (ROE) only after the continuance period ends and the final payment's made. You've got to include all the continuance earnings in the pay period fields of the ROE."
     },
     {
       q: "Can I stop benefits during salary continuance?",
-      a: "Generally, employment standards require that benefits (health, dental, life) continue during the statutory notice period. Some employers choose to continue them for the entire continuance period to reduce legal risk."
+      a: "Generally, employment standards require that benefits (health, dental, life) stay active during the statutory notice period. Some employers choose to continue them for the entire continuance period to reduce legal risk."
     },
     {
       q: "What's the difference between this and a Retiring Allowance?",
-      a: "A retiring allowance (severance) is usually a lump sum paid upon termination for loss of office. Salary continuance is a bridge where the employee stays on the regular pay cycle. Retiring allowances often have special tax-free transfer rules (to RRSPs) that salary continuance does not."
+      a: "A retiring allowance (severance)'s usually a lump sum paid upon termination for loss of office. Salary continuance's a bridge where the employee stays on the regular pay cycle. Retiring allowances often've got special tax-free transfer rules (to RRSPs) that salary continuance doesn't."
     },
     {
       q: "Does vacation pay accrue on salary continuance?",
@@ -79,7 +78,7 @@ const SalaryContinuancePage: React.FC<SalaryContinuancePageProps> = ({ onNavigat
               <span className="text-red-500">Salary Continuance.</span>
             </h1>
             <p className="text-xl text-slate-300 leading-relaxed font-medium mb-10">
-              Salary continuance is a common but complex termination strategy in Canada. Unlike a lump-sum retiring allowance, continuance keeps the employee on your regular pay cycle, carrying unique implications for <strong>CPP, EI, and ROE timing.</strong>
+              Salary continuance's a common but complex termination strategy in Canada. Unlike a lump-sum retiring allowance, continuance keeps the employee on your regular pay cycle, carrying unique implications for <strong>CPP, EI, and ROE timing.</strong>
             </p>
             <div className="flex flex-col sm:flex-row gap-5">
               <button 
@@ -100,7 +99,7 @@ const SalaryContinuancePage: React.FC<SalaryContinuancePageProps> = ({ onNavigat
             
             <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tight">Defining the Continuance</h2>
             <p className="text-slate-600 mb-8">
-              In a salary continuance arrangement, an employer agrees to pay a terminated employee their regular salary for a fixed period (the notice period) instead of paying a single lump-sum amount. From a payroll perspective, the employee is effectively <strong>"active but not working."</strong>
+              In a salary continuance arrangement, an employer agrees to pay a terminated employee their regular salary for a fixed period (the notice period) instead of paying a single lump-sum amount. From a payroll perspective, the employee's effectively <strong>"active but not working."</strong>
             </p>
 
             <div className="bg-slate-50 p-10 border-l-8 border-slate-900 mb-12 shadow-sm">
@@ -119,10 +118,10 @@ const SalaryContinuancePage: React.FC<SalaryContinuancePageProps> = ({ onNavigat
 
             <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tight">ROE: The Compliance Trap</h2>
             <p className="text-slate-600 mb-6">
-              One of the most frequent errors in Canadian payroll is issuing a Record of Employment (ROE) too early for a salary continuance. 
+              One of the most frequent errors in Canadian payroll's issuing a Record of Employment (ROE) too early for a salary continuance. 
             </p>
             <p className="text-slate-600 mb-8">
-              Service Canada dictates that for salary continuance, the ROE should only be issued when the final payment of the continuance is made. If you issue it on the "last day of work" but continue to pay them for 3 months, you are reporting conflicting data to the government, which can trigger an audit of your entire payroll account.
+              Service Canada dictates that for salary continuance, the ROE should only be issued when the final payment of the continuance's made. If you issue it on the "last day of work" but continue to pay them for 3 months, you're reporting conflicting data to the government, which can trigger an audit of your entire payroll account.
             </p>
 
             <div className="bg-red-50 p-8 border-l-4 border-red-600 my-12">
@@ -130,7 +129,7 @@ const SalaryContinuancePage: React.FC<SalaryContinuancePageProps> = ({ onNavigat
                  <span className="text-xl">⚠️</span> Concierge Warning
                </h4>
                <p className="text-red-800 text-sm font-bold leading-relaxed">
-                 Employees often demand their ROE immediately so they can apply for EI. However, because they are receiving salary continuance, they are technically not yet entitled to EI benefits. Issuing the ROE early is a compliance violation that Maple Managed proactively prevents for our clients.
+                 Employees often demand their ROE immediately so they're able to apply for EI. However, because they're receiving salary continuance, they aren't technically yet entitled to EI benefits. Issuing the ROE early's a compliance violation that Maple Managed proactively prevents for our clients.
                </p>
             </div>
 
@@ -172,7 +171,7 @@ const SalaryContinuancePage: React.FC<SalaryContinuancePageProps> = ({ onNavigat
             <div className="bg-slate-50 p-8 border border-slate-200 sticky top-24">
               <h3 className="text-xl font-black text-slate-900 mb-4 uppercase tracking-tight leading-tight">Need a Termination Package Review?</h3>
               <p className="text-slate-600 text-sm mb-6 leading-relaxed">
-                Calculating severance vs. continuance math is a leading cause of costly ROE amendments.
+                Calculating severance vs. continuance math's a leading cause of costly ROE amendments.
               </p>
               <button 
                 onClick={() => onNavigate('home', 'Severance Audit')}
@@ -184,7 +183,7 @@ const SalaryContinuancePage: React.FC<SalaryContinuancePageProps> = ({ onNavigat
               <div className="mt-8 pt-8 border-t border-slate-200">
                 <p className="text-[10px] font-black text-red-600 uppercase tracking-widest mb-2">Concierge Advantage</p>
                 <p className="text-xs text-slate-700 italic font-medium">
-                  "Maple managed clients simply send us the termination letter. We calculate the exact tax withholdings and manage the ROE schedule automatically."
+                  "Maple managed clients simply send us the termination letter. We'll calculate the exact tax withholdings and manage the ROE schedule automatically."
                 </p>
               </div>
             </div>
@@ -203,7 +202,7 @@ const SalaryContinuancePage: React.FC<SalaryContinuancePageProps> = ({ onNavigat
             </div>
             <div className="p-8 bg-white/5 border border-white/10">
               <p className="text-red-500 font-black text-[10px] uppercase tracking-widest mb-2">Compliance Trap</p>
-              <p className="text-lg font-bold">Filing an ROE before the continuance period ends is the fastest way to trigger a Service Canada investigation.</p>
+              <p className="text-lg font-bold">Filing an ROE before the continuance period ends's the fastest way to trigger a Service Canada investigation.</p>
             </div>
           </div>
         </div>

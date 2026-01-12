@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { PageType } from '../App';
 
@@ -19,9 +18,10 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
       {/* Visual Background Element - Fun, collaborative office team */}
       <div className="absolute top-0 right-0 w-full lg:w-3/5 h-full z-0">
         <img 
-          src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=2000" 
-          alt="Happy, productive office team collaborating" 
+          src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=2000" 
+          alt="Canadian small business team collaborating on payroll strategy" 
           className="w-full h-full object-cover opacity-90"
+          loading="eager"
         />
         {/* Lighter gradient to ensure image brightness while keeping text readable. Dark on left, transparent on right. */}
         <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/60 to-transparent"></div>
@@ -33,16 +33,16 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-32 lg:py-48">
         <div className="max-w-3xl animate-fade-in-up">
           <div className="inline-flex items-center px-4 py-1.5 bg-red-600 text-white text-[10px] font-black tracking-[0.4em] mb-12 uppercase shadow-lg shadow-red-900/20">
-            MANAGED PAYROLL CONCIERGE
+            Professional Managed Payroll Canada
           </div>
           
           <h1 className="text-5xl lg:text-[6.5rem] font-black text-white mb-10 leading-[0.85] tracking-tighter uppercase">
-            Reclaim your <br/>
-            <span className="text-red-600">Business.</span>
+            Canadian Payroll <br/>
+            <span className="text-red-600">Service.</span>
           </h1>
           
           <p className="text-xl lg:text-2xl text-slate-300 leading-relaxed mb-16 max-w-2xl font-medium text-balance">
-            Maple is the dedicated payroll department you need. We handle the <span className="text-white underline decoration-red-600 decoration-4 underline-offset-8">math, the humans, and the CRA</span>, so you can focus on the vision.
+            Maple's the dedicated <strong>outsourced payroll department</strong> you've been looking for. We'll handle the <span className="text-white underline decoration-red-600 decoration-4 underline-offset-8">math, the humans, and the CRA</span>, so you can focus on your vision.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center gap-10">
@@ -64,7 +64,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           <div className="mt-24 grid grid-cols-2 md:grid-cols-3 gap-12 border-t border-white/10 pt-12">
             <div>
               <p className="text-3xl font-black text-white">10h+</p>
-              <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Monthly Time Reclaimed</p>
+              <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Monthly Admin Time Reclaimed</p>
             </div>
             <div>
               <p className="text-3xl font-black text-white">100%</p>

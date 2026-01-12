@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { PageType } from '../App';
 import FAQ from '../components/FAQ';
@@ -120,7 +119,7 @@ const CanadianPayrollSoftwareGuide: React.FC<CanadianPayrollSoftwareGuideProps> 
     <div className="bg-white">
       <section className="relative min-h-screen flex items-center overflow-hidden bg-slate-900">
         <div className="absolute inset-0 z-0">
-          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38+f71?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover opacity-40" alt="Best Payroll Software Canada" />
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover opacity-40" alt="Best Payroll Software Canada" />
           <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/90 to-transparent"></div>
           <div className="absolute top-0 left-0 w-2 h-full bg-red-600 z-20"></div>
         </div>
@@ -170,7 +169,7 @@ const CanadianPayrollSoftwareGuide: React.FC<CanadianPayrollSoftwareGuideProps> 
            <div>
               <p className="text-[10px] font-black text-red-500 uppercase tracking-widest mb-1">Reviewed by Authority</p>
               <h4 className="text-xl font-black uppercase">Arshad Merali, PCP</h4>
-              <p className="text-sm text-slate-400 font-medium">Founder of Maple Managed Payroll with 15+ years experience in Canadian compliance software configuration.</p>
+              <p className="text-sm text-slate-400 font-medium">35 years of experience in Canadian compliance software configuration.</p>
            </div>
         </div>
       </section>

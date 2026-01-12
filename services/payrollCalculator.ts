@@ -1,4 +1,3 @@
-
 export interface TaxBracket {
   threshold: number;
   rate: number;
@@ -105,8 +104,9 @@ export interface PayrollParams {
   claimAmount?: number;
   preTaxDeductions?: number;
   afterTaxDeductions?: number;
+  taxableBenefits?: number;
   vacationRate?: number; // 0.04 or 0.06
-  vacationMethod?: 'accrued' | 'paid_per_cycle';
+  vacationMethod?: 'accrued' | 'paid_on_each_pay';
 }
 
 function calculateTax(income: number, brackets: TaxBracket[]): number {
@@ -141,12 +141,13 @@ export function calculatePayroll(params: PayrollParams) {
     income, 
     payType = 'annual', 
     province: provinceName = 'Ontario', 
-    year = 2026, 
+    year = new Date().getFullYear(), 
     frequency = 'biweekly',
     hoursPerWeek = 40,
     claimAmount,
     preTaxDeductions = 0,
     afterTaxDeductions = 0,
+    taxableBenefits = 0,
     vacationRate = 0.04,
     vacationMethod = 'accrued'
   } = params;
@@ -162,9 +163,9 @@ export function calculatePayroll(params: PayrollParams) {
   
   // Vacation Logic
   const annualVacationAmount = annualBase * vacationRate;
-  let annualGrossTaxable = annualBase;
-  if (vacationMethod === 'paid_per_cycle') {
-    annualGrossTaxable = annualBase + annualVacationAmount;
+  let annualGrossTaxable = annualBase + taxableBenefits;
+  if (vacationMethod === 'paid_on_each_pay') {
+    annualGrossTaxable = annualBase + annualVacationAmount + taxableBenefits;
   }
 
   const taxableIncomeAnnual = Math.max(0, annualGrossTaxable - preTaxDeductions);
@@ -208,10 +209,10 @@ export function calculatePayroll(params: PayrollParams) {
   const erVacation = annualVacationAmount; // Liability regardless of when paid
   
   const totalAnnualDeductions = fedTax + provTax + healthPremium + annualPensionBase + annualPension2 + annualEI + annualQPIP;
-  const annualNetPreAfterTax = annualGrossTaxable - totalAnnualDeductions;
   
-  // Apply After-Tax Deductions
-  const finalAnnualNet = Math.max(0, annualNetPreAfterTax - afterTaxDeductions);
+  // Cash Net Calculation (Exclude non-cash taxable benefits from pocket)
+  const cashGross = (vacationMethod === 'paid_on_each_pay' ? annualBase + annualVacationAmount : annualBase);
+  const finalAnnualNet = Math.max(0, cashGross - totalAnnualDeductions - afterTaxDeductions);
   
   const totalAnnualEmployerCost = annualGrossTaxable + erPensionBase + erPension2 + erEI + erQPIP + erWSIB + (vacationMethod === 'accrued' ? erVacation : 0);
 
@@ -221,6 +222,7 @@ export function calculatePayroll(params: PayrollParams) {
     netPay: format(finalAnnualNet),
     grossPay: format(annualGrossTaxable),
     basePay: format(annualBase),
+    taxableBenefits: format(taxableBenefits),
     vacationPay: format(annualVacationAmount),
     vacationMethod,
     totalEmployerCost: format(totalAnnualEmployerCost),

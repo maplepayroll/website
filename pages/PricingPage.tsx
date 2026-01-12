@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { PageType } from '../App';
 import Pricing from '../components/Pricing';
@@ -63,7 +62,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
     },
     {
       q: "Is there a setup fee?",
-      a: "Our standard setup fee is $250, which covers data migration from your previous provider, CRA authorization, and parallel testing. This fee is waived for annual contracts."
+      a: "Our setup fee starts at a $250 base but is calculated based on the number of employees being set up and the complexity of the work. Each project is quoted separately to ensure an accurate migration. This is a one-time fee."
     },
     {
       q: "Do I pay for inactive employees?",

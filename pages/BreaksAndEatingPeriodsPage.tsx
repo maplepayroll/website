@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { PageType } from '../App';
 import FAQ from '../components/FAQ';
@@ -23,7 +22,7 @@ const BreaksAndEatingPeriodsPage: React.FC<BreaksAndEatingPeriodsPageProps> = ({
     },
     {
       q: "Are there exceptions to the 5-hour rule?",
-      a: "Some industries (like long-haul trucking or emergency services) have specialized rules, but for standard offices, the 5-hour mark is a strict legal trigger for a mandatory break."
+      a: "Some industries (like long-haul trucking or emergency services) have specialised rules, but for standard offices, the 5-hour mark is a strict legal trigger for a mandatory break."
     },
     {
       q: "Does Newfoundland have different break rules?",
@@ -93,7 +92,7 @@ const BreaksAndEatingPeriodsPage: React.FC<BreaksAndEatingPeriodsPageProps> = ({
             
             <div className="bg-white/5 backdrop-blur-md border-l-4 border-red-600 p-6 mb-10 max-w-2xl">
               <p className="text-lg text-slate-200 leading-relaxed font-medium italic">
-                Canadian labor laws generally mandate one 30-minute unpaid eating period for every 5 consecutive hours of work. Employers are not legally required to provide additional 'coffee breaks,' but if they do, these are typically paid. Newfoundland is an outlier, requiring a full 1-hour break after 5 hours of work.
+                Canadian labour laws generally mandate one 30-minute unpaid eating period for every 5 consecutive hours of work. Employers are not legally required to provide additional 'coffee breaks,' but if they do, these are typically paid. Newfoundland is an outlier, requiring a full 1-hour break after 5 hours of work.
               </p>
             </div>
           </div>

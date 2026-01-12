@@ -1,5 +1,4 @@
-
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { PageType } from '../App';
 
 interface EmployerPortalPageProps {
@@ -61,14 +60,20 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
     : companies.filter(c => c.assignedAdminIds.includes(currentUser.id));
 
   const [activeCompany, setActiveCompany] = useState<Company>(accessibleCompanies[0] || companies[0]);
-  const [activeTab, setActiveTab] = useState<'overview' | 'employees' | 'payroll' | 'billing' | 'settings' | 'maple-control'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'employees' | 'payroll' | 'reports' | 'billing' | 'settings' | 'maple-control'>('overview');
   
   const [selectedInvoice, setSelectedInvoice] = useState<any | null>(null);
   const [selectedPayRun, setSelectedPayRun] = useState<PayRun | null>(null);
   const [showInviteModal, setShowInviteModal] = useState(false);
-  const [showAccountModal, setShowAccountModal] = useState(false);
   const [showManualInvoiceModal, setShowManualInvoiceModal] = useState(false);
   const [showAdminAssignModal, setShowAdminAssignModal] = useState<Company | null>(null);
+
+  // Reporting State
+  const [reportType, setReportType] = useState<'run-detail' | 'company-totals'>('run-detail');
+  const [reportDateStart, setReportDateStart] = useState('2026-01-01');
+  const [reportDateEnd, setReportDateEnd] = useState('2026-12-31');
+  const [selectedPayRunId, setSelectedPayRunId] = useState<number>(1);
+  const [visibleFields, setVisibleFields] = useState<string[]>(['employee', 'dept', 'gross', 'tax', 'net']);
 
   const isSuperuser = currentUser.role === 'Superuser';
   const isAdministrator = currentUser.role === 'Administrator';
@@ -125,7 +130,7 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
       id: 2, 
       period: "Jan 16 - Jan 31", 
       payDate: "Jan 31, 2026", 
-      amount: "24,500.00", 
+      amount: "25,120.00", 
       status: 'Committed',
       history: [
         { status: 'Started', user: 'Arshad Merali', timestamp: 'Jan 24, 2026, 10:45 AM' },
@@ -140,10 +145,16 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
     { id: 2, name: "Emily Brown", email: "emily@client.ca", role: "Payroll Admin", status: "Active", lastLogin: "Yesterday, 4:30 PM" },
   ]);
 
-  const [payrollAccounts] = useState([
-    { id: 1, nickname: "Main Corporate Account", number: "12345 6789 RP0001", status: "Verified" },
-    { id: 2, nickname: "Quebec Branch", number: "12345 6789 RP0002", status: "Verified" }
-  ]);
+  // Mock Reporting Data
+  const reportData = useMemo(() => {
+    return [
+      { id: 1, employee: "Sarah Jenkins", dept: "Sales", gross: 5000, cpp: 297.5, ei: 82, tax: 1200, net: 3420.5, erBurden: 450, totalCost: 5450, date: '2026-01-15' },
+      { id: 2, employee: "Mike Chen", dept: "Engineering", gross: 6000, cpp: 357, ei: 98.4, tax: 1500, net: 4044.6, erBurden: 550, totalCost: 6550, date: '2026-01-15' },
+      { id: 3, employee: "Jessica Wu", dept: "Product", gross: 5500, cpp: 327.25, ei: 90.2, tax: 1350, net: 3732.55, erBurden: 490, totalCost: 5990, date: '2026-01-15' },
+      { id: 4, employee: "Sarah Jenkins", dept: "Sales", gross: 5200, cpp: 309.4, ei: 85.28, tax: 1280, net: 3525.32, erBurden: 470, totalCost: 5670, date: '2026-01-31' },
+      { id: 5, employee: "Mike Chen", dept: "Engineering", gross: 6000, cpp: 357, ei: 98.4, tax: 1500, net: 4044.6, erBurden: 550, totalCost: 6550, date: '2026-01-31' },
+    ];
+  }, []);
 
   const handleManualInvoice = (e: React.FormEvent) => {
     e.preventDefault();
@@ -154,21 +165,10 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
       period: "Special Service / Custom Audit",
       amount: "150.00",
       status: "Pending",
-      items: [{ description: "Specialized Record Audit Fee", amount: "150.00" }]
+      items: [{ description: "Specialised Record Audit Fee", amount: "150.00" }]
     };
     setInvoices([newInv, ...invoices]);
     setShowManualInvoiceModal(false);
-  };
-
-  const updatePrimaryAdmin = (companyId: number, adminId: number) => {
-    setCompanies(prev => prev.map(c => {
-      if (c.id === companyId) {
-        const newAssigned = Array.from(new Set([...c.assignedAdminIds, adminId]));
-        return { ...c, primaryAdminId: adminId, assignedAdminIds: newAssigned };
-      }
-      return c;
-    }));
-    setShowAdminAssignModal(null);
   };
 
   const getStatusBadgeStyles = (status: string) => {
@@ -310,6 +310,225 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
       </div>
     </div>
   );
+
+  const renderReports = () => {
+    const fields = [
+      { id: 'employee', label: 'Employee Name' },
+      { id: 'dept', label: 'Department' },
+      { id: 'gross', label: 'Gross Pay' },
+      { id: 'cpp', label: 'CPP' },
+      { id: 'ei', label: 'EI' },
+      { id: 'tax', label: 'Income Tax' },
+      { id: 'net', label: 'Net Pay' },
+      { id: 'erBurden', label: 'ER Burden' },
+      { id: 'totalCost', label: 'Total Cost' }
+    ];
+
+    const filteredData = reportData.filter(row => {
+      if (reportType === 'run-detail') {
+        const targetRunDate = recentPayRuns.find(r => r.id === selectedPayRunId)?.payDate;
+        // Mock matching logic for the demo
+        return row.date === (targetRunDate === 'Jan 15, 2026' ? '2026-01-15' : '2026-01-31');
+      } else {
+        return row.date >= reportDateStart && row.date <= reportDateEnd;
+      }
+    });
+
+    const toggleField = (id: string) => {
+      setVisibleFields(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
+    };
+
+    const handleExportCSV = () => {
+      const activeFields = fields.filter(f => visibleFields.includes(f.id));
+      const header = activeFields.map(f => f.label).join(',');
+      const rows = filteredData.map(row => {
+        return activeFields.map(f => {
+          const val = (row as any)[f.id];
+          return typeof val === 'string' ? `"${val}"` : val;
+        }).join(',');
+      });
+      
+      // Add Total Row for consistency
+      const totalRow = activeFields.map(f => {
+        if (f.id === 'employee') return '"TOTALS"';
+        if (['dept'].includes(f.id)) return '""';
+        const sum = filteredData.reduce((acc, r) => acc + (r as any)[f.id], 0);
+        return sum;
+      }).join(',');
+
+      const csvContent = [header, ...rows, totalRow].join('\n');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', `Maple_Report_${activeCompany.name}_${new Date().toISOString().slice(0,10)}.csv`);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    };
+
+    const handleExportPDF = () => {
+      // Professional browser print trigger, index.html contains print styles to optimise layout
+      window.print();
+    };
+
+    return (
+      <div className="space-y-8 animate-in fade-in slide-in-from-right-4 duration-500">
+        <div className="bg-white border border-slate-200 p-8 shadow-sm no-print">
+          <div className="flex flex-col lg:flex-row gap-8 items-start justify-between">
+            <div className="space-y-6 w-full lg:w-1/3">
+              <h3 className="text-[10px] font-black text-red-600 uppercase tracking-[0.3em]">Report Configuration</h3>
+              <div>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Report Type</label>
+                <div className="grid grid-cols-2 gap-2">
+                  <button 
+                    onClick={() => setReportType('run-detail')}
+                    className={`py-3 text-[9px] font-black uppercase border transition-all ${reportType === 'run-detail' ? 'bg-slate-900 text-white' : 'bg-white text-slate-500'}`}
+                  >
+                    Pay Run Detail
+                  </button>
+                  <button 
+                    onClick={() => setReportType('company-totals')}
+                    className={`py-3 text-[9px] font-black uppercase border transition-all ${reportType === 'company-totals' ? 'bg-slate-900 text-white' : 'bg-white text-slate-500'}`}
+                  >
+                    Aggregate Totals
+                  </button>
+                </div>
+              </div>
+
+              {reportType === 'run-detail' ? (
+                <div>
+                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Select Pay Run</label>
+                  <select 
+                    value={selectedPayRunId}
+                    onChange={(e) => setSelectedPayRunId(parseInt(e.target.value))}
+                    className="w-full bg-slate-50 border border-slate-200 px-4 py-3 font-bold text-sm outline-none"
+                  >
+                    {recentPayRuns.map(r => <option key={r.id} value={r.id}>{r.period} ({r.payDate})</option>)}
+                  </select>
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Start Date</label>
+                    <input type="date" value={reportDateStart} onChange={e => setReportDateStart(e.target.value)} className="w-full bg-slate-50 border border-slate-200 px-2 py-3 font-bold text-xs" />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">End Date</label>
+                    <input type="date" value={reportDateEnd} onChange={e => setReportDateEnd(e.target.value)} className="w-full bg-slate-50 border border-slate-200 px-2 py-3 font-bold text-xs" />
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="w-full lg:w-2/3">
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Fields to Display</label>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {fields.map(f => (
+                  <button 
+                    key={f.id}
+                    onClick={() => toggleField(f.id)}
+                    className={`flex items-center gap-3 px-4 py-2 border text-[10px] font-black uppercase transition-all ${visibleFields.includes(f.id) ? 'bg-red-50 border-red-200 text-red-700' : 'bg-white border-slate-200 text-slate-400'}`}
+                  >
+                    <span className={`w-3 h-3 border flex items-center justify-center ${visibleFields.includes(f.id) ? 'bg-red-600 border-red-600' : 'bg-white border-slate-300'}`}>
+                      {visibleFields.includes(f.id) && <span className="text-white">✓</span>}
+                    </span>
+                    {f.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-10 pt-8 border-t border-slate-100 flex justify-end gap-4 no-print">
+            <button 
+              onClick={handleExportCSV}
+              className="px-6 py-3 border-2 border-slate-900 text-slate-900 text-[10px] font-black uppercase tracking-widest hover:bg-slate-900 hover:text-white transition-all"
+            >
+              Download CSV
+            </button>
+            <button 
+              onClick={handleExportPDF}
+              className="px-6 py-3 bg-red-600 text-white text-[10px] font-black uppercase tracking-widest hover:bg-red-700 transition-all"
+            >
+              Export PDF
+            </button>
+          </div>
+        </div>
+
+        <div className="bg-white border border-slate-200 shadow-sm overflow-hidden report-surface">
+          {/* Internal report header for PDF printing */}
+          <div className="hidden print:block p-8 border-b-2 border-slate-900 mb-6">
+            <div className="flex justify-between items-end">
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-widest text-red-600 mb-1">Maple Managed Payroll</p>
+                <h1 className="text-2xl font-black uppercase tracking-tight">{activeCompany.name} - Payroll Audit Report</h1>
+                <p className="text-xs text-slate-500 font-bold uppercase tracking-widest">
+                  {reportType === 'run-detail' ? `Pay Run Period: ${recentPayRuns.find(r => r.id === selectedPayRunId)?.period}` : `Date Range: ${reportDateStart} to ${reportDateEnd}`}
+                </p>
+              </div>
+              <div className="text-right">
+                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Generated On</p>
+                <p className="text-xs font-bold text-slate-900">{new Date().toLocaleString()}</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-left">
+              <thead className="bg-slate-900 text-white">
+                <tr>
+                  {fields.filter(f => visibleFields.includes(f.id)).map(f => (
+                    <th key={f.id} className="px-6 py-4 text-[10px] font-black uppercase tracking-[0.2em]">{f.label}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {filteredData.length === 0 ? (
+                  <tr><td colSpan={fields.length} className="p-20 text-center text-slate-400 font-bold uppercase tracking-widest italic">No matching records found for selected filters.</td></tr>
+                ) : (
+                  filteredData.map((row) => (
+                    <tr key={row.id} className="hover:bg-slate-50 transition-colors">
+                      {visibleFields.includes('employee') && <td className="px-6 py-4 font-bold text-slate-900 text-sm">{row.employee}</td>}
+                      {visibleFields.includes('dept') && <td className="px-6 py-4 text-xs font-bold text-slate-500 uppercase">{row.dept}</td>}
+                      {visibleFields.includes('gross') && <td className="px-6 py-4 text-sm font-black text-slate-700">${row.gross.toLocaleString()}</td>}
+                      {visibleFields.includes('cpp') && <td className="px-6 py-4 text-sm font-medium text-slate-600">${row.cpp.toLocaleString()}</td>}
+                      {visibleFields.includes('ei') && <td className="px-6 py-4 text-sm font-medium text-slate-600">${row.ei.toLocaleString()}</td>}
+                      {visibleFields.includes('tax') && <td className="px-6 py-4 text-sm font-medium text-red-600">-${row.tax.toLocaleString()}</td>}
+                      {visibleFields.includes('net') && <td className="px-6 py-4 text-sm font-black text-slate-900">${row.net.toLocaleString()}</td>}
+                      {visibleFields.includes('erBurden') && <td className="px-6 py-4 text-sm font-medium text-slate-600">${row.erBurden.toLocaleString()}</td>}
+                      {visibleFields.includes('totalCost') && <td className="px-6 py-4 text-sm font-black text-red-600">${row.totalCost.toLocaleString()}</td>}
+                    </tr>
+                  ))
+                )}
+              </tbody>
+              {filteredData.length > 0 && (
+                <tfoot className="bg-slate-50 border-t-2 border-slate-900">
+                  <tr className="font-black text-slate-900 text-sm">
+                    {visibleFields.includes('employee') && <td className="px-6 py-4 uppercase text-[10px] text-slate-400">Total Selection</td>}
+                    {visibleFields.includes('dept') && <td className="px-6 py-4"></td>}
+                    {visibleFields.includes('gross') && <td className="px-6 py-4">${filteredData.reduce((acc, r) => acc + r.gross, 0).toLocaleString()}</td>}
+                    {visibleFields.includes('cpp') && <td className="px-6 py-4">${filteredData.reduce((acc, r) => acc + r.cpp, 0).toLocaleString()}</td>}
+                    {visibleFields.includes('ei') && <td className="px-6 py-4">${filteredData.reduce((acc, r) => acc + r.ei, 0).toLocaleString()}</td>}
+                    {visibleFields.includes('tax') && <td className="px-6 py-4">${filteredData.reduce((acc, r) => acc + r.tax, 0).toLocaleString()}</td>}
+                    {visibleFields.includes('net') && <td className="px-6 py-4">${filteredData.reduce((acc, r) => acc + r.net, 0).toLocaleString()}</td>}
+                    {visibleFields.includes('erBurden') && <td className="px-6 py-4">${filteredData.reduce((acc, r) => acc + r.erBurden, 0).toLocaleString()}</td>}
+                    {visibleFields.includes('totalCost') && <td className="px-6 py-4">${filteredData.reduce((acc, r) => acc + r.totalCost, 0).toLocaleString()}</td>}
+                  </tr>
+                </tfoot>
+              )}
+            </table>
+          </div>
+          
+          {/* Footer disclosure for PDF */}
+          <div className="hidden print:block p-8 mt-12 border-t border-slate-100 text-[10px] text-slate-400 font-bold uppercase tracking-widest text-center">
+            🔒 This report contains confidential payroll data protected by PIPEDA. Distributed by Maple Managed Payroll Concierge.
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   const renderBilling = () => (
     <div className="space-y-8 animate-in fade-in slide-in-from-right-4 duration-500">
@@ -547,7 +766,7 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col md:flex-row font-sans">
-      <aside className="w-full md:w-64 bg-slate-900 text-white flex-shrink-0 flex flex-col">
+      <aside className="w-full md:w-64 bg-slate-900 text-white flex-shrink-0 flex flex-col no-print">
         <div className="p-6 border-b border-slate-800">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-8 h-8 bg-red-600 flex items-center justify-center">
@@ -576,8 +795,9 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
           {[
             { id: 'overview', label: 'Overview', icon: 'M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z' },
             { id: 'payroll', label: 'Payroll History', icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z' },
+            { id: 'reports', label: 'Reports', icon: 'M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2-2-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' },
             { id: 'employees', label: 'Employees', icon: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z' },
-            { id: 'billing', label: 'Billing Center', icon: 'M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z' },
+            { id: 'billing', label: 'Billing Centre', icon: 'M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z' },
             { id: 'settings', label: 'Settings', icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z' },
           ].map((item) => (
              <button 
@@ -615,11 +835,12 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
       </aside>
 
       <main className="flex-grow p-8 lg:p-12 h-screen overflow-y-auto">
-        <header className="flex justify-between items-center mb-10">
+        <header className="flex justify-between items-center mb-10 no-print">
           <div>
             <div className="flex items-center gap-4 mb-2">
               <h1 className="text-3xl font-black text-slate-900 uppercase tracking-tighter">
-                {activeTab === 'maple-control' ? 'Global Admin Hub' : 'Dashboard Overview'}
+                {activeTab === 'maple-control' ? 'Global Admin Hub' : 
+                 activeTab === 'reports' ? 'Advanced Reporting' : 'Dashboard Overview'}
               </h1>
               {isSuperuser && (
                 <span className="bg-red-600 text-white text-[10px] font-black uppercase px-2 py-1 tracking-widest">Superuser Mode</span>
@@ -682,6 +903,7 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
         {activeTab === 'overview' && renderOverview()}
         {activeTab === 'employees' && renderEmployees()}
         {activeTab === 'payroll' && renderPayroll()}
+        {activeTab === 'reports' && renderReports()}
         {activeTab === 'billing' && renderBilling()}
         {activeTab === 'settings' && renderSettings()}
       </main>
@@ -787,7 +1009,7 @@ const EmployerPortalPage: React.FC<EmployerPortalPageProps> = ({ onNavigate }) =
               </div>
               <div>
                 <label className="block text-xs font-bold text-slate-400 uppercase mb-2">Service Description</label>
-                <input required className="w-full px-4 py-3 bg-white border border-slate-200 font-medium text-slate-900 focus:outline-none focus:border-red-600 transition-all" placeholder="e.g. Specialized Record Audit Fee" />
+                <input required className="w-full px-4 py-3 bg-white border border-slate-200 font-medium text-slate-900 focus:outline-none focus:border-red-600 transition-all" placeholder="e.g. Specialised Record Audit Fee" />
               </div>
               <div>
                 <label className="block text-xs font-bold text-slate-400 uppercase mb-2">Amount (CAD)</label>

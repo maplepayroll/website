@@ -60,7 +60,7 @@ const Features: React.FC = () => {
                 {f.icon}
               </div>
               <h3 className="text-xl font-black text-slate-900 mb-4 uppercase tracking-tight">{f.title}</h3>
-              <p className="text-slate-600 leading-relaxed text-sm font-medium">{f.desc}</p>
+              <p className="text-slate-700 leading-relaxed text-sm font-medium">{f.desc}</p>
             </div>
           ))}
         </div>

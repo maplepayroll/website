@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { PageType } from '../App';
 import FAQ from '../components/FAQ';
@@ -29,7 +28,8 @@ const DIYCostCalculatorPage: React.FC<DIYCostCalculatorPageProps> = ({ onNavigat
     const monthlySavings = diyMonthly - mapleTotalMonthly;
     const annualSavings = monthlySavings * 12;
     
-    // Detailed itemized estimates
+    // Detailed itemised estimates
+    // Fix: Removed space from variable name 'riskMitigationValue'
     const riskMitigationValue = staffCount * 150; // $150 per head in risk reduction
     const softwareConsolidationValue = 600; // Est. annual cost of standalone payroll/HR tools
     const totalAnnualBenefit = annualSavings + riskMitigationValue + softwareConsolidationValue;
@@ -80,7 +80,7 @@ const DIYCostCalculatorPage: React.FC<DIYCostCalculatorPageProps> = ({ onNavigat
     },
     {
       q: "Do I still need an internal payroll software if I outsource?",
-      a: "You need the platform (the 'database'), but you don't need to be the one who operates it. Our managed fees cover the labor of running the system; the software fee is separate."
+      a: "You need the platform (the 'database'), but you don't need to be the one who operates it. Our managed fees cover the labour of running the system; the software fee is separate."
     },
     {
       q: "What happens to the ROI as my team grows?",

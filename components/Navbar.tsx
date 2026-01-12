@@ -65,7 +65,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, isOpen, setIsO
               <button 
                 key={link.id} 
                 onClick={() => onNavigate(link.id)} 
-                className={`text-sm font-black uppercase tracking-widest transition-all relative py-2 group ${scrolled ? (currentPage === link.id ? 'text-red-600' : 'text-slate-600 hover:text-red-600') : (currentPage === link.id ? 'text-white' : 'text-white/70 hover:text-white')}`}
+                className={`text-sm font-black uppercase tracking-widest transition-all relative py-2 group ${scrolled ? (currentPage === link.id ? 'text-red-600' : 'text-slate-700 hover:text-red-600') : (currentPage === link.id ? 'text-white' : 'text-white/70 hover:text-white')}`}
               >
                 {link.label}
                 <span className={`absolute bottom-0 left-0 h-0.5 bg-red-600 transition-all duration-300 ${currentPage === link.id ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
@@ -114,7 +114,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, isOpen, setIsO
         {/* Explicit Close Button in Overlay Top Right */}
         <button 
           onClick={() => setIsOpen(false)}
-          className="absolute top-6 right-6 p-4 text-slate-400 hover:text-red-600 transition-colors z-[80]"
+          className="absolute top-6 right-6 p-4 text-slate-500 hover:text-red-600 transition-colors z-[80]"
           aria-label="Close menu overlay"
         >
           <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -139,7 +139,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, isOpen, setIsO
             ))}
             <button 
               onClick={() => handleMobileNav('employer-portal')}
-              className="font-black text-4xl sm:text-6xl uppercase tracking-tighter text-slate-400 hover:text-slate-900 transition-all duration-300"
+              className="font-black text-4xl sm:text-6xl uppercase tracking-tighter text-slate-500 hover:text-slate-900 transition-all duration-300"
             >
               Client Login
             </button>
@@ -153,7 +153,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, isOpen, setIsO
               </button>
               <button 
                 onClick={() => handleMobileNav('resources')}
-                className="text-slate-400 font-black uppercase text-xs tracking-widest hover:text-slate-900 transition-colors"
+                className="text-slate-500 font-black uppercase text-xs tracking-widest hover:text-slate-900 transition-colors"
               >
                 Browse Resources
               </button>
@@ -161,7 +161,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, isOpen, setIsO
           </nav>
 
           <div className="absolute bottom-12 text-center">
-            <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.4em] mb-4">Dedicated Support</p>
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] mb-4">Dedicated Support</p>
             <p className="text-sm font-bold text-slate-900">1 (416) 252-1000</p>
           </div>
         </div>

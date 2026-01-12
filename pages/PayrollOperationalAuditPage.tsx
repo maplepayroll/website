@@ -718,7 +718,7 @@ const PayrollOperationalAuditPage: React.FC<PayrollOperationalAuditPageProps> = 
                 type="submit"
                 className="px-20 py-8 bg-red-600 text-white font-black uppercase tracking-[0.3em] text-xl hover:bg-red-700 transition-all shadow-2xl shadow-red-100 transform hover:-translate-y-1 active:scale-95"
               >
-                Transmit Operational Audit
+                Submit
               </button>
               <p className="mt-8 text-[10px] font-black text-slate-400 uppercase tracking-widest">
                 🔒 Secure PIPEDA-Compliant Data Processing
